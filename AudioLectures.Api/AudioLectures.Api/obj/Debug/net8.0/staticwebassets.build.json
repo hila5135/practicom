@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "miNs4LJjyi5WxPfMpfNsSjCxyd9bvbV9RD5Wv5vy1gM=",
+  "Source": "AudioLectures.Api",
+  "BasePath": "_content/AudioLectures.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
