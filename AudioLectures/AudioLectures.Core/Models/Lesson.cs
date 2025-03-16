@@ -16,6 +16,7 @@ namespace AudioLectures.Core.Models
         public DateTime LessonRealeaseDate { get; set; }
         public int LessonListenersCount { get; set; }
         public int LessonDownloadCount { get; set; }
+        public List<User> Users { get; set; }
 
     }
 }

@@ -83,7 +83,6 @@ namespace AudioLectures.Api.Controllers
 
             return NoContent(); // לא מחזירים תוכן כי העדכון בוצע בהצלחה
         }
-
         //[HttpPut("{LecturerId}")]
         //public async Task<IActionResult> Update(int LecturerId, [FromBody] Lecturer lecturer)
         //{

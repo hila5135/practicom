@@ -61,7 +61,8 @@ namespace AudioLectures.Api.Controllers
         //    return NoContent();
         //}
 
-        [Authorize(Roles="manager")]
+        [Authorize(Roles = "Admin")]
+        //[Authorize(Policy = "AdminOnly")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

@@ -1,60 +1,9 @@
-﻿//using Microsoft.Extensions.Configuration;
-//using Microsoft.IdentityModel.Tokens;
-//using System;
-//using System.Collections.Generic;
-//using System.IdentityModel.Tokens.Jwt;
-//using System.Linq;
-//using System.Security.Claims;
-//using System.Text;
-//using System.Threading.Tasks;
-
-//namespace AudioLectures.Service
-//{
-//    public class AuthService
-//    {
-//        private readonly IConfiguration _configuration;
-
-//        public AuthService(IConfiguration configuration)
-//        {
-//            _configuration = configuration;
-//        }
-
-//        public string GenerateJwtToken(string username, string[] roles)
-//        {
-//            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-//            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-//            var claims = new List<Claim>
-//        {
-//            new Claim(ClaimTypes.Name, username)
-//        };
-
-//            // הוספת תפקידים כ-Claims
-//            foreach (var role in roles)
-//            {
-//                claims.Add(new Claim(ClaimTypes.Role, role));
-//            }
-
-//            var token = new JwtSecurityToken(
-//                issuer: _configuration["Jwt:Issuer"],
-//                audience: _configuration["Jwt:Audience"],
-//                claims: claims,
-//                expires: DateTime.Now.AddMinutes(30),
-//                signingCredentials: credentials
-//            );
-
-//            return new JwtSecurityTokenHandler().WriteToken(token);
-//        }
-//    }
-//}
-
-using AudioLectures.Core.Repositories;
+﻿using AudioLectures.Core.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-
 public class AuthService
 {
     private readonly IConfiguration _configuration;
@@ -82,15 +31,41 @@ public class AuthService
         return GenerateToken(username, new[] { "Viewer" });
     }
 
+    //private string GenerateToken(string username, string[] roles)
+    //{
+    //    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+    //    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+    //    var claims = new List<Claim>
+    //    {
+    //        new Claim(ClaimTypes.Name, username)
+    //    };
+
+    //    foreach (var role in roles)
+    //    {
+    //        claims.Add(new Claim(ClaimTypes.Role, role));
+    //    }
+
+    //    var token = new JwtSecurityToken(
+    //        issuer: _configuration["Jwt:Issuer"],
+    //        audience: _configuration["Jwt:Audience"],
+    //        claims: claims,
+    //        expires: DateTime.Now.AddMinutes(30),
+    //        signingCredentials: credentials
+    //    );
+
+    //    return new JwtSecurityTokenHandler().WriteToken(token);
+    //}
     private string GenerateToken(string username, string[] roles)
     {
+        // יצירת החתימה של ה-JWT
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
         var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, username)
-        };
+    {
+        new Claim(ClaimTypes.Name, username),
+    };
 
         foreach (var role in roles)
         {
@@ -105,6 +80,18 @@ public class AuthService
             signingCredentials: credentials
         );
 
+        //var jwtHandler = new JwtSecurityTokenHandler();
+
+        //// המרת ה-JWT ל-token רגיל
+        //var rawToken = jwtHandler.WriteToken(token);
+
+        //// המרת ה-token ל-base64url
+        //var base64UrlToken = rawToken
+        //    .Replace("+", "-")  // החלפת + ב-
+        //    .Replace("/", "_")  // החלפת / ב_
+        //    .TrimEnd('=');      // הסרת padding (=)
+
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
+
 }
