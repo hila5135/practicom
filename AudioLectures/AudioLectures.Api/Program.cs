@@ -89,6 +89,21 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.Use(async (context, next) =>
+{
+    await next(); // Continue to the next middleware
+
+    if (context.Response.StatusCode == StatusCodes.Status403Forbidden)
+    {
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsync("{\"error\": \"You do not have permission to perform this action!\"}");
+    }
+    else if (context.Response.StatusCode == StatusCodes.Status401Unauthorized)
+    {
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsync("{\"error\": \"You must be logged in to access this resource!\"}");
+    }
+});
 
 app.UseAuthentication(); 
 app.UseAuthorization();

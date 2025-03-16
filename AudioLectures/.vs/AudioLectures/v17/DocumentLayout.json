@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7E96DFF8-1682-4A4D-9B7F-065F74DEDEF4}|AudioLectures.Api\\AudioLectures.Api.csproj|c:\\users\\user\\desktop\\practicom\\audiolectures\\audiolectures.api\\controllers\\lessoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E96DFF8-1682-4A4D-9B7F-065F74DEDEF4}|AudioLectures.Api\\AudioLectures.Api.csproj|solutionrelative:audiolectures.api\\controllers\\lessoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7E96DFF8-1682-4A4D-9B7F-065F74DEDEF4}|AudioLectures.Api\\AudioLectures.Api.csproj|c:\\users\\user\\desktop\\practicom\\audiolectures\\audiolectures.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E96DFF8-1682-4A4D-9B7F-065F74DEDEF4}|AudioLectures.Api\\AudioLectures.Api.csproj|solutionrelative:audiolectures.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7E96DFF8-1682-4A4D-9B7F-065F74DEDEF4}|AudioLectures.Api\\AudioLectures.Api.csproj|c:\\users\\user\\desktop\\practicom\\audiolectures\\audiolectures.api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E96DFF8-1682-4A4D-9B7F-065F74DEDEF4}|AudioLectures.Api\\AudioLectures.Api.csproj|solutionrelative:audiolectures.api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E96DFF8-1682-4A4D-9B7F-065F74DEDEF4}|AudioLectures.Api\\AudioLectures.Api.csproj|c:\\users\\user\\desktop\\practicom\\audiolectures\\audiolectures.api\\controllers\\lessoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E96DFF8-1682-4A4D-9B7F-065F74DEDEF4}|AudioLectures.Api\\AudioLectures.Api.csproj|solutionrelative:audiolectures.api\\controllers\\lessoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7E96DFF8-1682-4A4D-9B7F-065F74DEDEF4}|AudioLectures.Api\\AudioLectures.Api.csproj|c:\\users\\user\\desktop\\practicom\\audiolectures\\audiolectures.api\\controllers\\lecturercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -162,7 +162,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 32,
           "Children": [
             {
               "$type": "Document",
@@ -320,13 +320,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Api\\Program.cs",
               "RelativeDocumentMoniker": "AudioLectures.Api\\Program.cs",
               "ToolTip": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Api\\Program.cs",
               "RelativeToolTip": "AudioLectures.Api\\Program.cs",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAUwFoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAUwGkAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-12T22:50:47.82Z",
               "EditorCaption": ""
@@ -536,13 +536,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "LessonController.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Api\\Controllers\\LessonController.cs",
               "RelativeDocumentMoniker": "AudioLectures.Api\\Controllers\\LessonController.cs",
               "ToolTip": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Api\\Controllers\\LessonController.cs",
               "RelativeToolTip": "AudioLectures.Api\\Controllers\\LessonController.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAcwCAAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAAqwD4AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-12T14:35:58.886Z",
               "EditorCaption": ""
@@ -561,7 +561,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Api\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "AudioLectures.Api\\Controllers\\UserController.cs",
@@ -569,8 +569,7 @@
               "RelativeToolTip": "AudioLectures.Api\\Controllers\\UserController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T14:34:54.601Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T14:34:54.601Z"
             },
             {
               "$type": "Document",

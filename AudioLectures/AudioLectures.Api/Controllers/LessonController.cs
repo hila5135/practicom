@@ -60,7 +60,7 @@ namespace AudioLectures.Api.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _lessonService.DeleteLessonAsync(id);
-            return Ok("the request succeed!");
+            return Ok("Lesson deleted successfully");
         }
     }
 }
