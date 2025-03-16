@@ -80,16 +80,6 @@ public class AuthService
             signingCredentials: credentials
         );
 
-        //var jwtHandler = new JwtSecurityTokenHandler();
-
-        //// המרת ה-JWT ל-token רגיל
-        //var rawToken = jwtHandler.WriteToken(token);
-
-        //// המרת ה-token ל-base64url
-        //var base64UrlToken = rawToken
-        //    .Replace("+", "-")  // החלפת + ב-
-        //    .Replace("/", "_")  // החלפת / ב_
-        //    .TrimEnd('=');      // הסרת padding (=)
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }

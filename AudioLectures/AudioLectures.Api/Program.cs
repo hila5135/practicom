@@ -40,8 +40,8 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
-        RoleClaimType = "role"
-        //RoleClaimType = ClaimTypes.Role
+        //RoleClaimType = "role"
+        RoleClaimType = ClaimTypes.Role
     };
 });
 builder.Services.AddAuthorization(options =>
