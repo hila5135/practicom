@@ -109,11 +109,6 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-foreach (var kvp in builder.Configuration.AsEnumerable())
-{
-    Console.WriteLine($"{kvp.Key}: {kvp.Value}");
-}
 // הוספת שירותים
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -124,9 +119,9 @@ builder.Services.AddScoped<ILecturerService, LecturerService>();
 builder.Services.AddScoped<ILessonRepository, LessonRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILecturerRepository, LecturerRepository>();
+builder.Services.AddScoped<AuthService>();
 
 builder.Services.AddDbContext<DataContext>();
-
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -143,7 +138,7 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
-        RoleClaimType = "role"  // ✅ זהו החלק הקריטי - מוודא שהתפקידים מגיעים מה-JWT
+        //RoleClaimType = "role"  // ✅ זהו החלק הקריטי - מוודא שהתפקידים מגיעים מה-JWT
     };
 });
 builder.Services.AddAuthorization(options =>
@@ -153,17 +148,6 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("ViewerOnly", policy => policy.RequireRole("Viewer"));
 });
 
-builder.Configuration
-    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
-    .AddEnvironmentVariables();
-
-
-//var keyBytes = Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]);
-//Console.WriteLine($"Key length in bits: {keyBytes.Length * 8}");
-
-
-// ✅ **כאן נבנה ה-App**
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -174,8 +158,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// ✅ **חייב להיות בסדר הנכון**
-app.UseAuthentication();  // 🟢 הוספת Authentication לפני Authorization
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.MapControllers();

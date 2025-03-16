@@ -954,7 +954,10 @@
       },
       "AudioLectures.Service/1.0.0": {
         "dependencies": {
-          "AudioLectures.Core": "1.0.0"
+          "AudioLectures.Core": "1.0.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
+          "Microsoft.IdentityModel.Tokens": "7.1.2",
+          "System.IdentityModel.Tokens.Jwt": "7.1.2"
         },
         "runtime": {
           "AudioLectures.Service.dll": {
