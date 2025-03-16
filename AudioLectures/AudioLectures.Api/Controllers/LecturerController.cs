@@ -81,15 +81,8 @@ namespace AudioLectures.Api.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
 
-            return NoContent(); // לא מחזירים תוכן כי העדכון בוצע בהצלחה
+            return NoContent(); 
         }
-        //[HttpPut("{LecturerId}")]
-        //public async Task<IActionResult> Update(int LecturerId, [FromBody] Lecturer lecturer)
-        //{
-        //    if (LecturerId != lecturer.LecturerId) return BadRequest();
-        //    await _lecturerService.UpdateLecturerAsync(lecturer);
-        //    return NoContent();
-        //}
         [HttpDelete("{LecturerId}")]
         public async Task<IActionResult> Delete(int LecturerId)
         {

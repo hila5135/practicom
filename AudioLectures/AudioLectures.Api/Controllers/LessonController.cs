@@ -30,12 +30,14 @@ namespace AudioLectures.Api.Controllers
             if (lesson == null) return NotFound();
             return lesson;
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Lesson lesson)
         {
             await _lessonService.AddLessonAsync(lesson);
             return CreatedAtAction(nameof(GetById), new { id = lesson.LessonId }, lesson);
         }
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] Lesson lesson)
         {
@@ -44,30 +46,21 @@ namespace AudioLectures.Api.Controllers
                 return BadRequest();
             }
 
-            // אם ה-lessonLecturerId התקבל, לא נדרש להמיר אובייקט Lecturer
             if (lesson.LessonLecturerId > 0)
             {
-                lesson.LessonLecturer = null; // לא צריך להמיר אובייקט
+                lesson.LessonLecturer = null; 
             }
 
             await _lessonService.UpdateLessonAsync(lesson);
             return NoContent();
         }
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> Put(int id,[FromBody] Lesson lesson)//עדכון
-        //{
-        //    if (id != lesson.LessonId) return BadRequest();
-        //    await _lessonService.UpdateLessonAsync(lesson);
-        //    return NoContent();
-        //}
 
         [Authorize(Roles = "Admin")]
-        //[Authorize(Policy = "AdminOnly")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _lessonService.DeleteLessonAsync(id);
-            return NoContent();
+            return Ok("the request succeed!");
         }
     }
 }

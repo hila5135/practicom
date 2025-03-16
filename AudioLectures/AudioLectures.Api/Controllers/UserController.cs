@@ -1,6 +1,7 @@
 ﻿using AudioLectures.Core.Models;
 using AudioLectures.Core.Services;
 using AudioLectures.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -44,7 +45,7 @@ namespace AudioLectures.Api.Controllers
             await _userService.UpdateUserAsync(user);
             return NoContent();
         }
-
+        [Authorize(policy:"EditorOrAdmin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
