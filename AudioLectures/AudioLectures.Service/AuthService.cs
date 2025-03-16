@@ -58,7 +58,7 @@ using System.Text;
 public class AuthService
 {
     private readonly IConfiguration _configuration;
-    private readonly IUserRepository _userRepository; // אם יש רפוזיטורי למשתמשים
+    private readonly IUserRepository _userRepository;
 
     public AuthService(IConfiguration configuration, IUserRepository userRepository)
     {
@@ -68,21 +68,17 @@ public class AuthService
 
     public string GenerateJwtToken(string username, string password)
     {
-        // 1. אם נתוני ההתחברות תואמים לערכים קבועים
         if (username == "hila5135" && password == "5135")
         {
             return GenerateToken(username, new[] { "Admin" });
         }
 
-        // 2. בדיקה אם המשתמש קיים במאגר
         var user = _userRepository.GetUserByCredentials(username, password);
         if (user != null)
         {
-            // אם המשתמש קיים במאגר - תפקיד User
             return GenerateToken(username, new[] { "User" });
         }
 
-        // 3. אם המשתמש לא קיים במאגר - משתמש חדש, תפקיד Viewer
         return GenerateToken(username, new[] { "Viewer" });
     }
 
