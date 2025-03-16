@@ -17,7 +17,7 @@ namespace AudioLectures.Api.Controllers
         {
             _userService = userService;
         }
-
+        [Authorize(policy:"AdminOnly")]
         [HttpGet]
         public async Task<IEnumerable<User>> GetAll()
         {
@@ -50,7 +50,7 @@ namespace AudioLectures.Api.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _userService.DeleteUserAsync(id);
-            return NoContent();
+            return Ok("the request secceeded");
         }
         
     }
