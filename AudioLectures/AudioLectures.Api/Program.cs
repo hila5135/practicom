@@ -1,0 +1,183 @@
+﻿//using AudioLectures.Core.Repositories;
+//using AudioLectures.Core.Services;
+//using AudioLectures.Data;
+//using AudioLectures.Data.Repositories;
+//using AudioLectures.Service;
+//using Microsoft.AspNetCore.Authentication.JwtBearer;
+//using Microsoft.IdentityModel.Tokens;
+//using Microsoft.OpenApi.Models;
+//using System.Text;
+
+//var builder = WebApplication.CreateBuilder(args);
+
+
+//builder.Services.AddControllers();
+
+//builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddSwaggerGen();
+//builder.Services.AddScoped<ILessonService, LessonService>();
+//builder.Services.AddScoped<IUserService, UserService>();
+//builder.Services.AddScoped<ILecturerService, LecturerService>();
+//builder.Services.AddScoped<ILessonRepository, LessonRepository>();
+//builder.Services.AddScoped<IUserRepository, UserRepository>();
+//builder.Services.AddScoped<ILecturerRepository, LecturerRepository>();
+
+////builder.Services.AddScoped<repositoryManager, IRepositoryManager>();
+
+//builder.Services.AddSwaggerGen(options =>
+//{
+//    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+//    {
+//        Scheme = "Bearer",
+//        BearerFormat = "JWT",
+//        In = ParameterLocation.Header,
+//        Name = "Authorization",
+//        Description = "Bearer Authentication with JWT Token",
+//        Type = SecuritySchemeType.Http
+//    });
+//    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+//    {
+//        {
+//            new OpenApiSecurityScheme
+//            {
+//                Reference = new OpenApiReference
+//                {
+//                    Id = "Bearer",
+//                    Type = ReferenceType.SecurityScheme
+//                }
+//            },
+//            new List<string>()
+//        }
+//    });
+//});
+
+
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+//    options.AddPolicy("EditorOrAdmin", policy => policy.RequireRole("Editor", "Admin"));
+//    options.AddPolicy("ViewerOnly", policy => policy.RequireRole("Viewer"));
+//});
+
+//builder.Services.AddDbContext<DataContext>();
+//var app = builder.Build();
+
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//})
+//    .AddJwtBearer(options =>
+//    {
+//        options.TokenValidationParameters = new TokenValidationParameters
+//        {
+//            ValidateIssuer = true,
+//            ValidateAudience = true,
+//            ValidateLifetime = true,
+//            ValidateIssuerSigningKey = true,
+//            ValidIssuer = builder.Configuration["JWT:Issuer"],
+//            ValidAudience = builder.Configuration["JWT:Audience"],
+//            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
+//        };
+//    });
+//app.UseAuthentication();
+
+
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+
+//app.UseHttpsRedirection();
+
+//app.UseAuthorization();
+
+//app.MapControllers();
+
+//app.Run();
+
+using AudioLectures.Core.Repositories;
+using AudioLectures.Core.Services;
+using AudioLectures.Data;
+using AudioLectures.Data.Repositories;
+using AudioLectures.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
+
+var builder = WebApplication.CreateBuilder(args);
+
+
+foreach (var kvp in builder.Configuration.AsEnumerable())
+{
+    Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+}
+// הוספת שירותים
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ILessonService, LessonService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ILecturerService, LecturerService>();
+builder.Services.AddScoped<ILessonRepository, LessonRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ILecturerRepository, LecturerRepository>();
+
+builder.Services.AddDbContext<DataContext>();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+        RoleClaimType = "role"  // ✅ זהו החלק הקריטי - מוודא שהתפקידים מגיעים מה-JWT
+    };
+});
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("EditorOrAdmin", policy => policy.RequireRole("Editor", "Admin"));
+    options.AddPolicy("ViewerOnly", policy => policy.RequireRole("Viewer"));
+});
+
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+    .AddEnvironmentVariables();
+
+
+//var keyBytes = Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]);
+//Console.WriteLine($"Key length in bits: {keyBytes.Length * 8}");
+
+
+// ✅ **כאן נבנה ה-App**
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+// ✅ **חייב להיות בסדר הנכון**
+app.UseAuthentication();  // 🟢 הוספת Authentication לפני Authorization
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
