@@ -2,7 +2,7 @@
 {
     public class LecturerDTO
     {
-        public string Name { get; set; }
+        public string LecturerName { get; set; }
 
     }
 }

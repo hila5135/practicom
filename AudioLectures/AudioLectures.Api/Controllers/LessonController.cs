@@ -8,7 +8,7 @@ namespace AudioLectures.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LessonController : Controller
+    public class LessonController : ControllerBase
     {
         private readonly ILessonService _lessonService;
 
@@ -32,7 +32,7 @@ namespace AudioLectures.Api.Controllers
         }
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] LessonDTO lesson)
+        public async Task<ActionResult<Lesson>> Add([FromBody] LessonDTO lesson)
         {
             Lesson l = await _lessonService.AddLessonAsync(lesson);
             return Ok(l);

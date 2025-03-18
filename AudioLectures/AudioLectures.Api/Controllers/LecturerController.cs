@@ -9,7 +9,7 @@ namespace AudioLectures.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LecturerController : Controller
+    public class LecturerController : ControllerBase
     {
         private readonly ILecturerService _lecturerService;
 
@@ -33,7 +33,7 @@ namespace AudioLectures.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] LecturerDTO lecturer)
+        public async Task<ActionResult<Lecturer>> Add([FromBody] LecturerDTO lecturer)
         {
             Lecturer l = await _lecturerService.AddLecturerAsync(lecturer);
             return Ok(l);

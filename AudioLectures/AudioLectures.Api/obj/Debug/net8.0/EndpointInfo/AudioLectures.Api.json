@@ -98,7 +98,24 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lecturer"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lecturer"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lecturer"
+                }
+              }
+            }
           }
         }
       }
@@ -266,7 +283,24 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lesson"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lesson"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lesson"
+                }
+              }
+            }
           }
         }
       }
@@ -434,7 +468,24 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
           }
         }
       }
@@ -567,7 +618,7 @@
       "LecturerDTO": {
         "type": "object",
         "properties": {
-          "name": {
+          "lecturerName": {
             "type": "string",
             "nullable": true
           }
@@ -625,11 +676,11 @@
       "LessonDTO": {
         "type": "object",
         "properties": {
-          "lessonTitle": {
+          "lessonDuration": {
             "type": "string",
-            "nullable": true
+            "format": "date-span"
           },
-          "genre": {
+          "lessonTitle": {
             "type": "string",
             "nullable": true
           },
@@ -641,7 +692,7 @@
             "type": "string",
             "nullable": true
           },
-          "singerId": {
+          "lessonLecturerId": {
             "type": "integer",
             "format": "int32"
           }
@@ -698,19 +749,19 @@
       "UserDTO": {
         "type": "object",
         "properties": {
-          "name": {
+          "userName": {
             "type": "string",
             "nullable": true
           },
-          "email": {
+          "userEmail": {
             "type": "string",
             "nullable": true
           },
-          "password": {
+          "userPassword": {
             "type": "string",
             "nullable": true
           },
-          "role": {
+          "userRole": {
             "type": "string",
             "nullable": true
           }

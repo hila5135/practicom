@@ -33,7 +33,7 @@ namespace AudioLectures.Api.Controllers
             return user;
         }
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] UserDTO user)
+        public async Task<ActionResult<User>> Add([FromBody] UserDTO user)
         {
             User u = await _userService.AddUserAsync(user);
             return Ok(u);
