@@ -1,4 +1,5 @@
-﻿using AudioLectures.Core.Models;
+﻿using AudioLectures.Api.Dtos;
+using AudioLectures.Core.Models;
 using AudioLectures.Core.Services;
 using AudioLectures.Service;
 using Microsoft.AspNetCore.Http;
@@ -32,56 +33,20 @@ namespace AudioLectures.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] Lecturer lecturer)
+        public async Task<IActionResult> Add([FromBody] LecturerDTO lecturer)
         {
-            await _lecturerService.AddLecturerAsync(lecturer);
-            return CreatedAtAction(nameof(GetById), new { LecturerId = lecturer.LecturerId }, lecturer);
+            Lecturer l = await _lecturerService.AddLecturerAsync(lecturer);
+            return Ok(l);
         }
         [HttpPut("{LecturerId}")]
-        public async Task<IActionResult> Update(int LecturerId, [FromBody] Lecturer lecturer)
+        public async Task<IActionResult> Update(int LecturerId, [FromBody] LecturerDTO lecturer)
         {
-            // אם הLecturerId בנתיב לא תואם לזה שבאובייקט, מחזירים BadRequest
-            if (LecturerId != lecturer.LecturerId)
+            Lecturer l = await _lecturerService.AddLecturerAsync(lecturer);
+            if (l == null)
             {
-                return BadRequest("Lecturer ID mismatch.");
+                return NotFound();
             }
-
-            // שוודא שהLecturer יש שיעורים
-            if (lecturer.LecturerLessons == null || !lecturer.LecturerLessons.Any())
-            {
-                return BadRequest("Lecturer must have at least one lesson.");
-            }
-
-            // נוודא שכל שיעור שיש לו LecturerValid תואם למרצה
-            foreach (var lesson in lecturer.LecturerLessons)
-            {
-                if (lesson.LessonLecturer == null || lesson.LessonLecturer.LecturerId != lecturer.LecturerId)
-                {
-                    return BadRequest("Each lesson must have a valid lecturer.");
-                }
-
-                // במקרה של שיעור עם LecturerId אבל בלי Lecturer מלא, עדכן אותו כאן (אם צריך)
-                if (lesson.LessonLecturer != null && lesson.LessonLecturer.LecturerId != lecturer.LecturerId)
-                {
-                    lesson.LessonLecturer = new Lecturer
-                    {
-                        LecturerId = lecturer.LecturerId,
-                        LecturerName = lecturer.LecturerName
-                    };
-                }
-            }
-
-            // עכשיו נבצע את העדכון של המרצה
-            try
-            {
-                await _lecturerService.UpdateLecturerAsync(lecturer);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
-
-            return NoContent(); 
+            return Ok(l);
         }
         [HttpDelete("{LecturerId}")]
         public async Task<IActionResult> Delete(int LecturerId)
@@ -89,5 +54,6 @@ namespace AudioLectures.Api.Controllers
             await _lecturerService.DeleteLecturerAsync(LecturerId);
             return NoContent();
         }
+
     }
 }

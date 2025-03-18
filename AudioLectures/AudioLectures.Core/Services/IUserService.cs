@@ -1,4 +1,5 @@
-﻿using AudioLectures.Core.Models;
+﻿using AudioLectures.Api.Dtos;
+using AudioLectures.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace AudioLectures.Core.Services
 {
     public interface IUserService
     {
-        Task<IEnumerable<User>> GetAllUsersAsync();
-        Task<User> GetUserByIdAsync(int id);
-        Task AddUserAsync(User user);
-        Task UpdateUserAsync(User user);
-        Task DeleteUserAsync(int id);
+        public Task<IEnumerable<User>> GetAllUsersAsync();
+      public  Task<User> GetUserByIdAsync(int id);
+      public  Task<User> AddUserAsync(UserDTO user);
+      public  Task<User> UpdateUserAsync(int id,UserDTO user);
+       public Task DeleteUserAsync(int id);
         public User Authenticate(string userName, string userPassword);
     }
 }

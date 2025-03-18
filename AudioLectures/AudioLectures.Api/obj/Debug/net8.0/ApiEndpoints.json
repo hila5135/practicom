@@ -45,7 +45,7 @@
     "Parameters": [
       {
         "Name": "lecturer",
-        "Type": "AudioLectures.Core.Models.Lecturer",
+        "Type": "AudioLectures.Api.Dtos.LecturerDTO",
         "IsRequired": true
       }
     ],
@@ -92,7 +92,7 @@
       },
       {
         "Name": "lecturer",
-        "Type": "AudioLectures.Core.Models.Lecturer",
+        "Type": "AudioLectures.Api.Dtos.LecturerDTO",
         "IsRequired": true
       }
     ],
@@ -136,7 +136,7 @@
   },
   {
     "ContainingType": "AudioLectures.Api.Controllers.LessonController",
-    "Method": "Post",
+    "Method": "Add",
     "RelativePath": "api/Lesson",
     "HttpMethod": "POST",
     "IsController": true,
@@ -144,7 +144,7 @@
     "Parameters": [
       {
         "Name": "lesson",
-        "Type": "AudioLectures.Core.Models.Lesson",
+        "Type": "AudioLectures.Api.Dtos.LessonDTO",
         "IsRequired": true
       }
     ],
@@ -191,7 +191,7 @@
       },
       {
         "Name": "lesson",
-        "Type": "AudioLectures.Core.Models.Lesson",
+        "Type": "AudioLectures.Api.Dtos.LessonDTO",
         "IsRequired": true
       }
     ],
@@ -243,7 +243,7 @@
     "Parameters": [
       {
         "Name": "user",
-        "Type": "AudioLectures.Core.Models.User",
+        "Type": "AudioLectures.Api.Dtos.UserDTO",
         "IsRequired": true
       }
     ],
@@ -290,7 +290,7 @@
       },
       {
         "Name": "user",
-        "Type": "AudioLectures.Core.Models.User",
+        "Type": "AudioLectures.Api.Dtos.UserDTO",
         "IsRequired": true
       }
     ],

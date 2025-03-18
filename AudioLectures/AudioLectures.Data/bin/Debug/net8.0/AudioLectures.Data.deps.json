@@ -9,11 +9,22 @@
       "AudioLectures.Data/1.0.0": {
         "dependencies": {
           "AudioLectures.Core": "1.0.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.14",
-          "Microsoft.EntityFrameworkCore.Tools": "8.0.14"
+          "Microsoft.EntityFrameworkCore.Design": "8.0.14",
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.14"
         },
         "runtime": {
           "AudioLectures.Data.dll": {}
+        }
+      },
+      "AutoMapper/14.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Options": "8.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/AutoMapper.dll": {
+            "assemblyVersion": "14.0.0.0",
+            "fileVersion": "14.0.0.0"
+          }
         }
       },
       "Azure.Core/1.38.0": {
@@ -411,11 +422,6 @@
             "assemblyVersion": "8.0.14.0",
             "fileVersion": "8.0.1425.11206"
           }
-        }
-      },
-      "Microsoft.EntityFrameworkCore.Tools/8.0.14": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design": "8.0.14"
         }
       },
       "Microsoft.Extensions.Caching.Abstractions/8.0.0": {
@@ -925,6 +931,9 @@
         }
       },
       "AudioLectures.Core/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "14.0.0"
+        },
         "runtime": {
           "AudioLectures.Core.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -939,6 +948,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoMapper/14.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OC+1neAPM4oCCqQj3g2GJ2shziNNhOkxmNB9cVS8jtx4JbgmRzLcUOxB9Tsz6cVPHugdkHgCaCrTjjSI0Z5sCQ==",
+      "path": "automapper/14.0.0",
+      "hashPath": "automapper.14.0.0.nupkg.sha512"
     },
     "Azure.Core/1.38.0": {
       "type": "package",
@@ -1065,13 +1081,6 @@
       "sha512": "sha512-DFgy5EEdyq00hNC/6GrEANeW0Rvx5qdcF8KZ2ArU7yVTfL5cL8Y2qduXxcuuLgIMdBXlAoG7CorKo5Iqjz0mHQ==",
       "path": "microsoft.entityframeworkcore.sqlserver/8.0.14",
       "hashPath": "microsoft.entityframeworkcore.sqlserver.8.0.14.nupkg.sha512"
-    },
-    "Microsoft.EntityFrameworkCore.Tools/8.0.14": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-nWlJaFEvT7HpLkOusyReeQPeHsl5EUIBlI5Pr05SYhkWFQ7KGLmUNdv4j1aAjrO+x42Enqr7fu7r3MXLPQqImg==",
-      "path": "microsoft.entityframeworkcore.tools/8.0.14",
-      "hashPath": "microsoft.entityframeworkcore.tools.8.0.14.nupkg.sha512"
     },
     "Microsoft.Extensions.Caching.Abstractions/8.0.0": {
       "type": "package",

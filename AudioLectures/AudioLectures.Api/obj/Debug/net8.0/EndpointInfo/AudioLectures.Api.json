@@ -81,17 +81,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Lecturer"
+                "$ref": "#/components/schemas/LecturerDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Lecturer"
+                "$ref": "#/components/schemas/LecturerDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Lecturer"
+                "$ref": "#/components/schemas/LecturerDTO"
               }
             }
           }
@@ -161,17 +161,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Lecturer"
+                "$ref": "#/components/schemas/LecturerDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Lecturer"
+                "$ref": "#/components/schemas/LecturerDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Lecturer"
+                "$ref": "#/components/schemas/LecturerDTO"
               }
             }
           }
@@ -249,17 +249,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Lesson"
+                "$ref": "#/components/schemas/LessonDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Lesson"
+                "$ref": "#/components/schemas/LessonDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Lesson"
+                "$ref": "#/components/schemas/LessonDTO"
               }
             }
           }
@@ -329,17 +329,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Lesson"
+                "$ref": "#/components/schemas/LessonDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Lesson"
+                "$ref": "#/components/schemas/LessonDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Lesson"
+                "$ref": "#/components/schemas/LessonDTO"
               }
             }
           }
@@ -417,17 +417,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserDTO"
               }
             }
           }
@@ -497,17 +497,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserDTO"
               }
             }
           }
@@ -564,6 +564,16 @@
         },
         "additionalProperties": false
       },
+      "LecturerDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Lesson": {
         "type": "object",
         "properties": {
@@ -575,18 +585,11 @@
             "type": "string",
             "nullable": true
           },
-          "lessonLecturerId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "lessonLecturer": {
-            "$ref": "#/components/schemas/Lecturer"
-          },
-          "lessonUrl": {
+          "lessonDuration": {
             "type": "string",
-            "nullable": true
+            "format": "date-span"
           },
-          "lessonRealeaseDate": {
+          "lessonReleaseDate": {
             "type": "string",
             "format": "date-time"
           },
@@ -598,12 +601,49 @@
             "type": "integer",
             "format": "int32"
           },
-          "users": {
+          "lessonUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "lessonLecturerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lessonLecturer": {
+            "$ref": "#/components/schemas/Lecturer"
+          },
+          "lessonUsers": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/User"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LessonDTO": {
+        "type": "object",
+        "properties": {
+          "lessonTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "genre": {
+            "type": "string",
+            "nullable": true
+          },
+          "lessonRealeaseDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lessonUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "singerId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -645,11 +685,33 @@
             "type": "string",
             "nullable": true
           },
-          "lessons": {
+          "userLessons": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Lesson"
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
             "nullable": true
           }
         },

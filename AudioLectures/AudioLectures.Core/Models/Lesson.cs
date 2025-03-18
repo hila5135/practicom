@@ -10,13 +10,16 @@ namespace AudioLectures.Core.Models
     {
         public int LessonId { get; set; }
         public string LessonTitle { get; set; }
-        public int LessonLecturerId { get; set; }
-        public Lecturer LessonLecturer { get; set; }
-        public string LessonUrl { get; set; }
-        public DateTime LessonRealeaseDate { get; set; }
+        public TimeSpan LessonDuration { get; set; }
+        public DateTime LessonReleaseDate { get; set; }
         public int LessonListenersCount { get; set; }
         public int LessonDownloadCount { get; set; }
-        public List<User> Users { get; set; }
+        public string LessonUrl { get; set; }
+
+
+        public int LessonLecturerId { get; set; }
+        public Lecturer LessonLecturer { get; set; }
+        public List<User> LessonUsers { get; set; }
 
     }
 }

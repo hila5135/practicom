@@ -11,8 +11,8 @@ namespace AudioLectures.Core.Repositories
     {
         Task<IEnumerable<User>> GetAllAsync();
         Task<User> GetByIdAsync(int id);
-        Task AddAsync(User user);
-        Task UpdateAsync(User user);
+        Task<User> AddAsync(User user);
+        Task<User> UpdateAsync(int id,User user);
         Task DeleteAsync(int id);
         User GetUserByCredentials(string userName, string userPassword);
     }

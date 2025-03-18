@@ -18,36 +18,42 @@ namespace AudioLectures.Data.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Lesson>> GetAllAsync()
-        {
-            return await _context.Lessons.ToListAsync();
-        }
+        public async Task<IEnumerable<Lesson>> GetAllAsync() => await _context.Lessons.Include(s => s.LessonUsers).Include(s => s.LessonUsers).ToListAsync();
 
-        public async Task<Lesson?> GetByIdAsync(int id)
-        {
-            return await _context.Lessons.FindAsync(id);
-        }
 
-        public async Task AddAsync(Lesson lesson)
+        public async Task<Lesson> GetByIdAsync(int id) => await _context.Lessons.FindAsync(id);
+
+        public async Task<IEnumerable<Lesson>> GetSongsByTitleAsync(string title) => await _context.Lessons.Where(s => s.LessonTitle == title).ToListAsync();
+
+        public async Task<Lesson> AddAsync(Lesson lesson)
         {
-            _context.Lessons.Add(lesson);
+            await _context.Lessons.AddAsync(lesson);
             await _context.SaveChangesAsync();
+            return lesson;
         }
 
-        public async Task UpdateAsync(Lesson lesson)
+        public async Task<Lesson> UpdateAsync(int id, Lesson lesson)  
         {
-            _context.Lessons.Update(lesson);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteAsync(int id)
-        {
-            var lesson = await GetByIdAsync(id);
-            if (lesson != null)
+            Lesson s = await _context.Lessons.SingleOrDefaultAsync(act => act.LessonId == id);
+            if (s == null) return null;
+            else
             {
-                _context.Lessons.Remove(lesson);
-                await _context.SaveChangesAsync();
+                s.LessonTitle = lesson.LessonTitle;
+                s.LessonDuration = lesson.LessonDuration;
+                s.LessonListenersCount=lesson.LessonListenersCount;
+                s.LessonUrl = lesson.LessonUrl;
+                s.LessonReleaseDate = lesson.LessonReleaseDate;
+                s.LessonLecturer = lesson.LessonLecturer;
+                s.LessonLecturerId = lesson.LessonLecturerId;
+                s.LessonUsers = lesson.LessonUsers;
+
             }
+            await _context.SaveChangesAsync();
+            return s;
+
         }
+
+        public async Task DeleteAsync(int id) { var entity = await _context.Lessons.FindAsync(id); if (entity != null) { _context.Lessons.Remove(entity); await _context.SaveChangesAsync(); } }
+
     }
 }

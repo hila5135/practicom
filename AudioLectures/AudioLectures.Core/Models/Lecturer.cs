@@ -10,7 +10,7 @@ namespace AudioLectures.Core.Models
     {
         public int LecturerId { get; set; }
         public string LecturerName { get; set; }
-        public List<Lesson> LecturerLessons { get; set; } = new List<Lesson>();
+        public List<Lesson> LecturerLessons { get; set; }
       
     }
 }

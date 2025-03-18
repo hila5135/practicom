@@ -1,4 +1,5 @@
-﻿using AudioLectures.Core.Models;
+﻿using AudioLectures.Api.Dtos;
+using AudioLectures.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace AudioLectures.Core.Services
     {
         Task<IEnumerable<Lesson>> GetAllLessonsAsync();
         Task<Lesson> GetLessonByIdAsync(int id);
-        Task AddLessonAsync(Lesson lesson);
-        Task UpdateLessonAsync(Lesson lesson);
+        Task<Lesson> AddLessonAsync(LessonDTO lesson);
+        Task<Lesson> UpdateLessonAsync(int id,LessonDTO lesson);
         Task DeleteLessonAsync(int id);
     }
 }

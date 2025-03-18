@@ -36,7 +36,7 @@ namespace AudioLectures.Data.Migrations
 
                     b.HasKey("LecturerId");
 
-                    b.ToTable("lecturers");
+                    b.ToTable("Lecturers");
                 });
 
             modelBuilder.Entity("AudioLectures.Core.Models.Lesson", b =>
@@ -50,13 +50,16 @@ namespace AudioLectures.Data.Migrations
                     b.Property<int>("LessonDownloadCount")
                         .HasColumnType("int");
 
+                    b.Property<TimeSpan>("LessonDuration")
+                        .HasColumnType("time");
+
                     b.Property<int>("LessonLecturerId")
                         .HasColumnType("int");
 
                     b.Property<int>("LessonListenersCount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("LessonRealeaseDate")
+                    b.Property<DateTime>("LessonReleaseDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LessonTitle")
@@ -67,16 +70,11 @@ namespace AudioLectures.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("LessonId");
 
                     b.HasIndex("LessonLecturerId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("lessons");
+                    b.ToTable("Lessons");
                 });
 
             modelBuilder.Entity("AudioLectures.Core.Models.User", b =>
@@ -105,7 +103,22 @@ namespace AudioLectures.Data.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("users");
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("LessonUser", b =>
+                {
+                    b.Property<int>("LessonUsersUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserLessonsLessonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LessonUsersUserId", "UserLessonsLessonId");
+
+                    b.HasIndex("UserLessonsLessonId");
+
+                    b.ToTable("LessonUser");
                 });
 
             modelBuilder.Entity("AudioLectures.Core.Models.Lesson", b =>
@@ -116,21 +129,27 @@ namespace AudioLectures.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AudioLectures.Core.Models.User", null)
-                        .WithMany("Lessons")
-                        .HasForeignKey("UserId");
-
                     b.Navigation("LessonLecturer");
+                });
+
+            modelBuilder.Entity("LessonUser", b =>
+                {
+                    b.HasOne("AudioLectures.Core.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("LessonUsersUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AudioLectures.Core.Models.Lesson", null)
+                        .WithMany()
+                        .HasForeignKey("UserLessonsLessonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AudioLectures.Core.Models.Lecturer", b =>
                 {
                     b.Navigation("LecturerLessons");
-                });
-
-            modelBuilder.Entity("AudioLectures.Core.Models.User", b =>
-                {
-                    b.Navigation("Lessons");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
-﻿using AudioLectures.Core.Models;
+﻿using AudioLectures.Api.Dtos;
+using AudioLectures.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace AudioLectures.Core.Services
 {
     public interface ILecturerService
     {
-        Task<IEnumerable<Lecturer>> GetAllLecturersAsync();
-        Task<Lecturer> GetLecturerByIdAsync(int id);
-        Task AddLecturerAsync(Lecturer lecturer);
-        Task UpdateLecturerAsync(Lecturer lecturer);
-        Task DeleteLecturerAsync(int id);
+       public Task<IEnumerable<Lecturer>> GetAllLecturersAsync();
+       public Task<Lecturer> GetLecturerByIdAsync(int id);
+       public Task<Lecturer> AddLecturerAsync(LecturerDTO lecturer);
+       public Task<Lecturer> UpdateLecturerAsync(int id,LecturerDTO lecturer);
+       public Task DeleteLecturerAsync(int id);
     }
 }

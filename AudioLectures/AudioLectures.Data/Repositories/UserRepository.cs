@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AudioLectures.Data.Repositories
 {
-    public class UserRepository :IUserRepository///actions on users
+    public class UserRepository :IUserRepository    
     {
         private readonly DataContext _context;
 
@@ -20,7 +20,7 @@ namespace AudioLectures.Data.Repositories
 
         public async Task<IEnumerable<User>> GetAllAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Include(u=>u.UserLessons).ToListAsync();
         }
 
         public async Task<User?> GetByIdAsync(int id)
@@ -28,16 +28,32 @@ namespace AudioLectures.Data.Repositories
             return await _context.Users.FindAsync(id);
         }
 
-        public async Task AddAsync(User user)
+        public async Task<User> AddAsync(User user)
         {
-            _context.Users.Add(user);
+            await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+            return user;
         }
 
-        public async Task UpdateAsync(User user)
+        public async Task<User> UpdateAsync(int id, User user)
         {
-            _context.Users.Update(user);
+            User u = await _context.Users.SingleOrDefaultAsync(u => u.UserId == id);
+            if (u == null) return null;
+
+            else
+            {
+
+                u.UserName = user.UserName;
+                u.UserPassword = user.UserPassword;
+                u.UserEmail = user.UserEmail;
+                u.UserRole = user.UserRole;
+                u.UserLessons = user.UserLessons;
+
+            }
             await _context.SaveChangesAsync();
+            return u;
+
+
         }
 
         public async Task DeleteAsync(int id)

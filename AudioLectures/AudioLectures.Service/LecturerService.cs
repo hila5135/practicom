@@ -1,6 +1,8 @@
-﻿using AudioLectures.Core.Models;
+﻿using AudioLectures.Api.Dtos;
+using AudioLectures.Core.Models;
 using AudioLectures.Core.Repositories;
 using AudioLectures.Core.Services;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +14,24 @@ namespace AudioLectures.Service
     public class LecturerService :ILecturerService
     {
         private readonly ILecturerRepository _lecturerRepository;
-        public LecturerService(ILecturerRepository lecturerRepository)
+        private readonly IMapper _mapper;
+        public LecturerService(ILecturerRepository lecturerRepository, IMapper mapper)
         {
             _lecturerRepository = lecturerRepository;
+            _mapper = mapper;
         }
-        public Task<IEnumerable<Lecturer>> GetAllLecturersAsync() => _lecturerRepository.GetAllAsync();
-        public Task<Lecturer> GetLecturerByIdAsync(int id) => _lecturerRepository.GetByIdAsync(id);
-        public Task AddLecturerAsync(Lecturer lecturer) => _lecturerRepository.AddAsync(lecturer);
-        public Task UpdateLecturerAsync(Lecturer lecturer) => _lecturerRepository.UpdateAsync(lecturer);
-        public Task DeleteLecturerAsync(int id) => _lecturerRepository.DeleteAsync(id);
+        public async Task<IEnumerable<Lecturer>> GetAllLecturersAsync() =>await _lecturerRepository.GetAllAsync();
+        public async Task<Lecturer> GetLecturerByIdAsync(int id) => await _lecturerRepository.GetByIdAsync(id);
+        public async Task<Lecturer> AddLecturerAsync(LecturerDTO lecturer)
+        {
+            var lecturerMap=_mapper.Map<Lecturer>(lecturer);
+            return await _lecturerRepository.AddAsync(lecturerMap);
+        }
+        public async Task<Lecturer> UpdateLecturerAsync(int id,LecturerDTO lecturer)
+        {
+            var lecturerMap = _mapper.Map<Lecturer>(lecturer);
+           return await _lecturerRepository.UpdateAsync(id,lecturerMap);
+        }
+        public async Task DeleteLecturerAsync(int id) =>await _lecturerRepository.DeleteAsync(id);
     }
 }

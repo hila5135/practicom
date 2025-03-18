@@ -1,4 +1,5 @@
-﻿using AudioLectures.Core.Repositories;
+﻿using AudioLectures.Core;
+using AudioLectures.Core.Repositories;
 using AudioLectures.Core.Services;
 using AudioLectures.Data;
 using AudioLectures.Data.Repositories;
@@ -6,11 +7,14 @@ using AudioLectures.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Net.Http.Headers;
+
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json.Serialization;
+
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<DataContext>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -23,7 +27,18 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILecturerRepository, LecturerRepository>();
 builder.Services.AddScoped<AuthService>();
 
-builder.Services.AddDbContext<DataContext>();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+
+builder.Services.AddControllers();
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
+});
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -11,8 +11,8 @@ namespace AudioLectures.Core.Repositories
     {
         Task<IEnumerable<Lecturer>> GetAllAsync();
         Task<Lecturer> GetByIdAsync(int id);
-        Task AddAsync(Lecturer lecturer);
-        Task UpdateAsync(Lecturer lecturer);
+        Task<Lecturer> AddAsync(Lecturer lecturer);
+        Task<Lecturer> UpdateAsync(int id,Lecturer lecturer);
         Task DeleteAsync(int id);
     }
 }

@@ -1,7 +1,7 @@
-﻿using AudioLectures.Core.Models;
+﻿using AudioLectures.Api.Dtos;
+using AudioLectures.Core.Models;
 using AudioLectures.Core.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AudioLectures.Api.Controllers
@@ -32,27 +32,21 @@ namespace AudioLectures.Api.Controllers
         }
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Lesson lesson)
+        public async Task<IActionResult> Add([FromBody] LessonDTO lesson)
         {
-            await _lessonService.AddLessonAsync(lesson);
-            return CreatedAtAction(nameof(GetById), new { id = lesson.LessonId }, lesson);
+            Lesson l = await _lessonService.AddLessonAsync(lesson);
+            return Ok(l);
         }
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Lesson lesson)
+        public async Task<IActionResult> Update(int id, [FromBody] LessonDTO lesson)
         {
-            if (id != lesson.LessonId)
+            Lesson l = await _lessonService.UpdateLessonAsync(id, lesson);
+            if (l== null)
             {
-                return BadRequest();
+                return NotFound();
             }
-
-            if (lesson.LessonLecturerId > 0)
-            {
-                lesson.LessonLecturer = null; 
-            }
-
-            await _lessonService.UpdateLessonAsync(lesson);
-            return NoContent();
+            return Ok(l);
         }
 
         [Authorize(Roles = "Admin")]

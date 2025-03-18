@@ -1,4 +1,5 @@
-﻿using AudioLectures.Core.Models;
+﻿using AudioLectures.Api.Dtos;
+using AudioLectures.Core.Models;
 using AudioLectures.Core.Services;
 using AudioLectures.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -32,18 +33,21 @@ namespace AudioLectures.Api.Controllers
             return user;
         }
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] User user)
+        public async Task<IActionResult> Add([FromBody] UserDTO user)
         {
-            await _userService.AddUserAsync(user);
-            return CreatedAtAction(nameof(GetById), new { id = user.UserId }, user);
+            User u = await _userService.AddUserAsync(user);
+            return Ok(u);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id,[FromBody] User user)
+        public async Task<IActionResult> Update(int id,[FromBody] UserDTO user)
         {
-            if (id != user.UserId) return BadRequest();
-            await _userService.UpdateUserAsync(user);
-            return NoContent();
+            User u = await _userService.UpdateUserAsync(id, user);
+            if (u == null)
+            {
+                return NotFound();
+            }
+            return Ok(u);
         }
         [Authorize(policy:"EditorOrAdmin")]
         [HttpDelete("{id}")]

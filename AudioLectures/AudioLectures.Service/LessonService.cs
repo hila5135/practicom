@@ -1,6 +1,8 @@
-﻿using AudioLectures.Core.Models;
+﻿using AudioLectures.Api.Dtos;
+using AudioLectures.Core.Models;
 using AudioLectures.Core.Repositories;
 using AudioLectures.Core.Services;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +14,26 @@ namespace AudioLectures.Service
     public class LessonService :ILessonService
     {
         private readonly ILessonRepository _lessonRepository;
-
-        public LessonService(ILessonRepository lessonRepository)
+        private readonly IMapper _mapper;
+        public LessonService(ILessonRepository lessonRepository, IMapper mapper)
         {
             _lessonRepository = lessonRepository;
+            _mapper = mapper;
         }
 
-        public Task<IEnumerable<Lesson>> GetAllLessonsAsync() => _lessonRepository.GetAllAsync();
-        public Task<Lesson> GetLessonByIdAsync(int id) => _lessonRepository.GetByIdAsync(id);
-        public Task AddLessonAsync(Lesson lesson) => _lessonRepository.AddAsync(lesson);
-        public Task UpdateLessonAsync(Lesson lesson) => _lessonRepository.UpdateAsync(lesson);
-        public Task DeleteLessonAsync(int id) => _lessonRepository.DeleteAsync(id);
+        public async Task<IEnumerable<Lesson>> GetAllLessonsAsync() =>await _lessonRepository.GetAllAsync();
+        public async Task<Lesson> GetLessonByIdAsync(int id) =>await _lessonRepository.GetByIdAsync(id);
+        public async Task<Lesson> AddLessonAsync(LessonDTO lesson)
+        {
+            var lessonMap = _mapper.Map<Lesson>(lesson);
+            return await _lessonRepository.AddAsync(lessonMap);
+        }
+        public async Task<Lesson> UpdateLessonAsync(int id, LessonDTO lesson)
+        {
+            var lessonMap = _mapper.Map<Lesson>(lesson);
+            return await _lessonRepository.UpdateAsync(id, lessonMap);
+        }
+
+        public async Task DeleteLessonAsync(int id) =>await _lessonRepository.DeleteAsync(id);
     }
 }

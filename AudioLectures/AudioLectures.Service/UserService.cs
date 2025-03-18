@@ -1,6 +1,8 @@
-﻿using AudioLectures.Core.Models;
+﻿using AudioLectures.Api.Dtos;
+using AudioLectures.Core.Models;
 using AudioLectures.Core.Repositories;
 using AudioLectures.Core.Services;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +14,26 @@ namespace AudioLectures.Service
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
-        public Task<IEnumerable<User>> GetAllUsersAsync() => _userRepository.GetAllAsync();
-        public Task<User> GetUserByIdAsync(int id) => _userRepository.GetByIdAsync(id);
-        public Task AddUserAsync(User user) => _userRepository.AddAsync(user);
-        public Task UpdateUserAsync(User user) => _userRepository.UpdateAsync(user);
-        public Task DeleteUserAsync(int id) => _userRepository.DeleteAsync(id);
+        public async Task<IEnumerable<User>> GetAllUsersAsync() => await _userRepository.GetAllAsync();
+        public async Task<User> GetUserByIdAsync(int id) => await _userRepository.GetByIdAsync(id);
+        public async Task<User> AddUserAsync(UserDTO user)
+        {
+            var userMap = _mapper.Map<User>(user);
+            return await _userRepository.AddAsync(userMap);
+        }
+        public async Task<User> UpdateUserAsync(int id, UserDTO user)
+        {
+            var userMap = _mapper.Map<User>(user);
+            return await _userRepository.UpdateAsync(id, userMap);
+        }
+        public async Task DeleteUserAsync(int id) => await _userRepository.DeleteAsync(id);
         public User Authenticate(string userName, string userPassword)
         {
             // אם שם המשתמש והסיסמה הם hila5135 → המשתמש מנהל
