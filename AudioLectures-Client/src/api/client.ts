@@ -104,7 +104,7 @@ export class ApiClient {
      * @param body (optional) 
      * @return OK
      */
-    lecturerPOST(body: LecturerDTO | undefined): Promise<void> {
+    lecturerPOST(body: LecturerDTO | undefined): Promise<Lecturer> {
         let url_ = this.baseUrl + "/api/Lecturer";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -115,6 +115,7 @@ export class ApiClient {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "text/plain"
             }
         };
 
@@ -123,44 +124,7 @@ export class ApiClient {
         });
     }
 
-    protected processLecturerPOST(response: Response): Promise<void> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<void>(null as any);
-    }
-
-    /**
-     * @return OK
-     */
-    lecturerGET(lecturerId: number): Promise<Lecturer> {
-        let url_ = this.baseUrl + "/api/Lecturer/{LecturerId}";
-        if (lecturerId === undefined || lecturerId === null)
-            throw new Error("The parameter 'lecturerId' must be defined.");
-        url_ = url_.replace("{LecturerId}", encodeURIComponent("" + lecturerId));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "text/plain"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processLecturerGET(_response);
-        });
-    }
-
-    protected processLecturerGET(response: Response): Promise<Lecturer> {
+    protected processLecturerPOST(response: Response): Promise<Lecturer> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -176,6 +140,93 @@ export class ApiClient {
             });
         }
         return Promise.resolve<Lecturer>(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    id(lecturerId: number): Promise<Lecturer> {
+        let url_ = this.baseUrl + "/api/Lecturer/id/{LecturerId}";
+        if (lecturerId === undefined || lecturerId === null)
+            throw new Error("The parameter 'lecturerId' must be defined.");
+        url_ = url_.replace("{LecturerId}", encodeURIComponent("" + lecturerId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processId(_response);
+        });
+    }
+
+    protected processId(response: Response): Promise<Lecturer> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Lecturer.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<Lecturer>(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    name(lecturerName: string): Promise<Lecturer[]> {
+        let url_ = this.baseUrl + "/api/Lecturer/name/{LecturerName}";
+        if (lecturerName === undefined || lecturerName === null)
+            throw new Error("The parameter 'lecturerName' must be defined.");
+        url_ = url_.replace("{LecturerName}", encodeURIComponent("" + lecturerName));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processName(_response);
+        });
+    }
+
+    protected processName(response: Response): Promise<Lecturer[]> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(Lecturer.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<Lecturer[]>(null as any);
     }
 
     /**
@@ -258,93 +309,8 @@ export class ApiClient {
     /**
      * @return OK
      */
-        lessonAll(): Promise<Lesson[]> {
-            let url_ = this.baseUrl + "/api/Lesson";
-            url_ = url_.replace(/[?&]$/, "");
-
-            let options_: RequestInit = {
-                method: "GET",
-                headers: {
-                    "Accept": "text/plain"
-                }
-            };
-
-            return this.http.fetch(url_, options_).then((_response: Response) => {
-                return this.processLessonAll(_response);
-            });
-        }
-
-        protected processLessonAll(response: Response): Promise<Lesson[]> {
-            const status = response.status;
-            let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-            if (status === 200) {
-                return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                if (Array.isArray(resultData200)) {
-                    result200 = [] as any;
-                    for (let item of resultData200)
-                        result200!.push(Lesson.fromJS(item));
-                }
-                else {
-                    result200 = <any>null;
-                }
-                return result200;
-                });
-            } else if (status !== 200 && status !== 204) {
-                return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-                });
-            }
-            return Promise.resolve<Lesson[]>(null as any);
-        }
-
-    /**
-     * @param body (optional) 
-     * @return OK
-     */
-    lessonPOST(body: LessonDTO | undefined): Promise<void> {
+    lessonAll(): Promise<Lesson[]> {
         let url_ = this.baseUrl + "/api/Lesson";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processLessonPOST(_response);
-        });
-    }
-
-    protected processLessonPOST(response: Response): Promise<void> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<void>(null as any);
-    }
-
-    /**
-     * @return OK
-     */
-    lessonGET(id: number): Promise<Lesson> {
-        let url_ = this.baseUrl + "/api/Lesson/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -355,11 +321,60 @@ export class ApiClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processLessonGET(_response);
+            return this.processLessonAll(_response);
         });
     }
 
-    protected processLessonGET(response: Response): Promise<Lesson> {
+    protected processLessonAll(response: Response): Promise<Lesson[]> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(Lesson.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<Lesson[]>(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    lessonPOST(body: LessonDTO | undefined): Promise<Lesson> {
+        let url_ = this.baseUrl + "/api/Lesson";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_: RequestInit = {
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processLessonPOST(_response);
+        });
+    }
+
+    protected processLessonPOST(response: Response): Promise<Lesson> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -375,6 +390,93 @@ export class ApiClient {
             });
         }
         return Promise.resolve<Lesson>(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    id2(id: number): Promise<Lesson> {
+        let url_ = this.baseUrl + "/api/Lesson/id/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processId2(_response);
+        });
+    }
+
+    protected processId2(response: Response): Promise<Lesson> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Lesson.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<Lesson>(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    title(title: string): Promise<Lesson[]> {
+        let url_ = this.baseUrl + "/api/Lesson/title/{title}";
+        if (title === undefined || title === null)
+            throw new Error("The parameter 'title' must be defined.");
+        url_ = url_.replace("{title}", encodeURIComponent("" + title));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processTitle(_response);
+        });
+    }
+
+    protected processTitle(response: Response): Promise<Lesson[]> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(Lesson.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<Lesson[]>(null as any);
     }
 
     /**
@@ -502,7 +604,7 @@ export class ApiClient {
      * @param body (optional) 
      * @return OK
      */
-    userPOST(body: UserDTO | undefined): Promise<void> {
+    userPOST(body: UserDTO | undefined): Promise<User> {
         let url_ = this.baseUrl + "/api/User";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -513,6 +615,7 @@ export class ApiClient {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "text/plain"
             }
         };
 
@@ -521,19 +624,22 @@ export class ApiClient {
         });
     }
 
-    protected processUserPOST(response: Response): Promise<void> {
+    protected processUserPOST(response: Response): Promise<User> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
-            return;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = User.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(null as any);
+        return Promise.resolve<User>(null as any);
     }
 
     /**
@@ -707,7 +813,7 @@ export interface ILecturer {
 }
 
 export class LecturerDTO implements ILecturerDTO {
-    name?: string | undefined;
+    lecturerName?: string | undefined;
 
     constructor(data?: ILecturerDTO) {
         if (data) {
@@ -720,7 +826,7 @@ export class LecturerDTO implements ILecturerDTO {
 
     init(_data?: any) {
         if (_data) {
-            this.name = _data["name"];
+            this.lecturerName = _data["lecturerName"];
         }
     }
 
@@ -733,17 +839,18 @@ export class LecturerDTO implements ILecturerDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
+        data["lecturerName"] = this.lecturerName;
         return data;
     }
 }
 
 export interface ILecturerDTO {
-    name?: string | undefined;
+    lecturerName?: string | undefined;
 }
 
 export class Lesson implements ILesson {
     lessonId?: number;
+    lessonName?: string | undefined;
     lessonTitle?: string | undefined;
     lessonDuration?: string;
     lessonReleaseDate?: Date;
@@ -766,6 +873,7 @@ export class Lesson implements ILesson {
     init(_data?: any) {
         if (_data) {
             this.lessonId = _data["lessonId"];
+            this.lessonName = _data["lessonName"];
             this.lessonTitle = _data["lessonTitle"];
             this.lessonDuration = _data["lessonDuration"];
             this.lessonReleaseDate = _data["lessonReleaseDate"] ? new Date(_data["lessonReleaseDate"].toString()) : <any>undefined;
@@ -792,6 +900,7 @@ export class Lesson implements ILesson {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["lessonId"] = this.lessonId;
+        data["lessonName"] = this.lessonName;
         data["lessonTitle"] = this.lessonTitle;
         data["lessonDuration"] = this.lessonDuration;
         data["lessonReleaseDate"] = this.lessonReleaseDate ? this.lessonReleaseDate.toISOString() : <any>undefined;
@@ -811,6 +920,7 @@ export class Lesson implements ILesson {
 
 export interface ILesson {
     lessonId?: number;
+    lessonName?: string | undefined;
     lessonTitle?: string | undefined;
     lessonDuration?: string;
     lessonReleaseDate?: Date;
@@ -823,11 +933,12 @@ export interface ILesson {
 }
 
 export class LessonDTO implements ILessonDTO {
+    lessonName?: string | undefined;
     lessonTitle?: string | undefined;
-    genre?: string | undefined;
+    lessonDuration?: string;
     lessonRealeaseDate?: Date;
     lessonUrl?: string | undefined;
-    singerId?: number;
+    lessonLecturerId?: number;
 
     constructor(data?: ILessonDTO) {
         if (data) {
@@ -840,11 +951,12 @@ export class LessonDTO implements ILessonDTO {
 
     init(_data?: any) {
         if (_data) {
+            this.lessonName = _data["lessonName"];
             this.lessonTitle = _data["lessonTitle"];
-            this.genre = _data["genre"];
+            this.lessonDuration = _data["lessonDuration"];
             this.lessonRealeaseDate = _data["lessonRealeaseDate"] ? new Date(_data["lessonRealeaseDate"].toString()) : <any>undefined;
             this.lessonUrl = _data["lessonUrl"];
-            this.singerId = _data["singerId"];
+            this.lessonLecturerId = _data["lessonLecturerId"];
         }
     }
 
@@ -857,21 +969,23 @@ export class LessonDTO implements ILessonDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["lessonName"] = this.lessonName;
         data["lessonTitle"] = this.lessonTitle;
-        data["genre"] = this.genre;
+        data["lessonDuration"] = this.lessonDuration;
         data["lessonRealeaseDate"] = this.lessonRealeaseDate ? this.lessonRealeaseDate.toISOString() : <any>undefined;
         data["lessonUrl"] = this.lessonUrl;
-        data["singerId"] = this.singerId;
+        data["lessonLecturerId"] = this.lessonLecturerId;
         return data;
     }
 }
 
 export interface ILessonDTO {
+    lessonName?: string | undefined;
     lessonTitle?: string | undefined;
-    genre?: string | undefined;
+    lessonDuration?: string;
     lessonRealeaseDate?: Date;
     lessonUrl?: string | undefined;
-    singerId?: number;
+    lessonLecturerId?: number;
 }
 
 export class LoginModel implements ILoginModel {
@@ -979,10 +1093,10 @@ export interface IUser {
 }
 
 export class UserDTO implements IUserDTO {
-    name?: string | undefined;
-    email?: string | undefined;
-    password?: string | undefined;
-    role?: string | undefined;
+    userName?: string | undefined;
+    userEmail?: string | undefined;
+    userPassword?: string | undefined;
+    userRole?: string | undefined;
 
     constructor(data?: IUserDTO) {
         if (data) {
@@ -995,10 +1109,10 @@ export class UserDTO implements IUserDTO {
 
     init(_data?: any) {
         if (_data) {
-            this.name = _data["name"];
-            this.email = _data["email"];
-            this.password = _data["password"];
-            this.role = _data["role"];
+            this.userName = _data["userName"];
+            this.userEmail = _data["userEmail"];
+            this.userPassword = _data["userPassword"];
+            this.userRole = _data["userRole"];
         }
     }
 
@@ -1011,19 +1125,19 @@ export class UserDTO implements IUserDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
-        data["email"] = this.email;
-        data["password"] = this.password;
-        data["role"] = this.role;
+        data["userName"] = this.userName;
+        data["userEmail"] = this.userEmail;
+        data["userPassword"] = this.userPassword;
+        data["userRole"] = this.userRole;
         return data;
     }
 }
 
 export interface IUserDTO {
-    name?: string | undefined;
-    email?: string | undefined;
-    password?: string | undefined;
-    role?: string | undefined;
+    userName?: string | undefined;
+    userEmail?: string | undefined;
+    userPassword?: string | undefined;
+    userRole?: string | undefined;
 }
 
 export class SwaggerException extends Error {
