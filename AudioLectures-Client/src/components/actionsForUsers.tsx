@@ -7,10 +7,23 @@ function ActionsForUsers() {
     const [isFetched, setIsFetched] = useState(false);//for button
     const [searchQuery, setSearchQuery] = useState(""); // חיפוש לפי שם מרצה או נושא
     const [searchType, setSearchType] = useState("lecturer");
+    const [titles, setTitles] = useState<string[]>([]);
+    const [isLoadingTitles, setIsLoadingTitles] = useState(false);
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value);
     };
-
+    const allTitles = async () => {
+        setIsLoadingTitles(true);
+        try {
+            let result = await apiClient.title();
+            console.log(result);
+            setTitles(result);
+        }
+        catch (error) {
+            console.error('error-failed to fetch', error);
+        }
+        setIsLoading(false);
+    }
     const handleSearch = async () => {
         setIsLoading(true);
         try {
@@ -19,10 +32,10 @@ function ActionsForUsers() {
                 result = await apiClient.name(searchQuery); // שים לב שהפונקציה הזאת צריכה להיות ב-API
                 console.log("the lessons for lecturer:", result);
             } else {
-                result = await apiClient.title(searchQuery); // שים לב שהפונקציה הזאת צריכה להיות ב-API
+                result = await apiClient.title2(searchQuery); // שים לב שהפונקציה הזאת צריכה להיות ב-API
                 console.log("the lessons for lesson title:", result);
             }
-            const lessons = searchType === "lecturer" ? result.flatMap((lecturer: any) => lecturer.lecturerLessons || []): result   ;
+            const lessons = searchType === "lecturer" ? result.flatMap((lecturer: any) => lecturer.lecturerLessons || []) : result;
             setAllLessons(lessons)
         } catch (error) {
             console.error("Error fetching lessons:", error);
@@ -48,44 +61,11 @@ function ActionsForUsers() {
     }, []);
     return (
         <>
-           <div>
-    <div>
-        <button onClick={() => setSearchType('lecturer')}>Search by Lecturer</button>
-        <button onClick={() => setSearchType('topic')}>Search by Topic</button>
-    </div>
-</div>
-<div>
-    <input
-        type="text"
-        placeholder={searchType === 'lecturer' ? "Enter a lecturer name" : "Enter a lesson topic"}
-        value={searchQuery}
-        onChange={handleSearchChange}
-    />
-    <button onClick={handleSearch}>Search</button>
-</div>
-<div>
-    <h1>All Lessons</h1>
-    {isLoading ? (
-        <p>Loading...</p>
-    ) : (
-        <ul>
-            {allLessons.length > 0 ? (
-                allLessons.map((lesson, index) => (
-                    <li key={index}>
-                        {/* הצגת שם השיעור */}
-                        {lesson.lessonTitle ? lesson.lessonTitle : "No title available"}
-                    </li>
-                ))
-            ) : (
-                <p>No lessons found</p>
-            )}
-        </ul>
-    )}
-</div>
-            {/* <div>
+            <button onClick={allTitles}>view all subjects</button>
+            <div>
                 <div>
-                    <button onClick={() => setSearchType('lecturer')}>search by Lecturer</button>
-                    <button onClick={() => setSearchType('topic')}>search by Topic</button>
+                    <button onClick={() => setSearchType('lecturer')}>Search by Lecturer</button>
+                    <button onClick={() => setSearchType('topic')}>Search by Topic</button>
                 </div>
             </div>
             <div>
@@ -103,12 +83,21 @@ function ActionsForUsers() {
                     <p>Loading...</p>
                 ) : (
                     <ul>
-                        {allLessons.map((lesson, index) => (
-                            <li key={index}>{lesson.lessonTitle?.toString()}</li>
-                        ))}
+                        {allLessons.length > 0 ? (
+                            allLessons.map((lesson, index) => (
+                                <li key={index} style={{ display: "flex", gap: "10px" }}>
+                                    {lesson.lessonTitle ? lesson.lessonTitle : "No title available"}
+                                    {lesson.lessonName ? lesson.lessonName : "No description available"}
+                                    {lesson.lessonUrl ? <a href={lesson.lessonUrl || "#"} target="_blank">Listening</a> : "No URL available"}
+                                    {lesson.lessonUrl ? <a href={lesson.lessonUrl || "#"} target="_blank">Downloading</a> : "No URL available"}
+                                </li>
+                            ))
+                        ) : (
+                            <p>No lessons found</p>
+                        )}
                     </ul>
                 )}
-            </div> */}
+            </div>
         </>);
 }
 export default ActionsForUsers;

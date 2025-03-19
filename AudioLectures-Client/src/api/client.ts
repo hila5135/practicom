@@ -395,6 +395,50 @@ export class ApiClient {
     /**
      * @return OK
      */
+    title(): Promise<string[]> {
+        let url_ = this.baseUrl + "/api/Lesson/title";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processTitle(_response);
+        });
+    }
+
+    protected processTitle(response: Response): Promise<string[]> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(item);
+            }
+            else {
+                result200 = <any>null;
+            }
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<string[]>(null as any);
+    }
+
+    /**
+     * @return OK
+     */
     id2(id: number): Promise<Lesson> {
         let url_ = this.baseUrl + "/api/Lesson/id/{id}";
         if (id === undefined || id === null)
@@ -435,7 +479,7 @@ export class ApiClient {
     /**
      * @return OK
      */
-    title(title: string): Promise<Lesson[]> {
+    title2(title: string): Promise<Lesson[]> {
         let url_ = this.baseUrl + "/api/Lesson/title/{title}";
         if (title === undefined || title === null)
             throw new Error("The parameter 'title' must be defined.");
@@ -450,11 +494,11 @@ export class ApiClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processTitle(_response);
+            return this.processTitle2(_response);
         });
     }
 
-    protected processTitle(response: Response): Promise<Lesson[]> {
+    protected processTitle2(response: Response): Promise<Lesson[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
