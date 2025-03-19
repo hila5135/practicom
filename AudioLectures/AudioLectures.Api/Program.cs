@@ -69,6 +69,16 @@ builder.Services.AddCors(options =>
                         .AllowAnyHeader());
 });
 
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowFrontend",
+//        policy => policy.WithOrigins("http://localhost:5173") // הכתובת של ה-React
+//                        .AllowAnyMethod()
+//                        .AllowAnyHeader());
+//});
+
+
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -135,6 +145,7 @@ app.Use(async (context, next) =>
         await context.Response.WriteAsync("{\"error\": \"You must be logged in to access this resource!\"}");
     }
 });
+app.UseCors("AllowAll");
 
 app.UseAuthentication(); 
 app.UseAuthorization();
