@@ -1,103 +1,89 @@
+import LessonList from "./lessonsList";
+import LessonSearch from "./lessonsSearch";
+import LessonsTitle from "./lessonsTitles";
+
 import { useEffect, useState } from "react";
 import { ApiClient, Lesson } from "../api/client";
 const apiClient = new ApiClient("https://localhost:7129");
+
 function ActionsForUsers() {
-    const [allLessons, setAllLessons] = useState<Lesson[]>([]);//for all lecturers
-    const [isLoading, setIsLoading] = useState(false);//for loading
-    const [isFetched, setIsFetched] = useState(false);//for button
-    const [searchQuery, setSearchQuery] = useState(""); // חיפוש לפי שם מרצה או נושא
+    const [allLessons, setAllLessons] = useState<Lesson[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
     const [searchType, setSearchType] = useState("lecturer");
     const [titles, setTitles] = useState<string[]>([]);
     const [isLoadingTitles, setIsLoadingTitles] = useState(false);
-    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchQuery(e.target.value);
-    };
-    const allTitles = async () => {
-        setIsLoadingTitles(true);
-        try {
-            let result = await apiClient.title();
-            console.log(result);
-            setTitles(result);
-        }
-        catch (error) {
-            console.error('error-failed to fetch', error);
-        }
-        setIsLoading(false);
-    }
-    const handleSearch = async () => {
-        setIsLoading(true);
-        try {
-            let result;
-            if (searchType === "lecturer") {
-                result = await apiClient.name(searchQuery); // שים לב שהפונקציה הזאת צריכה להיות ב-API
-                console.log("the lessons for lecturer:", result);
-            } else {
-                result = await apiClient.title2(searchQuery); // שים לב שהפונקציה הזאת צריכה להיות ב-API
-                console.log("the lessons for lesson title:", result);
-            }
-            const lessons = searchType === "lecturer" ? result.flatMap((lecturer: any) => lecturer.lecturerLessons || []) : result;
-            setAllLessons(lessons)
-        } catch (error) {
-            console.error("Error fetching lessons:", error);
-        }
-        setIsLoading(false);
-    };
+    const [showTitles, setShowTitles] = useState(false);
+
     useEffect(() => {
         const fetchAllLessons = async () => {
             setIsLoading(true);
             try {
                 const result = await apiClient.lessonAll();
-                console.log(result);
                 setAllLessons(result);
-                setIsFetched(true);
-
             } catch (error) {
-                console.error('error-failed to fetch', error);
+                console.error("Error fetching lessons:", error);
             }
             setIsLoading(false);
-            setIsFetched(false);
-        }
-        fetchAllLessons()
+        };
+        fetchAllLessons();
     }, []);
+
+    const allTitles = async () => {
+        setIsLoadingTitles(true);
+        try {
+            let result = await apiClient.title();
+            setTitles(result);
+            setShowTitles(true);
+        } catch (error) {
+            console.error("Error fetching titles:", error);
+        }
+        setIsLoadingTitles(false);
+    };
+
+    const handleSearch = async () => {
+        setIsLoading(true);
+        try {
+            let result = searchType === "lecturer"
+                ? await apiClient.name(searchQuery)
+                : await apiClient.title2(searchQuery);
+
+            const lessons = searchType === "lecturer"
+                ? result.flatMap((lecturer: any) => lecturer.lecturerLessons || [])
+                : result;
+
+            setAllLessons(lessons);
+        } catch (error) {
+            console.error("Error fetching lessons:", error);
+        }
+        setIsLoading(false);
+    };
+
     return (
-        <>
-            <button onClick={allTitles}>view all subjects</button>
-            <div>
-                <div>
-                    <button onClick={() => setSearchType('lecturer')}>Search by Lecturer</button>
-                    <button onClick={() => setSearchType('topic')}>Search by Topic</button>
-                </div>
+        <div style={{ display: "flex", justifyContent: "space-between", gap: "20px" }}>
+            {/* צד שמאל – רשימת השיעורים (60%) */}
+            <div style={{ width: "60%" }}>
+                <LessonList lessons={allLessons} isLoading={isLoading} />
             </div>
-            <div>
-                <input
-                    type="text"
-                    placeholder={searchType === 'lecturer' ? "Enter a lecturer name" : "Enter a lesson topic"}
-                    value={searchQuery}
-                    onChange={handleSearchChange}
+
+            <div style={{ width: "20%" }}>
+                <LessonSearch
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                    searchType={searchType}
+                    setSearchType={setSearchType}
+                    handleSearch={handleSearch}
                 />
-                <button onClick={handleSearch}>Search</button>
             </div>
-            <div>
-                <h1>All Lessons</h1>
-                {isLoading ? (
-                    <p>Loading...</p>
-                ) : (
-                    <ul>
-                        {allLessons.length > 0 ? (
-                            allLessons.map((lesson, index) => (
-                                <li key={index} style={{ display: "flex", gap: "10px" }}>
-                                    {lesson.lessonTitle ? lesson.lessonTitle : "No title available"}
-                                    {lesson.lessonName ? lesson.lessonName : "No description available"}
-                                    {lesson.lessonUrl ? <a href={lesson.lessonUrl || "#"} target="_blank">Listening</a> : "No URL available"}
-                                    {lesson.lessonUrl ? <a href={lesson.lessonUrl || "#"} target="_blank">Downloading</a> : "No URL available"}
-                                </li>
-                            ))
-                        ) : (
-                            <p>No lessons found</p>
-                        )}
-                    </ul>
-                )}
+
+            <div style={{ width: "15%" }}>
+                <button onClick={allTitles} style={{ marginBottom: "10px" }}>
+                    View all subjects
+                </button>
+                {showTitles && <LessonsTitle titles={titles} isLoading={isLoadingTitles} />}
             </div>
-        </>);
+        </div>
+    );
 }
+
 export default ActionsForUsers;
