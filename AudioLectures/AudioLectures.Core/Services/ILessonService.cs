@@ -11,7 +11,9 @@ namespace AudioLectures.Core.Services
     public interface ILessonService
     {
         Task<IEnumerable<Lesson>> GetAllLessonsAsync();
+        Task<IEnumerable<string>> GetAllTitlesAsync();
         Task<Lesson> GetLessonByIdAsync(int id);
+       Task<List<Lesson>> GetLessonByTitleAsync(string title);
         Task<Lesson> AddLessonAsync(LessonDTO lesson);
         Task<Lesson> UpdateLessonAsync(int id,LessonDTO lesson);
         Task DeleteLessonAsync(int id);

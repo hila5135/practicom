@@ -22,14 +22,26 @@ namespace AudioLectures.Api.Controllers
         {
             return await _lessonService.GetAllLessonsAsync();
         }
-
-        [HttpGet("{id}")]
+        [HttpGet("title")]
+        public async Task<IEnumerable<string>> GetAllTitles()
+        {
+            return await _lessonService.GetAllTitlesAsync();
+        }
+        [HttpGet("id/{id}")]
         public async Task<ActionResult<Lesson>> GetById(int id)
         {
             var lesson = await _lessonService.GetLessonByIdAsync(id);
             if (lesson == null) return NotFound();
             return lesson;
         }
+        [HttpGet("title/{title}")]
+        public async Task<ActionResult<List<Lesson>>> GetByTitle(string title)
+        {
+            var lesson = await _lessonService.GetLessonByTitleAsync(title);
+            if (lesson == null) return NotFound();
+            return lesson;
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Lesson>> Add([FromBody] LessonDTO lesson)

@@ -19,12 +19,10 @@ namespace AudioLectures.Data.Repositories
         }
 
         public async Task<IEnumerable<Lesson>> GetAllAsync() => await _context.Lessons.Include(s => s.LessonUsers).Include(s => s.LessonUsers).ToListAsync();
-
+        public async Task<IEnumerable<string>> GetAllTitlesAsync() => await _context.Lessons.Select(lesson=> lesson.LessonTitle).Distinct().ToListAsync();
 
         public async Task<Lesson> GetByIdAsync(int id) => await _context.Lessons.FindAsync(id);
-
-        public async Task<IEnumerable<Lesson>> GetSongsByTitleAsync(string title) => await _context.Lessons.Where(s => s.LessonTitle == title).ToListAsync();
-
+        public async Task<List<Lesson>> GetByTitleAsync(string title) =>  await _context.Lessons.Where(s => s.LessonTitle == title).Include(s=>s.LessonLecturer).ToListAsync();
         public async Task<Lesson> AddAsync(Lesson lesson)
         {
             await _context.Lessons.AddAsync(lesson);

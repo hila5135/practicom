@@ -22,7 +22,11 @@ namespace AudioLectures.Service
         }
 
         public async Task<IEnumerable<Lesson>> GetAllLessonsAsync() =>await _lessonRepository.GetAllAsync();
+        public async Task<IEnumerable<string>> GetAllTitlesAsync() => await _lessonRepository.GetAllTitlesAsync();
+
         public async Task<Lesson> GetLessonByIdAsync(int id) =>await _lessonRepository.GetByIdAsync(id);
+        public async Task<List<Lesson>> GetLessonByTitleAsync(string title) => await _lessonRepository.GetByTitleAsync(title);
+
         public async Task<Lesson> AddLessonAsync(LessonDTO lesson)
         {
             var lessonMap = _mapper.Map<Lesson>(lesson);

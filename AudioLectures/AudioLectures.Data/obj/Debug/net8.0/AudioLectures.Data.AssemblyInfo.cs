@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AudioLectures.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b161674635776254ecc0716e459a6fb64c5f460e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7d499e685ac1059c3526c930327ade83c967f5d")]
 [assembly: System.Reflection.AssemblyProductAttribute("AudioLectures.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AudioLectures.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

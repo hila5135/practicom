@@ -19,7 +19,7 @@ namespace AudioLectures.Data.Repositories
 
         public async Task<Lecturer> GetByIdAsync(int id) => await _context.Lecturers.FindAsync(id);
 
-        public async Task<Lecturer> GetByNameAsync(string name) => await _context.Lecturers.FirstOrDefaultAsync(s => s.LecturerName == name);
+        public async Task<List<Lecturer>> GetByNameAsync(string name) => await _context.Lecturers.Where(s => s.LecturerName == name).Include(s=>s.LecturerLessons).ToListAsync();
         public async Task<Lecturer> AddAsync(Lecturer entity)
         {
             await _context.Lecturers.AddAsync(entity);

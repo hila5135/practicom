@@ -22,6 +22,7 @@ namespace AudioLectures.Service
         }
         public async Task<IEnumerable<Lecturer>> GetAllLecturersAsync() =>await _lecturerRepository.GetAllAsync();
         public async Task<Lecturer> GetLecturerByIdAsync(int id) => await _lecturerRepository.GetByIdAsync(id);
+        public async Task<List<Lecturer>> GetLecturerByNameAsync(string name) => await _lecturerRepository.GetByNameAsync(name);
         public async Task<Lecturer> AddLecturerAsync(LecturerDTO lecturer)
         {
             var lecturerMap=_mapper.Map<Lecturer>(lecturer);

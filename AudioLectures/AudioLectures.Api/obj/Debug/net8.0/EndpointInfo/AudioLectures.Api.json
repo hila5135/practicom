@@ -120,7 +120,7 @@
         }
       }
     },
-    "/api/Lecturer/{LecturerId}": {
+    "/api/Lecturer/id/{LecturerId}": {
       "get": {
         "tags": [
           "Lecturer"
@@ -158,7 +158,57 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/Lecturer/name/{LecturerName}": {
+      "get": {
+        "tags": [
+          "Lecturer"
+        ],
+        "parameters": [
+          {
+            "name": "LecturerName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Lecturer"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Lecturer"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Lecturer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Lecturer/{LecturerId}": {
       "put": {
         "tags": [
           "Lecturer"
@@ -305,7 +355,45 @@
         }
       }
     },
-    "/api/Lesson/{id}": {
+    "/api/Lesson/title": {
+      "get": {
+        "tags": [
+          "Lesson"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Lesson/id/{id}": {
       "get": {
         "tags": [
           "Lesson"
@@ -343,7 +431,57 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/Lesson/title/{title}": {
+      "get": {
+        "tags": [
+          "Lesson"
+        ],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Lesson"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Lesson"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Lesson"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Lesson/{id}": {
       "put": {
         "tags": [
           "Lesson"
@@ -632,6 +770,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "lessonName": {
+            "type": "string",
+            "nullable": true
+          },
           "lessonTitle": {
             "type": "string",
             "nullable": true
@@ -676,13 +818,17 @@
       "LessonDTO": {
         "type": "object",
         "properties": {
-          "lessonDuration": {
+          "lessonName": {
             "type": "string",
-            "format": "date-span"
+            "nullable": true
           },
           "lessonTitle": {
             "type": "string",
             "nullable": true
+          },
+          "lessonDuration": {
+            "type": "string",
+            "format": "date-span"
           },
           "lessonRealeaseDate": {
             "type": "string",

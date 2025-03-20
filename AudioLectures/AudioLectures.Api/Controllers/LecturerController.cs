@@ -24,14 +24,20 @@ namespace AudioLectures.Api.Controllers
             return await _lecturerService.GetAllLecturersAsync();
         }
 
-        [HttpGet("{LecturerId}")]
+        [HttpGet("id/{LecturerId}")]
         public async Task<ActionResult<Lecturer>> GetById(int LecturerId)
         {
             var lecturer = await _lecturerService.GetLecturerByIdAsync(LecturerId);
             if (lecturer == null) return NotFound();
             return lecturer;
         }
-
+        [HttpGet("name/{LecturerName}")]
+        public async Task<ActionResult<List<Lecturer>>> GetByName(string LecturerName)
+        {
+            var lecturer = await _lecturerService.GetLecturerByNameAsync(LecturerName);
+            if (lecturer == null) return NotFound();
+            return lecturer;
+        }
         [HttpPost]
         public async Task<ActionResult<Lecturer>> Add([FromBody] LecturerDTO lecturer)
         {

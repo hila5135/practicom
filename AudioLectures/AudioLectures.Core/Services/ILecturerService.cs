@@ -12,6 +12,7 @@ namespace AudioLectures.Core.Services
     {
        public Task<IEnumerable<Lecturer>> GetAllLecturersAsync();
        public Task<Lecturer> GetLecturerByIdAsync(int id);
+       public Task<List<Lecturer>> GetLecturerByNameAsync(string title);
        public Task<Lecturer> AddLecturerAsync(LecturerDTO lecturer);
        public Task<Lecturer> UpdateLecturerAsync(int id,LecturerDTO lecturer);
        public Task DeleteLecturerAsync(int id);
