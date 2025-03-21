@@ -32,6 +32,11 @@ function ActionsForUsers() {
     const allTitles = async () => {
         setIsLoadingTitles(true);
         try {
+            if (showTitles) {
+                setShowTitles(false);
+                return;
+            }
+            
             let result = await apiClient.title();
             setTitles(result);
             setShowTitles(true);
@@ -78,8 +83,7 @@ function ActionsForUsers() {
 
             <div style={{ width: "15%" }}>
                 <button onClick={allTitles} style={{ marginBottom: "10px" }}>
-                    View all subjects
-                </button>
+                {showTitles ? "Hide all subjects" : "View all subjects"}                </button>
                 {showTitles && <LessonsTitle titles={titles} isLoading={isLoadingTitles} />}
             </div>
         </div>
