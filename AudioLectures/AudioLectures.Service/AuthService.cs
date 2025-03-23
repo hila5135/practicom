@@ -1,9 +1,10 @@
-﻿using AudioLectures.Core.Repositories;
+using AudioLectures.Core.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 public class AuthService
 {
     private readonly IConfiguration _configuration;
@@ -15,21 +16,38 @@ public class AuthService
         _userRepository = userRepository;
     }
 
-    public string GenerateJwtToken(string username, string password)
+  //public string GenerateJwtToken(string username, string password)
+  //{
+  //    if (username == "hila5135" && password == "5135")
+  //    {
+  //        return GenerateToken(username, new[] { "Admin" });
+  //    }
+
+  //    var user = _userRepository.GetUserByCredentials(username, password);
+  //    if (user != null)
+  //    {
+  //        return GenerateToken(username, new[] { "User" });
+  //    }
+
+  //    return GenerateToken(username, new[] { "Viewer" });
+  //}
+
+    public async Task<string?> GenerateJwtTokenAsync(string username, string userpassword)
     {
-        if (username == "hila5135" && password == "5135")
-        {
-            return GenerateToken(username, new[] { "Admin" });
-        }
+      if (username == "hila5135" && userpassword == "5135")
+      {
+        return GenerateToken(username, new[] { "Admin" });
+      }
 
-        var user = _userRepository.GetUserByCredentials(username, password);
-        if (user != null)
-        {
-            return GenerateToken(username, new[] { "User" });
-        }
+      var user = await _userRepository.GetUserByCredentialsAsync(username,userpassword );
+      if (user != null)
+      {
+        return GenerateToken(username, new[] { "User" });
+      }
 
-        return GenerateToken(username, new[] { "Viewer" });
+      return null; // אם המשתמש לא נמצא, נחזיר null
     }
+
     private string GenerateToken(string username, string[] roles)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
@@ -52,8 +70,6 @@ public class AuthService
             expires: DateTime.Now.AddMinutes(30),
             signingCredentials: credentials
         );
-
-
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 

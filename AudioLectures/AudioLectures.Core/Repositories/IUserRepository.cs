@@ -1,4 +1,4 @@
-﻿using AudioLectures.Core.Models;
+using AudioLectures.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,6 @@ namespace AudioLectures.Core.Repositories
         Task<User> AddAsync(User user);
         Task<User> UpdateAsync(int id,User user);
         Task DeleteAsync(int id);
-        User GetUserByCredentials(string userName, string userPassword);
+        Task<User?> GetUserByCredentialsAsync(string userName, string userPassword);
     }
 }

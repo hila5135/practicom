@@ -2,6 +2,7 @@ import { Modal, Button, Box, TextField } from "@mui/material";
 import { FormEvent, useContext, useRef, useState } from "react";
 import { UserContext } from "./userContext";
 import axios from "axios";
+import { ApiClient, Lesson } from "../api/client";
 import { cyan } from "@mui/material/colors";
 const style = {
   position: "absolute",
@@ -35,36 +36,69 @@ const Login = ({ successLogin, typeAction, close }: { successLogin: Function; ty
   const firstNameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(true)
-  const [userID,setUserId] = useState<string>();
+  const [userID, setUserId] = useState<string>();
   const handleSubmitLogin = async (e: FormEvent) => {
-    e.preventDefault();
+    // e.preventDefault();
 
-    try {
-      const link =
-        typeAction === "Sign"
-          ? "https://localhost:7129/api/user/register"
-          : "https://localhost:7129/api/user/login";
-      const res = await axios.post(link, {
-        firstName: firstNameRef.current?.value,
-        password: passwordRef.current?.value,
-      });
-      setUserId(res.data.userId);
-      context?.userDispatch({
-        type: "CREATE",
-        data: {
-          id: res.data.userId,
-          firstName: firstNameRef.current?.value || '',
-          password: passwordRef.current?.value || ''
+    // try {
+    //   const link =
+    //     typeAction === "Sign"
+    //       ? "https://localhost:7129/api/user/register"
+    //       : "https://localhost:7129/api/user/login";
+    //   const res = await axios.post(link, {
+    //     userName: firstNameRef.current?.value,
+    //     userPassword: passwordRef.current?.value,
+    //   });
+    //   if (res.data.token) {
+    //     context?.userDispatch({
+    //       type: "CREATE",
+    //       data: {
+    //         id: res.data.userId,
+    //         firstName: firstNameRef.current?.value || '',
+    //         password: passwordRef.current?.value || ''
+    //       }
+    //     });
+    //     setOpen(false);
+    //     successLogin();
+    //   }
+    // } catch (e: any) {
+    //   if (e.status === 400 || e.status === 401) {
+    //     alert(typeAction === "Sign" ? "User already exists" : "User not found");
+    //   }
+    //   console.error(e);
+    // }
+
+    const handleSubmitLogin = async (e: FormEvent) => {
+      e.preventDefault();
+    
+      const apiClient = new ApiClient("https://localhost:7129"); // ייבוא והגדרת ApiClient מ-NSwag
+    
+      try {
+        // לפי סוג הפעולה - רישום או התחברות
+        const res = typeAction === "Sign"
+          ? await apiClient.register({ userName: firstNameRef.current?.value, userPassword: passwordRef.current?.value })
+          : await apiClient.login({ userName: firstNameRef.current?.value, userPassword: passwordRef.current?.value });
+    
+        if (res.token) { // אם קיבלת את הטוקן, שמור אותו ושתף את המידע
+          context?.userDispatch({
+            type: "CREATE",
+            data: {
+              id: res.userId,
+              firstName: firstNameRef.current?.value || '',
+              password: passwordRef.current?.value || ''
+            }
+          });
+          setOpen(false);
+          successLogin();
         }
-      });
-      setOpen(false);
-      successLogin();
-    } catch (e: any) {
-      if (e.status === 400 || e.status === 401) {
-        alert(typeAction === "Sign" ? "User already exists" : "User not found");
+      } catch (e: any) {
+        if (e.status === 400 || e.status === 401) {
+          alert(typeAction === "Sign" ? "User already exists" : "User not found");
+        }
+        console.error(e);
       }
-      console.error(e);
     }
+    
   }
   return (
     <Modal

@@ -1,4 +1,4 @@
-﻿using AudioLectures.Api.Dtos;
+using AudioLectures.Api.Dtos;
 using AudioLectures.Core.Models;
 using AudioLectures.Core.Services;
 using AudioLectures.Service;
@@ -18,7 +18,7 @@ namespace AudioLectures.Api.Controllers
         {
             _userService = userService;
         }
-        [Authorize(policy:"AdminOnly")]
+        //[Authorize(policy:"AdminOnly")]
         [HttpGet]
         public async Task<IEnumerable<User>> GetAll()
         {

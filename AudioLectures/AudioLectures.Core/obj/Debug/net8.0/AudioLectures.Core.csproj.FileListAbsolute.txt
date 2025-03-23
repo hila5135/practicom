@@ -23,3 +23,15 @@ C:\Users\User\Desktop\practicom\AudioLectures\AudioLectures.Core\obj\Debug\net8.
 C:\Users\User\Desktop\practicom\AudioLectures\AudioLectures.Core\obj\Debug\net8.0\refint\AudioLectures.Core.dll
 C:\Users\User\Desktop\practicom\AudioLectures\AudioLectures.Core\obj\Debug\net8.0\AudioLectures.Core.pdb
 C:\Users\User\Desktop\practicom\AudioLectures\AudioLectures.Core\obj\Debug\net8.0\ref\AudioLectures.Core.dll
+C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Core\bin\Debug\net8.0\AudioLectures.Core.deps.json
+C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Core\bin\Debug\net8.0\AudioLectures.Core.dll
+C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Core\bin\Debug\net8.0\AudioLectures.Core.pdb
+C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Core\obj\Debug\net8.0\AudioLectures.Core.csproj.AssemblyReference.cache
+C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Core\obj\Debug\net8.0\AudioLectures.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Core\obj\Debug\net8.0\AudioLectures.Core.AssemblyInfoInputs.cache
+C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Core\obj\Debug\net8.0\AudioLectures.Core.AssemblyInfo.cs
+C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Core\obj\Debug\net8.0\AudioLectures.Core.csproj.CoreCompileInputs.cache
+C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Core\obj\Debug\net8.0\AudioLectures.Core.dll
+C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Core\obj\Debug\net8.0\refint\AudioLectures.Core.dll
+C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Core\obj\Debug\net8.0\AudioLectures.Core.pdb
+C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Core\obj\Debug\net8.0\ref\AudioLectures.Core.dll

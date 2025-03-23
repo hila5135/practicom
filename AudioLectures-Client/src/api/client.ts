@@ -57,6 +57,44 @@ export class ApiClient {
     }
 
     /**
+     * @param body (optional) 
+     * @return OK
+     */
+    register(body: RegisterModel | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/api/Auth/register";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_: RequestInit = {
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processRegister(_response);
+        });
+    }
+
+    protected processRegister(response: Response): Promise<void> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            return;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<void>(null as any);
+    }
+
+    /**
      * @return OK
      */
     lecturerAll(): Promise<Lecturer[]> {
@@ -1070,6 +1108,50 @@ export class LoginModel implements ILoginModel {
 export interface ILoginModel {
     userName?: string | undefined;
     userPassword?: string | undefined;
+}
+
+export class RegisterModel implements IRegisterModel {
+    userName?: string | undefined;
+    userPassword?: string | undefined;
+    userEmail?: string | undefined;
+
+    constructor(data?: IRegisterModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.userName = _data["userName"];
+            this.userPassword = _data["userPassword"];
+            this.userEmail = _data["userEmail"];
+        }
+    }
+
+    static fromJS(data: any): RegisterModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new RegisterModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["userName"] = this.userName;
+        data["userPassword"] = this.userPassword;
+        data["userEmail"] = this.userEmail;
+        return data;
+    }
+}
+
+export interface IRegisterModel {
+    userName?: string | undefined;
+    userPassword?: string | undefined;
+    userEmail?: string | undefined;
 }
 
 export class User implements IUser {

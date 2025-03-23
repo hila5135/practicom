@@ -1,4 +1,4 @@
-﻿using AudioLectures.Api.Dtos;
+using AudioLectures.Api.Dtos;
 using AudioLectures.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,6 @@ namespace AudioLectures.Core.Services
       public  Task<User> AddUserAsync(UserDTO user);
       public  Task<User> UpdateUserAsync(int id,UserDTO user);
        public Task DeleteUserAsync(int id);
-        public User Authenticate(string userName, string userPassword);
+        public Task<User> Authenticate(string userName, string userPassword);
     }
 }

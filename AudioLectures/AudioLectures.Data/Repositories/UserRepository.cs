@@ -1,4 +1,4 @@
-﻿using AudioLectures.Core.Models;
+using AudioLectures.Core.Models;
 using AudioLectures.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -39,7 +39,6 @@ namespace AudioLectures.Data.Repositories
         {
             User u = await _context.Users.SingleOrDefaultAsync(u => u.UserId == id);
             if (u == null) return null;
-
             else
             {
 
@@ -52,11 +51,8 @@ namespace AudioLectures.Data.Repositories
             }
             await _context.SaveChangesAsync();
             return u;
-
-
         }
-
-        public async Task DeleteAsync(int id)
+          public async Task DeleteAsync(int id)
         {
             var user = await GetByIdAsync(id);
             if (user != null)
@@ -65,10 +61,11 @@ namespace AudioLectures.Data.Repositories
                 await _context.SaveChangesAsync();
             }
         }
-        public User GetUserByCredentials(string userName, string userPassword)
-        {
-            // חיפוש משתמש לפי שם וסיסמה
-            return _context.Users.FirstOrDefault(user => user.UserName == userName && user.UserPassword == userPassword);
-        }
+    public async Task<User?> GetUserByCredentialsAsync(string userName, string userPassword)
+    {
+      // חיפוש משתמש לפי שם וסיסמה
+      return await _context.Users.FirstOrDefaultAsync(user => user.UserName == userName && user.UserPassword == userPassword);
     }
+
+  }
 }
