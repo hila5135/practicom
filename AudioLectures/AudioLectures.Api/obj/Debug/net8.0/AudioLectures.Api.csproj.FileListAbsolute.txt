@@ -465,3 +465,7 @@ C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Api\obj\Debug
 C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Api\obj\Debug\net8.0\AudioLectures.Api.pdb
 C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Api\obj\Debug\net8.0\AudioLectures.Api.genruntimeconfig.cache
 C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Api\obj\Debug\net8.0\ref\AudioLectures.Api.dll
+C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Api\bin\Debug\net8.0\AWSSDK.Core.dll
+C:\Users\User\Downloads\practicom-main\AudioLectures\AudioLectures.Api\bin\Debug\net8.0\AWSSDK.S3.dll
+C:\Users\User\Desktop\practicom\AudioLectures\AudioLectures.Api\bin\Debug\net8.0\AWSSDK.Core.dll
+C:\Users\User\Desktop\practicom\AudioLectures\AudioLectures.Api\bin\Debug\net8.0\AWSSDK.S3.dll

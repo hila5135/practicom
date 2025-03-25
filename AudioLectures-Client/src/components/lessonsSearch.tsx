@@ -60,7 +60,7 @@ function LessonSearch({ searchQuery, setSearchQuery, searchType, setSearchType, 
 
 const buttonStyle = (type?: string, searchType?: string) => ({
     padding: "10px 20px",
-    backgroundColor: searchType === type ? "#007BFF" : "#f1f1f1",
+    backgroundColor: searchType === type ? "#B8860B" : "#f1f1f1",
     border: "1px solid #ddd",
     borderRadius: "5px",
     cursor: "pointer",

@@ -4,12 +4,9 @@
 export type User = {
     [x: string]: any
     id: string,
-    firstName: string,
-    lastName: string,
+   name: string,
     email: string,
-    password: string,
-    address: string,
-    phone: string
+    password: string,   
 }
 
 type Action = {
@@ -27,12 +24,10 @@ export const userReducer = (state: User, action: Action): User => {
         case 'REMOVE':
             return {
                 id: '',
-                firstName: '',
-                lastName: '',
+                name:'',
                 email: '',
                 password: '',
-                address: '',
-                phone: ''
+              
             };
         default:
             return state;

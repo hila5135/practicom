@@ -13,12 +13,10 @@ const AppLayout = () => {
     
     const initialUser: User = {
         id: '',
-        firstName: '',
-        lastName: '',
+        name: '',
         email: '',
         password: '',
-        address: '',
-        phone: ''
+     
     }
 
     const [user, userDispatch] = useReducer(userReducer, initialUser)

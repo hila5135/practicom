@@ -1,4 +1,7 @@
-﻿using AudioLectures.Core;
+using Amazon.Runtime;
+using Amazon;
+using Amazon.S3;
+using AudioLectures.Core;
 using AudioLectures.Core.Repositories;
 using AudioLectures.Core.Services;
 using AudioLectures.Data;
@@ -88,8 +91,17 @@ builder.Services.AddScoped<ILecturerService, LecturerService>();
 builder.Services.AddScoped<ILessonRepository, LessonRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILecturerRepository, LecturerRepository>();
-builder.Services.AddScoped<AuthService>();
 
+builder.Services.AddSingleton<IAmazonS3>(sp =>
+{
+  var config = sp.GetRequiredService<IConfiguration>();
+  var awsAccessKeyId = config["AWS:AccessKeyId"];
+  var awsSecretAccessKey = config["AWS:SecretAccessKey"];
+  var region = RegionEndpoint.USEast1;  // בחר את ה-region שלך
+
+  var credentials = new BasicAWSCredentials(awsAccessKeyId, awsSecretAccessKey);
+  return new AmazonS3Client(credentials, region);
+}); builder.Services.AddScoped<AuthService>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 

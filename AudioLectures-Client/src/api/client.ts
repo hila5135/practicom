@@ -60,7 +60,7 @@ export class ApiClient {
      * @param body (optional) 
      * @return OK
      */
-    register(body: RegisterModel | undefined): Promise<void> {
+    register(body: UserDTO | undefined): Promise<void> {
         let url_ = this.baseUrl + "/api/Auth/register";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1110,50 +1110,6 @@ export interface ILoginModel {
     userPassword?: string | undefined;
 }
 
-export class RegisterModel implements IRegisterModel {
-    userName?: string | undefined;
-    userPassword?: string | undefined;
-    userEmail?: string | undefined;
-
-    constructor(data?: IRegisterModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.userName = _data["userName"];
-            this.userPassword = _data["userPassword"];
-            this.userEmail = _data["userEmail"];
-        }
-    }
-
-    static fromJS(data: any): RegisterModel {
-        data = typeof data === 'object' ? data : {};
-        let result = new RegisterModel();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["userName"] = this.userName;
-        data["userPassword"] = this.userPassword;
-        data["userEmail"] = this.userEmail;
-        return data;
-    }
-}
-
-export interface IRegisterModel {
-    userName?: string | undefined;
-    userPassword?: string | undefined;
-    userEmail?: string | undefined;
-}
-
 export class User implements IUser {
     userId?: number;
     userName?: string | undefined;
@@ -1222,7 +1178,6 @@ export class UserDTO implements IUserDTO {
     userName?: string | undefined;
     userEmail?: string | undefined;
     userPassword?: string | undefined;
-    userRole?: string | undefined;
 
     constructor(data?: IUserDTO) {
         if (data) {
@@ -1238,7 +1193,6 @@ export class UserDTO implements IUserDTO {
             this.userName = _data["userName"];
             this.userEmail = _data["userEmail"];
             this.userPassword = _data["userPassword"];
-            this.userRole = _data["userRole"];
         }
     }
 
@@ -1254,7 +1208,6 @@ export class UserDTO implements IUserDTO {
         data["userName"] = this.userName;
         data["userEmail"] = this.userEmail;
         data["userPassword"] = this.userPassword;
-        data["userRole"] = this.userRole;
         return data;
     }
 }
@@ -1263,7 +1216,6 @@ export interface IUserDTO {
     userName?: string | undefined;
     userEmail?: string | undefined;
     userPassword?: string | undefined;
-    userRole?: string | undefined;
 }
 
 export class SwaggerException extends Error {

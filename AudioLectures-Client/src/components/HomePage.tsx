@@ -1,5 +1,5 @@
 // import { User, userReducer } from "./user";
-import Login from "./Login";
+import Login from "./auth";
 import { useState } from "react";
 import Username_avatar from "./UserAvatar";
 import { Box, Button } from "@mui/material";
@@ -11,12 +11,10 @@ const HomePage = () => {
 
     const initialUser: User = {
         id: '',
-        firstName: '',
-        lastName: '',
+name:'',
         email: '',
         password: '',
-        address: '',
-        phone: ''
+        
     }
     const [isLogin, setIsLogin] = useState(false);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -29,7 +27,7 @@ const HomePage = () => {
         });
     }
     return (<>
-        {!isLogin && (
+        {/* {!isLogin && (
             <Box
                 sx={{ position: "absolute", top: 10, left: 10, display: "flex", gap: 2 }}>
                 <Button variant="contained"
@@ -60,6 +58,39 @@ const HomePage = () => {
 
         {isLoginOpen && <Login successLogin={handleLoginSuccess} typeAction={type} close={() => setIsLoginOpen(false)} />}
         {isLogin && <Username_avatar />}
-    </>)
+    </>
+     */}
+       <>
+            {/* כפתור Sign Up וכפתור Login יוצגו תמיד */}
+            <Box
+                sx={{ position: "absolute", top: 10, left: 10, display: "flex", gap: 2 }}>
+                <Button variant="contained"
+                    sx={{
+                        background: "black", color: "white",
+                        borderRadius: "10px", border: `2px solid ${cyan[300]}`,
+                        "&:hover": { backgroundColor: "white", borderColor: cyan[300], color: "#4dd0e1" },
+                    }}
+                    onClick={() => { setIsLoginOpen(true); setType('Sign'); }}>
+                    Sign Up
+                </Button>
+
+                <Button
+                    variant="contained"
+                    sx={{
+                        background: "black", color: "white",
+                        borderRadius: "10px", border: `2px solid ${cyan[300]}`,
+                        "&:hover": { backgroundColor: "white", borderColor: cyan[300], color: "#4dd0e1" },
+                    }}
+                    onClick={() => { setIsLoginOpen(true); setType('Login'); }}
+                >
+                    Login
+                </Button>
+            </Box>
+
+            {/* אם חלון הלוגין פתוח, הצג את הטופס */}
+            {isLoginOpen && <Login successLogin={handleLoginSuccess} typeAction={type} close={() => setIsLoginOpen(false)} />}
+        </>
+</>
+)
 }
 export default HomePage;

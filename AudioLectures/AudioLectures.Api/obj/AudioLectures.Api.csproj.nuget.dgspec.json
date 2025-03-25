@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Api\\AudioLectures.Api.csproj": {}
+    "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Api\\AudioLectures.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Api\\AudioLectures.Api.csproj": {
+    "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Api\\AudioLectures.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Api\\AudioLectures.Api.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Api\\AudioLectures.Api.csproj",
         "projectName": "AudioLectures.Api",
-        "projectPath": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Api\\AudioLectures.Api.csproj",
+        "projectPath": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Api\\AudioLectures.Api.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Api\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,11 +32,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Data\\AudioLectures.Data.csproj": {
-                "projectPath": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Data\\AudioLectures.Data.csproj"
+              "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Data\\AudioLectures.Data.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Data\\AudioLectures.Data.csproj"
               },
-              "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Service\\AudioLectures.Service.csproj": {
-                "projectPath": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Service\\AudioLectures.Service.csproj"
+              "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Service\\AudioLectures.Service.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Service\\AudioLectures.Service.csproj"
               }
             }
           }
@@ -57,6 +57,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[4.0.0-preview.10, )"
+            },
             "AutoMapper": {
               "target": "Package",
               "version": "[14.0.0, )"
@@ -99,14 +103,14 @@
         }
       }
     },
-    "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Core\\AudioLectures.Core.csproj": {
+    "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Core\\AudioLectures.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Core\\AudioLectures.Core.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Core\\AudioLectures.Core.csproj",
         "projectName": "AudioLectures.Core",
-        "projectPath": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Core\\AudioLectures.Core.csproj",
+        "projectPath": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Core\\AudioLectures.Core.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Core\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -148,6 +152,10 @@
             "AutoMapper": {
               "target": "Package",
               "version": "[14.0.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[6.6.2, )"
             }
           },
           "imports": [
@@ -170,14 +178,14 @@
         }
       }
     },
-    "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Data\\AudioLectures.Data.csproj": {
+    "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Data\\AudioLectures.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Data\\AudioLectures.Data.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Data\\AudioLectures.Data.csproj",
         "projectName": "AudioLectures.Data",
-        "projectPath": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Data\\AudioLectures.Data.csproj",
+        "projectPath": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Data\\AudioLectures.Data.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Data\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -198,8 +206,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Core\\AudioLectures.Core.csproj": {
-                "projectPath": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Core\\AudioLectures.Core.csproj"
+              "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Core\\AudioLectures.Core.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Core\\AudioLectures.Core.csproj"
               }
             }
           }
@@ -251,14 +259,14 @@
         }
       }
     },
-    "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Service\\AudioLectures.Service.csproj": {
+    "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Service\\AudioLectures.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Service\\AudioLectures.Service.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Service\\AudioLectures.Service.csproj",
         "projectName": "AudioLectures.Service",
-        "projectPath": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Service\\AudioLectures.Service.csproj",
+        "projectPath": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Service\\AudioLectures.Service.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Service\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -279,8 +287,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Core\\AudioLectures.Core.csproj": {
-                "projectPath": "C:\\Users\\User\\Downloads\\practicom-main\\AudioLectures\\AudioLectures.Core\\AudioLectures.Core.csproj"
+              "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Core\\AudioLectures.Core.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Core\\AudioLectures.Core.csproj"
               }
             }
           }
@@ -301,6 +309,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[4.0.0-preview.10, )"
+            },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
               "version": "[8.0.0, )"
