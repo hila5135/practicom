@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6A44C2D3-D183-4FD6-BA55-82AF9814A88E}|AudioLectures.Service\\AudioLectures.Service.csproj|c:\\users\\user\\desktop\\practicom\\audiolectures\\audiolectures.service\\s3service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A44C2D3-D183-4FD6-BA55-82AF9814A88E}|AudioLectures.Service\\AudioLectures.Service.csproj|solutionrelative:audiolectures.service\\s3service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7E96DFF8-1682-4A4D-9B7F-065F74DEDEF4}|AudioLectures.Api\\AudioLectures.Api.csproj|c:\\users\\user\\desktop\\practicom\\audiolectures\\audiolectures.api\\controllers\\s3controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E96DFF8-1682-4A4D-9B7F-065F74DEDEF4}|AudioLectures.Api\\AudioLectures.Api.csproj|solutionrelative:audiolectures.api\\controllers\\s3controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{EF30FF0C-6896-4F4F-AB38-B6B05CB387EE}|AudioLectures.Core\\AudioLectures.Core.csproj|c:\\users\\user\\desktop\\practicom\\audiolectures\\audiolectures.core\\models\\fileuploadoperationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF30FF0C-6896-4F4F-AB38-B6B05CB387EE}|AudioLectures.Core\\AudioLectures.Core.csproj|solutionrelative:audiolectures.core\\models\\fileuploadoperationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6A44C2D3-D183-4FD6-BA55-82AF9814A88E}|AudioLectures.Service\\AudioLectures.Service.csproj|c:\\users\\user\\desktop\\practicom\\audiolectures\\audiolectures.service\\s3service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6A44C2D3-D183-4FD6-BA55-82AF9814A88E}|AudioLectures.Service\\AudioLectures.Service.csproj|solutionrelative:audiolectures.service\\s3service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7E96DFF8-1682-4A4D-9B7F-065F74DEDEF4}|AudioLectures.Api\\AudioLectures.Api.csproj|c:\\users\\user\\desktop\\practicom\\audiolectures\\audiolectures.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -218,7 +218,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -242,7 +242,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "FileUploadOperationFilter.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Core\\Models\\FileUploadOperationFilter.cs",
               "RelativeDocumentMoniker": "AudioLectures.Core\\Models\\FileUploadOperationFilter.cs",
@@ -254,19 +254,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "S3Service.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Service\\S3Service.cs",
               "RelativeDocumentMoniker": "AudioLectures.Service\\S3Service.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Service\\S3Service.cs",
-              "RelativeToolTip": "AudioLectures.Service\\S3Service.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABAAAAAfAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Service\\S3Service.cs*",
+              "RelativeToolTip": "AudioLectures.Service\\S3Service.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T14:12:43.617Z"
+              "WhenOpened": "2025-03-25T14:12:43.617Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "IS3Service.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Core\\Services\\IS3Service.cs",
               "RelativeDocumentMoniker": "AudioLectures.Core\\Services\\IS3Service.cs",
@@ -278,13 +279,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "S3Controller.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Api\\Controllers\\S3Controller.cs",
               "RelativeDocumentMoniker": "AudioLectures.Api\\Controllers\\S3Controller.cs",
               "ToolTip": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Api\\Controllers\\S3Controller.cs",
               "RelativeToolTip": "AudioLectures.Api\\Controllers\\S3Controller.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAQwC0AAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwEAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-25T14:08:42.999Z",
               "EditorCaption": ""
@@ -565,7 +566,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\practicom\\AudioLectures\\AudioLectures.Api\\Program.cs",
               "RelativeDocumentMoniker": "AudioLectures.Api\\Program.cs",
@@ -573,8 +574,7 @@
               "RelativeToolTip": "AudioLectures.Api\\Program.cs",
               "ViewState": "AgIAAEsAAAAAAAAAAAAAwF4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T22:50:47.82Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T22:50:47.82Z"
             },
             {
               "$type": "Document",

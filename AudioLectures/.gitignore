@@ -1,0 +1,60 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+appsettings.json
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows Installer package files
+*.exe
+
+# .NET build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Dd]Release/
+[Dd]ebug/  # also works for netcore
+bin/
+obj/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# User-specific files
+.idea/
+.vscode/
+.vs/
+
+# Rider
+.idea/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# NPM packages
+node_modules/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# JetBrains Rider
+.idea/
+
+# ASP.NET Core Secrets
+secrets/
+
+# VS Code directory
+.vscode/
+# Ignore user-specific JetBrains Rider files
+.idea/
+
+# Ignore user-specific Visual Studio files
+.vs2019/
+.vs2017/
