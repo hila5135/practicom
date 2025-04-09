@@ -7,7 +7,7 @@ appsettings.json
 *.msi
 *.msm
 *.msp
-
+. vs
 # Windows Installer package files
 *.exe
 
