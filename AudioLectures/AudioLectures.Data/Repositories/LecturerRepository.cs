@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AudioLectures.Data.Repositories
 {
-    public class LecturerRepository :ILecturerRepository
+    public class LecturerRepository : ILecturerRepository
     {
         private readonly DataContext _context;
         public LecturerRepository(DataContext context) { _context = context; }
@@ -19,7 +19,7 @@ namespace AudioLectures.Data.Repositories
 
         public async Task<Lecturer> GetByIdAsync(int id) => await _context.Lecturers.FindAsync(id);
 
-        public async Task<List<Lecturer>> GetByNameAsync(string name) => await _context.Lecturers.Where(s => s.LecturerName == name).Include(s=>s.LecturerLessons).ToListAsync();
+        public async Task<List<Lecturer>> GetByNameAsync(string name) => await _context.Lecturers.Where(s => s.LecturerName == name).Include(s => s.LecturerLessons).ToListAsync();
         public async Task<Lecturer> AddAsync(Lecturer entity)
         {
             await _context.Lecturers.AddAsync(entity);
@@ -41,7 +41,15 @@ namespace AudioLectures.Data.Repositories
         }
 
 
-        public async Task DeleteAsync(int id) { var entity = await _context.Lecturers.FindAsync(id); if (entity != null) { _context.Lecturers.Remove(entity); await _context.SaveChangesAsync(); } }
+        public async Task DeleteAsync(int id)
+        {
+            var entity = await _context.Lecturers.FindAsync(id);
+            if (entity != null)
+            {
+                _context.Lecturers.Remove(entity);
+                await _context.SaveChangesAsync();
+            }
+        }
 
     }
 }

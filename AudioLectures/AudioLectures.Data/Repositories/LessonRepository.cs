@@ -11,14 +11,14 @@ namespace AudioLectures.Data.Repositories
 {
     public class LessonRepository :ILessonRepository
     {
-        private readonly DataContext _context;
+        private readonly DataContext _context;  
 
         public LessonRepository(DataContext context)
         {
             _context = context;
         }
 
-        public async Task<IEnumerable<Lesson>> GetAllAsync() => await _context.Lessons.Include(s => s.LessonUsers).Include(s => s.LessonUsers).ToListAsync();
+        public async Task<IEnumerable<Lesson>> GetAllAsync() => await _context.Lessons.Include(s => s.LessonLecturer).Include(s => s.LessonUsers).ToListAsync();
         public async Task<IEnumerable<string>> GetAllTitlesAsync() => await _context.Lessons.Select(lesson=> lesson.LessonTitle).Distinct().ToListAsync();
 
         public async Task<Lesson> GetByIdAsync(int id) => await _context.Lessons.FindAsync(id);
