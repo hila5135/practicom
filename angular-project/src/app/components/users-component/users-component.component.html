@@ -1,0 +1,94 @@
+<!-- <div class="container">
+    <h2 *ngIf="editMode">עריכת משתמש</h2>
+    <h2 *ngIf="!editMode">הוספת משתמש חדש</h2>
+    
+    <form (ngSubmit)="updateUser()">
+      <div>
+        <label for="id">ID</label>
+        <input type="
+        text" id="id" [(ngModel)]="user.id" name="id" required [disabled]="editMode" />
+      </div>
+  
+      <div>
+        <label for="name">שם</label>
+        <input type="text" id="name" [(ngModel)]="user.username" name="name" required />
+      </div>
+  
+      <div>
+        <label for="email">מייל</label>
+        <input type="email" id="email" [(ngModel)]="user.User" name="email" required />
+      </div>
+  
+     
+  
+      <div>
+        <button type="submit" [disabled]="!user.id || !user.name || !user.email">
+          {{ editMode ? 'עדכן' : 'הוסף' }}
+        </button>
+        <button type="button" *ngIf="editMode" (click)="cancelEdit()">ביטול</button>
+      </div>
+    </form>
+  </div>
+   -->
+
+<!-- טופס הוספת משתמש -->
+<div>
+  <button *ngIf="!isAddingNewUser" (click)="isAddingNewUser = true">
+    ➕ הוסף משתמש חדש
+  </button>
+</div>
+
+<!-- טופס הוספת משתמש -->
+<div *ngIf="isAddingNewUser">
+  <h3>הוספת משתמש</h3>
+  <input [(ngModel)]="newUser.userName" placeholder="שם">
+  <input [(ngModel)]="newUser.userEmail" placeholder="אימייל">
+  <input [(ngModel)]="newUser.userRole" placeholder="תפקיד">
+  <input [(ngModel)]="newUser.userPassword" placeholder="סיסמה">
+  <button (click)="addUser()">הוסף</button>
+  <button (click)="cancelAdd()">בטל</button>
+</div><hr>
+
+<!-- טבלת המשתמשים -->
+<table>
+  <thead>
+    <tr>
+      <th>שם</th>
+      <th>אימייל</th>
+      <th>תפקיד</th>
+      <th>פעולות</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td *ngIf="editMode !== user.userId">{{ user.userName }}</td>
+      <td *ngIf="editMode === user.userId">
+        <input [(ngModel)]="editUserDetails.userName">
+      </td>
+
+      <td *ngIf="editMode !== user.userId">{{ user.userEmail }}</td>
+      <td *ngIf="editMode === user.userId">
+        <input [(ngModel)]="editUserDetails.userEmail">
+      </td>
+
+      <td *ngIf="editMode !== user.userId">{{ user.userRole }}</td>
+      <td *ngIf="editMode === user.userId">
+        <input [(ngModel)]="editUserDetails.userRole">
+      </td>
+
+      <td>
+        <ng-container *ngIf="editMode !== user.userId; else editButtons">
+          <button (click)="editUser(user)">✏️ עריכה</button>
+          <button (click)="deleteUser(user.userId!)">🗑️ מחיקה</button>
+        </ng-container>
+        <ng-template #editButtons>
+          <button (click)="updateUser()">💾 שמירה</button>
+          <button (click)="cancelEdit()">❌ ביטול</button>
+        </ng-template>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+

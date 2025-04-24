@@ -1,0 +1,79 @@
+
+  <h2>ניהול קבצים</h2>
+<!-- 
+  <input type="file" (change)="onFileSelected($event)" />
+  <button (click)="uploadFile()">העלה קובץ</button>
+  
+  <div *ngIf="isUploading" style="color: green; font-weight: bold;">
+    {{ uploadingMessage }}
+  </div>
+  
+  <hr /> -->
+  <!-- כפתור ראשוני -->
+   <h2>העלאת קובץ</h2>
+<button (click)="toggleUploadControls()">העלה קובץ</button>
+
+<!-- יופיע רק לאחר הלחיצה -->
+<div *ngIf="showUploadControls">
+  <input type="file" (change)="onFileSelected($event)" />
+  <button (click)="uploadFile()">אישור העלאה</button>
+</div>
+
+<div *ngIf="isUploading" style="color: green; font-weight: bold;">
+  {{ uploadingMessage }}
+</div>
+<hr />
+<h2>📝 הוספת שיעור</h2>
+<button (click)="toggleLessonForm()">+ הוסף שיעור</button>
+
+<div *ngIf="showLessonForm">
+  <form (ngSubmit)="addLesson()">
+    <label>שם שיעור:</label>
+    <input [(ngModel)]="lessonPOST.lessonName" name="name" required /><br />
+    
+    <label>נושא שיעור:</label>
+    <input [(ngModel)]="lessonPOST.lessonTitle" name="title" required /><br />
+    
+    <label>משך שיעור:</label>
+    <input [(ngModel)]="lessonPOST.lessonDuration" name="duration" /><br />
+    
+    <label>תאריך שיעור:</label>
+    <input [(ngModel)]="lessonPOST.lessonReleaseDate" name="releaseDate" /><br />
+    
+    <label>מספר מזהה של מרצה:</label>
+    <input type="number" [(ngModel)]="lessonPOST.lessonLecturerId" name="lecturerId" /><br />
+    
+    <label>כתובת קובץ:</label>
+    <input [(ngModel)]="lessonPOST.lessonUrl" name="url" /><br />
+    
+    <button type="submit">📤 הוסף שיעור</button>
+  </form>
+</div>
+
+<hr />
+  <div style="text-align: right;">
+  <table border="1" style="width: auto; border-collapse: collapse; text-align: right;">
+    <thead>
+      <tr>
+        <th>שם קובץ</th>
+        <th>פעולות</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let file of filesList">
+        <td>{{ file }}</td>
+        <td>
+          <button (click)="downloadFile(file)">📥 הורד</button>
+          <!-- <div *ngIf="isDownloading" style="color: green; font-weight: bold;">
+            {{ downloadingMassage }}
+          </div> -->
+          <span *ngIf="downloadingFileName === file" style="margin-right: 10px; color: green;">
+            ⏳ מוריד קובץ...
+          </span>
+        </td>
+          <button (click)="deleteFile(file)">🗑️ מחק</button>
+      </tr>
+    </tbody>
+  </table>
+</div>
+     
