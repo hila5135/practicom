@@ -30,7 +30,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddEndpointsApiExplorer();
 
 
-builder.Services.AddDbContext<DataContext>();
+//builder.Services.AddDbContext<DataContext>();
 
 
 
@@ -83,10 +83,7 @@ builder.Services.AddScoped<ILecturerService, LecturerService>();
 builder.Services.AddScoped<ILessonRepository, LessonRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILecturerRepository, LecturerRepository>();
-//builder.Services.Configure<FormOptions>(options =>
-//{
-//    options.MultipartBodyLengthLimit = 100_000_000;
-//});
+
 builder.Services.Configure<FormOptions>(options =>
 {
     options.MultipartBodyLengthLimit = 100_000_000; // 100MB לדוגמה
@@ -136,13 +133,19 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseHttpsRedirection();
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
+    )
+);
 
 app.Use(async (context, next) =>
 {
@@ -165,5 +168,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapGet("/", () => "Welcome to Audio Lectures API!");
 app.Run();
