@@ -1,9 +1,10 @@
+
 {
     "runtime": "Net90",
     "defaultVariables": null,
     "documentGenerator": {
       "fromDocument": {
-        "url": "https://localhost:7129/swagger/v1/swagger.json",
+        "url":"https://audiolecturesserver.onrender.com/swagger/v1/swagger.json",
         "output": null,
         "newLineBehavior": "Auto"
       }
