@@ -7,13 +7,13 @@ import { User } from "./user";
 
 const HomePage = () => {
 
-        const initialUser: User = {
-        id: '',
-        name:'',
-        email: '',
-        password: '',
+    //     const initialUser: User = {
+    //     id: '',
+    //     name:'',
+    //     email: '',
+    //     password: '',
         
-    }
+    // }
     const [isLogin, setIsLogin] = useState(false);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [type, setType] = useState('Login');
