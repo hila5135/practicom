@@ -14,8 +14,6 @@ export class LessonsListComponentComponent implements OnInit {
   lessonPOST: Lesson = new Lesson();
   selectedFile: File | null = null;
   filesList: string[] = [];
-  // isDownloading = false;
-  // downloadingMassage = '';
   downloadingFileName: string | null = null;
   isUploading = false;
   uploadingMessage = '';
@@ -50,33 +48,7 @@ export class LessonsListComponentComponent implements OnInit {
     }
     this.showUploadControls = false;
   }
-  // downloadFile(fileName: string) {
-  //   this.isDownloading = true;
-  //   this.downloadingMassage = '⏳ מוריד קובץ...';
-  //   this.client.download(fileName).subscribe({
-  //     next: (blob: Blob) => {
-  //       this.isDownloading = false;
-  //       this.downloadingMassage = '';
-  //       if (!blob || !(blob instanceof Blob)) {
-  //         alert('הורדה נכשלה: לא התקבל קובץ תקני');
-  //         return;
-  //       }
-  //       const downloadUrl = window.URL.createObjectURL(blob);
-  //       const a = document.createElement('a');
-  //       a.href = downloadUrl;
-  //       a.download = fileName || 'downloaded.mp3';
-  //       document.body.appendChild(a);
-  //       a.click();
-  //       document.body.removeChild(a);
-  //       window.URL.revokeObjectURL(downloadUrl);
-  //     },
-  //     error: (err: HttpErrorResponse) => {
-  //       this.isDownloading = false;
-  //       this.downloadingMassage = '';
-  //       alert('שגיאה בהורדה: ' + err.message);
-  //     }
-  //   });
-  // }
+
   downloadFile(fileName: string) {
     this.downloadingFileName = fileName;
     this.client.download(fileName).subscribe({
