@@ -62,7 +62,7 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<FileUploadOperationFilter>();
 });
 
-builder.Services.AddCors(options =>
+builder.Services.AddCors(options => 
 {
     options.AddPolicy("AllowAll",
         policy => policy.AllowAnyOrigin()
@@ -79,14 +79,32 @@ builder.Services.AddScoped<ILecturerRepository, LecturerRepository>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<IS3Service, S3Service>();
 
+//builder.Services.AddSingleton<IAmazonS3>(sp =>
+//{
+//    var config = sp.GetRequiredService<IConfiguration>();
+//    var awsAccessKeyId = config["AWS:AccessKeyId"];
+//    var awsSecretAccessKey = config["AWS:SecretAccessKey"];
+//    var region = RegionEndpoint.USEast1;
+//    var credentials = new BasicAWSCredentials(awsAccessKeyId, awsSecretAccessKey);
+//    return new AmazonS3Client(credentials, region);
+//});
 builder.Services.AddSingleton<IAmazonS3>(sp =>
 {
     var config = sp.GetRequiredService<IConfiguration>();
-    var awsAccessKeyId = config["AWS:AccessKeyId"];
-    var awsSecretAccessKey = config["AWS:SecretAccessKey"];
-    var region = RegionEndpoint.USEast1;
+
+    var awsAccessKeyId = config["AWS:AccessKey"];
+    var awsSecretAccessKey = config["AWS:SecretKey"];
+    var awsRegion = config["AWS:Region"];
+
+    if (string.IsNullOrWhiteSpace(awsAccessKeyId) || string.IsNullOrWhiteSpace(awsSecretAccessKey) || string.IsNullOrWhiteSpace(awsRegion))
+    {
+        throw new InvalidOperationException("Missing AWS configuration values! Please check AccessKey, SecretKey, or Region in appsettings.json or environment variables.");
+    }
+
     var credentials = new BasicAWSCredentials(awsAccessKeyId, awsSecretAccessKey);
-    return new AmazonS3Client(credentials, region);
+    var regionEndpoint = RegionEndpoint.GetBySystemName(awsRegion);
+
+    return new AmazonS3Client(credentials, regionEndpoint);
 });
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
