@@ -13,7 +13,6 @@ namespace AudioLectures.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Lecturer> Lecturers { get; set; }
-        public DbSet<UserLessons> UserLessons { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
