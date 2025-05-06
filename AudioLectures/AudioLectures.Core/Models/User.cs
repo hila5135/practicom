@@ -13,6 +13,7 @@ namespace AudioLectures.Core.Models
         public string UserEmail { get; set; }
         public string UserPassword { get; set; }
         public string UserRole { get; set; }
-        public List<Lesson> UserLessons { get; set; }
+        //public List<Lesson> UserLessons { get; set; }
+        public List<UserLesson> UserLessons { get; set; }
     }
 }
