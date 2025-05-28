@@ -1,0 +1,59 @@
+<!-- 
+
+   <mat-sidenav-container class="sidenav-container" dir="rtl">
+    <mat-sidenav mode="side" opened position="end" class="sidenav">
+      <mat-toolbar color="primary">ניהול מערכת</mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/lecturersManagement" routerLinkActive="active">
+          <mat-icon>record_voice_over</mat-icon>
+          <span>מרצים</span>
+        </a>
+        <a mat-list-item routerLink="/usersManagement" routerLinkActive="active">
+          <mat-icon>people</mat-icon>
+          <span>משתמשים</span>
+        </a>
+        <a mat-list-item routerLink="/lessonsManagement" routerLinkActive="active">
+          <mat-icon>library_books</mat-icon>
+          <span>שיעורים</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <span>לוח ניהול</span>
+      </mat-toolbar>
+      <div class="main-content">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+   -->
+
+   <mat-sidenav-container class="sidenav-container" dir="rtl">
+    <mat-sidenav mode="side" opened position="start" class="sidenav">
+      <mat-toolbar color="primary">ניהול מערכת</mat-toolbar>    <mat-nav-list>
+      <a mat-list-item routerLink="/lecturersManagement" routerLinkActive="active">
+        <mat-icon>record_voice_over</mat-icon>
+        <span>מרצים</span>
+      </a>
+      <a mat-list-item routerLink="/usersManagement" routerLinkActive="active">
+        <mat-icon>people</mat-icon>
+        <span>משתמשים</span>
+      </a>
+      <a mat-list-item routerLink="/lessonsManagement" routerLinkActive="active">
+        <mat-icon>library_books</mat-icon>
+        <span>שיעורים</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <span>לוח ניהול</span>
+    </mat-toolbar>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

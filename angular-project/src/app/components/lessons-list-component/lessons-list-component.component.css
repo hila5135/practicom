@@ -1,0 +1,33 @@
+
+    .section-card {
+        margin-bottom: 24px;
+        padding: 16px;
+        direction: rtl;
+    }
+    
+    .upload-controls {
+        margin-top: 10px;
+    }
+    
+    .uploading-msg, .download-msg {
+        color: green;
+        font-weight: bold;
+        margin-right: 8px;
+    }
+    
+    .lesson-form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 16px;
+    }
+    
+    .lesson-form mat-form-field {
+        flex: 1 1 250px;
+    }
+    
+    .full-width-table {
+        width: 100%;
+        margin-top: 16px;
+    }
+    

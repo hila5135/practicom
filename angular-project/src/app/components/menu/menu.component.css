@@ -1,0 +1,84 @@
+/* 
+
+   .sidenav-container {
+    height: 100vh;
+    direction: rtl;
+  }
+  
+  .sidenav {
+    width: 250px;
+    float: right;
+  }
+  
+  .main-content {
+    padding: 20px;
+  }
+  
+  mat-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .active {
+    background-color: #e0f7fa !important;
+  }
+  
+  .hide-desktop {
+    display: none;
+    float: right;
+  }
+  
+  @media (max-width: 768px) {
+    .sidenav {
+      display: none;
+    }
+  
+    .hide-desktop {
+      display: inline-flex;
+    }
+  }
+   */
+   
+
+   .sidenav-container {
+    height: 100vh;
+    direction: rtl;
+  }
+  
+  .sidenav {
+    width: 250px;
+  }
+  
+  .main-content {
+    padding: 20px;
+    text-align: right; /* אם את רוצה שתוכן הטפסים וכו' יהיה מיושר לימין */
+  }
+  
+  mat-toolbar {
+
+text-align: right;;
+}
+  
+  .active {
+    background-color: #e0f7fa !important;
+  }
+  mat-header-cell {
+    text-align: right;
+  }
+  
+  
+  .hide-desktop {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    .sidenav {
+      display: none;
+    }
+  
+    .hide-desktop {
+      display: inline-flex;
+    }
+  }
+  

@@ -1,0 +1,27 @@
+   <div class="login-container mat-elevation-z8">
+    <h2 class="login-title">התחברות</h2>
+  
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>שם משתמש</mat-label>
+        <input matInput type="text" [(ngModel)]="username" name="username" required />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>סיסמה</mat-label>
+        <input matInput type="password" [(ngModel)]="password" name="password" required />
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit" class="full-width">
+        התחבר
+      </button>
+    </form>
+  
+    <mat-error *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </mat-error>
+
+    <!-- <a routerLink="/menu" routerLinkActive="active">manageLessons</a> -->
+
+  </div>
+  

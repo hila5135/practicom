@@ -1,0 +1,113 @@
+/* ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    background-color: #f9f9f9;
+    padding: 8px;
+    margin-bottom: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  label {
+    display: block;
+    margin: 6px 0;
+  }
+  input {
+    width: 200px;
+  }
+  button {
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+   */
+
+   /* mat-card {
+    margin: 16px auto;
+    max-width: 600px;
+    direction: rtl;
+  }
+  
+  .form-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  
+  mat-form-field {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .lecturer-item {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #ddd;
+    padding: 8px 0;
+  }
+  
+  .lessons {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #555;
+  }
+   */
+
+
+   mat-card {
+    margin: 16px auto;
+    max-width: 600px;
+    direction: rtl;
+    padding: 16px; 
+    box-sizing: border-box; 
+  }
+  
+  .form-row {
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    flex-wrap: wrap;
+    margin-top: 20px;
+    align-items: flex-end;
+  }
+  
+  mat-form-field {
+    flex: 1;
+    min-width: 200px;
+    min-height: 80px;
+    box-sizing: border-box;
+  } 
+  button {
+    height: 56px;
+    margin-bottom:25px;
+  }
+
+  .lecturer-item {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 0.5px solid #ddd;
+    padding: 5; 
+    box-sizing: border-box;
+    min-height: 85px;
+    max-height: 200px;   
+    overflow-y: auto;
+  }
+
+  .lessons {
+    margin-top: 25px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .form-item {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .lessons-scroll{
+      max-height: 100px;  /* או כל גובה אחר שתרצי */
+      overflow-y: auto;
+      padding-inline-start: 20px; /* לשיפור המראה של הרשימה */
+  }
+  

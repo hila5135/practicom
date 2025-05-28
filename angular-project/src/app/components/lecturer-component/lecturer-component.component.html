@@ -1,0 +1,96 @@
+        <!-- <h3>➕ הוספת מרצה חדש</h3>
+<form (ngSubmit)="addLecturer()" style="margin-bottom: 1em;">
+  <label>
+    שם:
+    <input [(ngModel)]="newLecturer.lecturerName" name="name" required />
+  </label>
+  <button type="submit">💾 הוסף מרצה</button>
+</form>
+
+<h2>📚 רשימת מרצים</h2>
+
+<ul>
+  <li *ngFor="let lecturer of lecturers">
+    <ng-container *ngIf="editMode !== lecturer.lecturerId; else editForm">
+      <strong>{{ lecturer.lecturerName }}</strong> | מזהה: {{ lecturer.lecturerId }}
+      <button (click)="startEdit(lecturer)">✏️ ערוך</button>
+      <button (click)="deleteLecturer(lecturer.lecturerId!)">🗑️ מחק</button>
+      <br />
+      📝 שיעורים:
+      <span *ngIf="lecturer.lecturerLessons?.length; else noLessons">
+        <ul>
+          <li *ngFor="let lesson of lecturer.lecturerLessons">
+            {{ lesson.lessonName }}
+          </li>
+        </ul>
+      </span>
+      <ng-template #noLessons>אין שיעורים</ng-template>
+    </ng-container>
+
+    <ng-template #editForm>
+      <form (ngSubmit)="saveEdit(lecturer.lecturerId!)">
+        <input [(ngModel)]="editLecturer.lecturerName" name="editName{{lecturer.lecturerId}}" required />
+        <button type="submit">💾 שמור</button>
+        <button type="button" (click)="cancelEdit()">❌ ביטול</button>
+      </form>
+    </ng-template>
+  </li>
+</ul> -->
+
+
+<mat-card class="lecturer-form">
+  <mat-card-title>➕ הוספת מרצה חדש</mat-card-title>
+  <form (ngSubmit)="addLecturer()" class="form-row">
+    <mat-form-field appearance="outline">
+      <mat-label>שם המרצה</mat-label>
+      <input matInput [(ngModel)]="newLecturer.lecturerName" name="name" required />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">💾 הוסף</button>
+  </form>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>📚 רשימת מרצים</mat-card-title>
+  <mat-list *ngIf="lecturers.length; else noLecturers">
+    <mat-list-item *ngFor="let lecturer of lecturers" class="lecturer-item">
+      <div *ngIf="editMode !== lecturer.lecturerId; else editForm" class="lecturer-display">
+        <strong>{{ lecturer.lecturerName }}</strong> | מזהה: {{ lecturer.lecturerId }}
+        <button mat-icon-button color="primary" (click)="startEdit(lecturer)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteLecturer(lecturer.lecturerId!)">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+        <!-- <div class="lessons">   <div class="lessons-scroll">
+          📝 שיעורים:
+       
+          <ul *ngIf="lecturer.lecturerLessons?.length; else noLessons">
+            <li *ngFor="let lesson of lecturer.lecturerLessons">
+              {{ lesson.lessonName }}
+            </li>
+          </ul>
+        </div> -->
+        <!-- </div> -->
+        <ng-template #noLessons>אין שיעורים</ng-template>
+      </div>
+      
+
+      <ng-template #editForm>
+        <form (ngSubmit)="saveEdit(lecturer.lecturerId!)" class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>שם חדש</mat-label>
+            <input matInput [(ngModel)]="editLecturer.lecturerName" name="editName{{lecturer.lecturerId}}" required />
+          </mat-form-field>
+          <button mat-icon-button color="primary" type="submit">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button mat-icon-button type="button" (click)="cancelEdit()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </form>
+      </ng-template>
+    </mat-list-item>
+  </mat-list>
+  <ng-template #noLecturers>אין מרצים להצגה</ng-template>
+</mat-card>

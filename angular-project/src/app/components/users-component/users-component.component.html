@@ -1,0 +1,126 @@
+<!-- 
+
+<div>
+  <button *ngIf="!isAddingNewUser" (click)="isAddingNewUser = true">
+    ➕ הוסף משתמש חדש
+  </button>
+</div>
+
+<div *ngIf="isAddingNewUser">
+  <h3>הוספת משתמש</h3>
+  <input [(ngModel)]="newUser.userName" placeholder="שם">
+  <input [(ngModel)]="newUser.userEmail" placeholder="אימייל">
+  <input [(ngModel)]="newUser.userRole" placeholder="תפקיד">
+  <input [(ngModel)]="newUser.userPassword" placeholder="סיסמה">
+  <button (click)="addUser()">הוסף</button>
+  <button (click)="cancelAdd()">בטל</button>
+</div><hr>
+
+<table>
+  <thead>
+    <tr>
+      <th>שם</th>
+      <th>אימייל</th>
+      <th>תפקיד</th>
+      <th>פעולות</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td *ngIf="editMode !== user.userId">{{ user.userName }}</td>
+      <td *ngIf="editMode === user.userId">
+        <input [(ngModel)]="editUserDetails.userName">
+      </td>
+
+      <td *ngIf="editMode !== user.userId">{{ user.userEmail }}</td>
+      <td *ngIf="editMode === user.userId">
+        <input [(ngModel)]="editUserDetails.userEmail">
+      </td>
+
+      <td *ngIf="editMode !== user.userId">{{ user.userRole }}</td>
+      <td *ngIf="editMode === user.userId">
+        <input [(ngModel)]="editUserDetails.userRole">
+      </td>
+
+      <td>
+        <ng-container *ngIf="editMode !== user.userId; else editButtons">
+          <button (click)="editUser(user)">✏️ עריכה</button>
+          <button (click)="deleteUser(user.userId!)">🗑️ מחיקה</button>
+        </ng-container>
+        <ng-template #editButtons>
+          <button (click)="updateUser()">💾 שמירה</button>
+          <button (click)="cancelEdit()">❌ ביטול</button>
+        </ng-template>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+ -->
+
+ <mat-table [dataSource]="users" class="mat-elevation-z8">
+
+  <!-- User Name Column -->
+  <ng-container matColumnDef="userName">
+    <mat-header-cell *matHeaderCellDef> שם משתמש </mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <ng-container *ngIf="editMode === user.userId; else showUserName">
+        <input [(ngModel)]="editUserDetails.userName" />
+      </ng-container>
+      <ng-template #showUserName>
+        {{user.userName}}
+      </ng-template>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Email Column -->
+  <ng-container matColumnDef="userEmail">
+    <mat-header-cell *matHeaderCellDef> אימייל </mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <ng-container *ngIf="editMode === user.userId; else showEmail">
+        <input [(ngModel)]="editUserDetails.userEmail" />
+      </ng-container>
+      <ng-template #showEmail>
+        {{user.userEmail}}
+      </ng-template>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Role Column -->
+  <ng-container matColumnDef="userRole">
+    <mat-header-cell *matHeaderCellDef> תפקיד </mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <ng-container *ngIf="editMode === user.userId; else showRole">
+        <input [(ngModel)]="editUserDetails.userRole" />
+      </ng-container>
+      <ng-template #showRole>
+        {{user.userRole}}
+      </ng-template>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> פעולות </mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <ng-container *ngIf="editMode === user.userId; else defaultActions">
+        <button mat-button color="primary" (click)="updateUser()">שמור</button>
+        <button mat-button color="warn" (click)="cancelEdit()">ביטול</button>
+      </ng-container>
+      <ng-template #defaultActions>
+        <button mat-icon-button (click)="editUser(user)">
+          <mat-icon color="primary">edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteUser(user.userId!)">
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </ng-template>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Header and Row Declarations -->
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
