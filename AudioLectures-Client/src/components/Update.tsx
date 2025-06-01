@@ -55,6 +55,7 @@ const Update = ({ setUpdate }: { setUpdate: Function }) => {
     }
     
   }
+  console.log(res);
   return (<>
     <Modal open={open} onClose={() => setUpdate()}
       aria-labelledby="modal-modal-title"
