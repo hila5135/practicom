@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { ApiClient, Lesson } from "../api/client";
-import { Container, Grid, Button, CircularProgress, Box, Typography, Divider } from "@mui/material";
+import { Container, Grid, Button, CircularProgress, Box, Typography} from "@mui/material";
 import LessonList from "./lessonsList";
 import LessonSearch from "./lessonsSearch";
 import LessonsTitle from "./lessonsTitles";
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { useNavigate } from "react-router-dom";
 
 const apiClient = new ApiClient("https://localhost:7129");
@@ -48,6 +47,8 @@ function ActionsForUsers() {
         setIsLoadingTitles(false);
     };
     const navigate = useNavigate();
+    console.log(navigate);
+    
     const handleSearch = async () => {
 
         setIsLoading(true);

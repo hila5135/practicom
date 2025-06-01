@@ -1,14 +1,12 @@
-
-import NavBar from "./NavBar"
 import { Outlet } from "react-router"
 // import { useContext , useState } from "react";
 import {useReducer} from "react";
 import { UserContext } from "./userContext";
-import HomePage from "./HomePage";
 import { User, userReducer } from "./user"
 
 
 
+/*************  ✨ Windsurf Command 🌟  *************/
 const AppLayout = () => {
     
     const initialUser: User = {
@@ -23,8 +21,8 @@ const AppLayout = () => {
     return (
         <>
             <UserContext value={{ user, userDispatch }}>
-                <HomePage/>
-                <NavBar />
+                  {/* <HomePage/> */}
+                {/* <NavBar /> */}
                 <div></div>
                 <Outlet />
             </UserContext>

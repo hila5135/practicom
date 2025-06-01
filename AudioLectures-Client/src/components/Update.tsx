@@ -18,6 +18,7 @@ const Update = ({ setUpdate }: { setUpdate: Function }) => {
   const phonRef = useRef<HTMLInputElement>(null);
   const context = useContext(UserContext);
   const [open, setOpen] = useState(true)
+  let res: any;
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!context?.user.firstName) {
@@ -25,7 +26,7 @@ const Update = ({ setUpdate }: { setUpdate: Function }) => {
       return;
     }
     try {
-      const res = await axios.put('http://localhost:7129/api/user/',
+       res = await axios.put('http://localhost:7129/api/user/',
         {
           firstName: firstNameRef.current?.value,
           lastName: lastNameRef.current?.value,
@@ -52,6 +53,7 @@ const Update = ({ setUpdate }: { setUpdate: Function }) => {
         alert('אין כזה משתמש');
       console.log(e);
     }
+    
   }
   return (<>
     <Modal open={open} onClose={() => setUpdate()}
