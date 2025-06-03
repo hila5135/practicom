@@ -6,8 +6,8 @@ using System.Web;
 
 namespace AudioLectures.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class S3Controller : ControllerBase
     {
         private readonly IS3Service _s3Service;
