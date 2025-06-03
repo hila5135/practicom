@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AudioLectures.Api.Controllers
 {
     [ApiController]
-    [Route("api/Lecturer")]
+    [Route("api/[controller]")]
     public class LecturerController : ControllerBase
     {
         private readonly ILecturerService _lecturerService;
