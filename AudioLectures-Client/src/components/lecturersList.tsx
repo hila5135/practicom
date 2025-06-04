@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const LecturersListPage: React.FC = () => {
   const [lecturers, setLecturers] = useState<Lecturer[]>([]);
-  const apiClient = new ApiClient("https://localhost:7129");
+  const apiClient = new ApiClient("https://audiolecturesserver.onrender.com");
 
   useEffect(() => {
     // שליפת המרצים מה-API
@@ -19,11 +19,8 @@ const LecturersListPage: React.FC = () => {
   }, []);
 
   return (
-    <Box sx={{ p: 4, direction: 'rtl' }}>
-      <Typography variant="h4" gutterBottom align="center">
-        רשימת המרצים
-      </Typography>
-
+    <Box sx={{ p: 4, direction: 'rtl' , margin: 7}} >
+     
       {lecturers.length === 0 ? (
         <Typography variant="h6" color="text.secondary" align="center">לא נמצאו מרצים</Typography>
       ) : (

@@ -187,7 +187,7 @@ const ChatComponent = () => {
 
     try {
       const response = await axios.post(
-        'https://localhost:7129/api/ChatApi/chat',
+        'https://audiolecturesserver.onrender.com/api/ChatApi/chat',
         userMessage,
         {
           headers: {

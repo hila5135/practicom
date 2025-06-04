@@ -26,7 +26,7 @@ const Update = ({ setUpdate }: { setUpdate: Function }) => {
       return;
     }
     try {
-       res = await axios.put('http://localhost:7129/api/user/',
+       res = await axios.put('https://audiolecturesserver.onrender.com/user',
         {
           firstName: firstNameRef.current?.value,
           lastName: lastNameRef.current?.value,

@@ -5,7 +5,7 @@ import { ApiClient } from "../api/client";
 type LessonProps = {
     lesson: Lesson;
 };
-const apiClient = new ApiClient("https://localhost:7129");
+const apiClient = new ApiClient("https://audiolecturesserver.onrender.com");
 const LessonItem = ({ lesson }: LessonProps) => {
     console.log("lesson url", lesson.lessonUrl);
     

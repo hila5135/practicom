@@ -11,7 +11,7 @@ import {
   Box,
 } from '@mui/material';
 
-const apiClient = new ApiClient("https://localhost:7129");
+const apiClient = new ApiClient("https://audiolecturesserver.onrender.com");
 
 const LecturerDetailsPage: React.FC = () => {
   const { lecturerId } = useParams<{ lecturerId: string }>();

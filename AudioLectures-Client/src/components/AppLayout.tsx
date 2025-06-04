@@ -3,6 +3,7 @@ import { Outlet } from "react-router"
 import {useReducer} from "react";
 import { UserContext } from "./userContext";
 import { User, userReducer } from "./user"
+import NavBar from "./NavBar";
 
 
 
@@ -21,8 +22,9 @@ const AppLayout = () => {
     return (
         <>
             <UserContext value={{ user, userDispatch }}>
+              
                   {/* <HomePage/> */}
-                {/* <NavBar /> */}
+                <NavBar />
                 <div></div>
                 <Outlet />
             </UserContext>

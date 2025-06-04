@@ -44,7 +44,7 @@ const Auth = ({ successLogin, typeAction, close }: { successLogin: Function; typ
 
   const handleSubmitLogin = async (e: FormEvent) => {
     e.preventDefault();
-    const apiClient = new ApiClient("https://localhost:7129");
+    const apiClient = new ApiClient("https://audiolecturesserver.onrender.com");
 
     try {
       let res: any;

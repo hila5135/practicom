@@ -6,7 +6,7 @@ import LessonSearch from "./lessonsSearch";
 import LessonsTitle from "./lessonsTitles";
 import { useNavigate } from "react-router-dom";
 
-const apiClient = new ApiClient("https://localhost:7129");
+const apiClient = new ApiClient("https://audiolecturesserver.onrender.com");
 
 function ActionsForUsers() {
     const [allLessons, setAllLessons] = useState<Lesson[]>([]);
@@ -102,7 +102,7 @@ return (
       <Typography
         variant="h4"
         gutterBottom
-        sx={{ fontWeight: "bold", textAlign: "center", mb: 4 }}
+        sx={{ fontWeight: "bold", textAlign: "center", mb: 4 , marginTop: 10, color: "#1976d2"}}
       >
         מערכת שיעורים
       </Typography>

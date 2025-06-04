@@ -10,7 +10,7 @@ type LessonsListProps = {
     isLoading: boolean;
 };
 
-const apiClient = new ApiClient("https://localhost:7129");
+const apiClient = new ApiClient("https://audiolecturesserver.onrender.com");
 const LessonsList = ({ lessons, isLoading }: LessonsListProps) => {
     const [currentAudio, setCurrentAudio] = useState<string | null>(null) // הוספת state לאודיו
    console.log(setCurrentAudio)
