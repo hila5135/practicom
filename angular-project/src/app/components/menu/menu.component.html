@@ -30,7 +30,7 @@
   </mat-sidenav-container>
    -->
 
-   <mat-sidenav-container class="sidenav-container" dir="rtl">
+   <!-- <mat-sidenav-container class="sidenav-container" dir="rtl">
     <mat-sidenav mode="side" opened position="start" class="sidenav">
       <mat-toolbar color="primary">ניהול מערכת</mat-toolbar>    <mat-nav-list>
       <a mat-list-item routerLink="/lecturersManagement" routerLinkActive="active">
@@ -52,6 +52,55 @@
     <mat-toolbar color="primary">
       <span>לוח ניהול</span>
     </mat-toolbar>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+
+<mat-sidenav-container class="sidenav-container" dir="rtl">
+  <mat-sidenav mode="side" opened position="start" class="sidenav" #sidenav>
+    <mat-toolbar color="primary">
+      <mat-icon style="margin-left: 10px;">admin_panel_settings</mat-icon>
+      ניהול מערכת
+    </mat-toolbar>
+    
+    <mat-nav-list>
+      <a mat-list-item routerLink="/lecturersManagement" routerLinkActive="active" class="ripple">
+        <mat-icon>record_voice_over</mat-icon>
+        <span>מרצים</span>
+      </a>
+      
+      <a mat-list-item routerLink="/usersManagement" routerLinkActive="active" class="ripple">
+        <mat-icon>people</mat-icon>
+        <span>משתמשים</span>
+      </a>
+      
+      <a mat-list-item routerLink="/lessonsManagement" routerLinkActive="active" class="ripple">
+        <mat-icon>library_books</mat-icon>
+        <span>שיעורים</span>
+      </a>
+      
+     
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="hide-desktop" (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>לוח ניהול</span>
+      <span style="flex: 1 1 auto;"></span>
+      <button mat-icon-button>
+        <mat-icon>notifications</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </mat-toolbar>
+    
     <div class="main-content">
       <router-outlet></router-outlet>
     </div>

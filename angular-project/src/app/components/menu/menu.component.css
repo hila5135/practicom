@@ -52,7 +52,7 @@
   
   .main-content {
     padding: 20px;
-    text-align: right; /* אם את רוצה שתוכן הטפסים וכו' יהיה מיושר לימין */
+    text-align: right;
   }
   
   mat-toolbar {

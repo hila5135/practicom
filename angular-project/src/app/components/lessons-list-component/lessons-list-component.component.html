@@ -1,4 +1,4 @@
-
+<!-- 
 
       <mat-card class="section-card">
         <mat-card-title>📤 העלאת קובץ</mat-card-title>
@@ -85,4 +85,144 @@
           </table>
         </mat-card-content>
       </mat-card>
+       -->
+
+       <mat-card class="section-card">
+        <mat-card-title>📤  העלאת קובץ שעור</mat-card-title>
+        <mat-card-content>
+          <button mat-raised-button color="primary" (click)="toggleUploadControls()" class="ripple">
+            <mat-icon style="margin-left: 8px;">cloud_upload</mat-icon>
+            בחר קובץ להעלאה
+          </button>
       
+          <div *ngIf="showUploadControls" class="upload-controls">
+            <div class="file-input-wrapper">
+              <input type="file" (change)="onFileSelected($event)" accept="*/*" />
+              <mat-icon class="upload-icon">attach_file</mat-icon>
+            </div>
+            
+            <button mat-flat-button color="accent" (click)="uploadFile()" class="ripple">
+              <mat-icon style="margin-left: 8px;">check_circle</mat-icon>
+              אישור העלאה
+            </button>
+          </div>
+      
+          <div *ngIf="isUploading" class="uploading-msg loading-spinner">
+            {{ uploadingMessage }}
+          </div>
+        </mat-card-content>
+      </mat-card>
+      
+      <mat-card class="section-card">
+        <mat-card-title>📝 הוספת שיעור</mat-card-title>
+        <mat-card-content>
+          <button mat-raised-button color="primary" (click)="toggleLessonForm()" class="ripple">
+            <mat-icon style="margin-left: 8px;">add_circle</mat-icon>
+            הוסף שיעור חדש
+          </button>
+      
+          <form *ngIf="showLessonForm" (ngSubmit)="addLesson()" class="lesson-form">
+            <mat-form-field appearance="outline">
+              <mat-label>שם שיעור</mat-label>
+              <input matInput [(ngModel)]="lessonPOST.lessonName" name="name" required />
+              <mat-icon matSuffix>title</mat-icon>
+            </mat-form-field>
+      
+            <mat-form-field appearance="outline">
+              <mat-label>נושא שיעור</mat-label>
+              <input matInput [(ngModel)]="lessonPOST.lessonTitle" name="title" required />
+              <mat-icon matSuffix>subject</mat-icon>
+            </mat-form-field>
+      
+            <mat-form-field appearance="outline">
+              <mat-label>משך שיעור (דקות)</mat-label>
+              <input matInput [(ngModel)]="lessonPOST.lessonDuration" name="duration" type="number" />
+              <mat-icon matSuffix>schedule</mat-icon>
+            </mat-form-field>
+      
+            <mat-form-field appearance="outline">
+              <mat-label>תאריך שיעור</mat-label>
+              <input matInput type="date" [(ngModel)]="lessonPOST.lessonReleaseDate" name="releaseDate" />
+              <mat-icon matSuffix>event</mat-icon>
+            </mat-form-field>
+      
+            <mat-form-field appearance="outline">
+              <mat-label>מזהה מרצה</mat-label>
+              <input matInput type="number" [(ngModel)]="lessonPOST.lessonLecturerId" name="lecturerId" />
+              <mat-icon matSuffix>person</mat-icon>
+            </mat-form-field>
+      
+            <mat-form-field appearance="outline">
+              <mat-label>כתובת קובץ</mat-label>
+              <input matInput [(ngModel)]="lessonPOST.lessonUrl" name="url" />
+              <mat-icon matSuffix>link</mat-icon>
+            </mat-form-field>
+      
+            <div class="form-actions">
+              <button mat-raised-button color="accent" type="submit" class="ripple">
+                <mat-icon style="margin-left: 8px;">save</mat-icon>
+                שמור שיעור
+              </button>
+              
+              <button mat-stroked-button type="button" (click)="toggleLessonForm()" class="cancel-btn">
+                <mat-icon style="margin-left: 8px;">cancel</mat-icon>
+                ביטול
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+      
+      <mat-card class="section-card">
+        <mat-card-title>📂 קבצים קיימים</mat-card-title>
+        <mat-card-content>
+          <div *ngIf="filesList.length === 0" class="empty-state">
+            <mat-icon>folder_open</mat-icon>
+            <p>אין קבצים להצגה</p>
+            <span>העלה קבצים כדי לראות אותם כאן</span>
+          </div>
+      
+          <table mat-table [dataSource]="filesList" class="mat-elevation-z2 full-width-table" *ngIf="filesList.length > 0">
+      
+            <ng-container matColumnDef="file">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon style="margin-left: 8px;">description</mat-icon>
+                שם קובץ
+              </th>
+              <td mat-cell *matCellDef="let file">
+                <div class="file-info">
+                  <mat-icon class="file-icon">insert_drive_file</mat-icon>
+                  <span>{{ file }}</span>
+                </div>
+              </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon style="margin-left: 8px;">settings</mat-icon>
+                פעולות
+              </th>
+              <td mat-cell *matCellDef="let file">
+                <div class="action-buttons">
+                  <button mat-icon-button color="primary" (click)="downloadFile(file)" 
+                          matTooltip="הורד קובץ" class="ripple">
+                    <mat-icon>download</mat-icon>
+                  </button>
+                  
+                  <button mat-icon-button color="warn" (click)="deleteFile(file)" 
+                          matTooltip="מחק קובץ" class="ripple">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                  
+                  <span *ngIf="downloadingFileName === file" class="download-msg loading-spinner">
+                    מוריד קובץ...
+                  </span>
+                </div>
+              </td>
+            </ng-container>
+      
+            <tr mat-header-row *matHeaderRowDef="['file', 'actions']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['file', 'actions']"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>

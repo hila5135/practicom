@@ -1,29 +1,306 @@
 .login-container {
-    width: 300px;
-    margin: 80px auto;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    background-color: #fafafa;
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  direction: rtl;
+  text-align: right;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* אפקט זכוכית מטושטשת */
+.login-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  z-index: -1;
+}
+
+/* כותרת */
+.login-title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: white;
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+}
+
+/* שדות הטופס */
+.full-width {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* עיצוב שדות Material - תמיד באותו צבע */
+::ng-deep .mat-form-field {
+  .mat-form-field-outline {
+    background: rgba(255, 255, 255, 0.2) !important;
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    transition: all 0.3s ease;
   }
   
-  .login-title {
-    text-align: center;
-    margin-bottom: 16px;
-    font-weight: 600;
-    color: #3f51b5;
+  .mat-form-field-outline-start,
+  .mat-form-field-outline-end {
+    border-radius: 12px;
+    border-color: rgba(255, 255, 255, 0.4) !important;
   }
   
-  .full-width {
-    width: 100%;
+  .mat-form-field-outline-thick {
+    border-color: rgba(255, 255, 255, 0.8) !important;
+    border-width: 2px;
   }
   
-  .error-message {
-    text-align: center;
-    color: red;
-    margin-top: 12px;
+  &.mat-focused .mat-form-field-outline {
+    background: rgba(255, 255, 255, 0.3) !important;
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.8) !important;
   }
   
+  .mat-form-field-label {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+  }
+  
+  &.mat-focused .mat-form-field-label {
+    color: white !important;
+  }
+  
+  .mat-input-element {
+    color: white !important;
+    font-size: 16px;
+    background: transparent !important;
+  }
+  
+  .mat-input-element::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+}
+
+/* הכפתור החדש והמדהים - הכי יוצא דופן שיש! */
+::ng-deep .mat-raised-button {
+  width: 100%;
+  height: 60px;
+  margin-top: 30px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+  background-size: 300% 300%;
+  color: white;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: none;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.2),
+    0 5px 15px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: gradientFlow 3s ease infinite;
+}
+
+/* אנימציה של הרקע הצבעוני */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* זוהר מסביב לכפתור */
+::ng-deep .mat-raised-button::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #ff6b6b);
+  background-size: 400% 400%;
+  border-radius: 23px;
+  z-index: -1;
+  animation: borderGlow 2s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+@keyframes borderGlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 400% 50%; }
+}
+
+/* אפקט ריפל פנימי מדהים */
+::ng-deep .mat-raised-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.8s ease, height 0.8s ease;
+  pointer-events: none;
+}
+
+/* טקסט מוצל בתוך הכפתור */
+::ng-deep .mat-button-wrapper {
+  position: relative;
+  z-index: 2;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* מצב hover מדהים */
+::ng-deep .mat-raised-button:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.3),
+    0 10px 20px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  animation-duration: 1.5s;
+}
+
+::ng-deep .mat-raised-button:hover::before {
+  opacity: 1;
+  animation-duration: 1s;
+}
+
+::ng-deep .mat-raised-button:hover::after {
+  width: 400px;
+  height: 400px;
+}
+
+/* מצב לחיצה מרשים */
+::ng-deep .mat-raised-button:active {
+  transform: translateY(-2px) scale(1.02);
+  transition: all 0.1s ease;
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.2),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* פוקוס מיוחד */
+::ng-deep .mat-raised-button:focus {
+  outline: none;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.2),
+    0 0 0 4px rgba(255, 255, 255, 0.3),
+    0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* הודעת שגיאה משופרת */
+.error-message {
+  margin-top: 20px;
+  padding: 15px 20px;
+  background: rgba(244, 67, 54, 0.2);
+  border: 1px solid rgba(244, 67, 54, 0.4);
+  border-radius: 12px;
+  color: #ff6b6b;
+  text-align: center;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  animation: shake 0.5s ease-in-out, fadeIn 0.3s ease;
+  box-shadow: 0 5px 15px rgba(244, 67, 54, 0.2);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* אנימציה של הופעה לקונטיינר */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* רקע אנימציה מדהים */
+body {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #667eea, #764ba2);
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* אפקט hover לקונטיינר */
+.login-container:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+/* אפקט פרטיקלים מרחפים */
+.login-container::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.2), transparent);
+  animation: sparkle 10s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes sparkle {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* אפקט מיקוד משופר בשדות */
+::ng-deep .mat-form-field:not(.mat-focused) .mat-input-element:focus {
+  animation: pulse 1.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6); }
+  50% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0.1); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
