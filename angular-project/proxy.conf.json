@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "https://localhost:7129",
+      "target": "https://audiolecturesserver.onrender.com",
       "secure": false,
       "changeOrigin": true
     }
