@@ -3,7 +3,7 @@
     "defaultVariables": null,
     "documentGenerator": {
       "fromDocument": {
-        "url": "https://audiolecturesserver.onrender.com/swagger/v1/swagger.json",
+        "url": "https://audiolecturesserver.onrender.com",
         "output": null
       }
     },

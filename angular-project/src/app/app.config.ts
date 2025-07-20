@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { API_BASE_URL } from './api/api-client';
+import { environment } from '../environments/environment.prod';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
@@ -13,6 +14,6 @@ export const appConfig: ApplicationConfig = {
       provideAnimationsAsync(),
        provideAnimationsAsync(),
         provideAnimationsAsync(),
-        { provide: API_BASE_URL, useValue: 'https://audiolecturesserver.onrender.com' }
+        { provide: API_BASE_URL, useValue: environment.apiUrl }
       ]
 };
