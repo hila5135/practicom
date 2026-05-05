@@ -54,16 +54,26 @@ export class UsersComponentComponent {
   //     }
   //   });
   // }
-  loadUsers(): void {
-    this.userClient.userAll(this.name, this.email, this.role).subscribe({
-      next: (data) => {
-        this.users = data;
-      },
-      error: (err) => {
-        console.error('Error loading users', err);
-      }
-    });
-  }
+//   loadUsers(): void {
+//   this.userClient.userAll(this.name, this.email, this.role).subscribe({
+//     next: (data) => {
+//       this.users = data;
+//     },
+//     error: (err) => {
+//       console.error('Error loading users', err);
+//     }
+//   });
+// }
+loadUsers(): void {
+  alert("BUTTON WORKS");
+
+  console.log("clicked");
+
+  this.userClient.userAll(this.name, this.email, this.role).subscribe({
+    next: (data) => this.users = data,
+    error: (err) => console.error(err)
+  });
+}
 
   addUser(): void {
     this.userClient.userPOST(this.newUser).subscribe({
