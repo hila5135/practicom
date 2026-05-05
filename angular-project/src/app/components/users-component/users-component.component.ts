@@ -30,7 +30,9 @@ export class UsersComponentComponent {
   editMode: number | null = null;
   editUserDetails: UserDTO = new UserDTO();
   displayedColumns: string[] = ['userName', 'userEmail', 'userRole', 'actions'];
-
+  name: string = '';
+  email: string = '';
+  role: string = '';
   constructor(private userClient: Client) {}
 
   ngOnInit(): void {

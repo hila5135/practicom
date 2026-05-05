@@ -59,6 +59,15 @@
 
  -->
 
+ <div style="display:flex; gap:10px; margin-bottom: 15px;">
+
+  <input placeholder="שם" [(ngModel)]="name" (input)="loadUsers()" />
+
+  <input placeholder="אימייל" [(ngModel)]="email" (input)="loadUsers()" />
+
+  <input placeholder="תפקיד" [(ngModel)]="role" (input)="loadUsers()" />
+
+</div>
  <mat-table [dataSource]="users" class="mat-elevation-z8">
 
   <!-- User Name Column -->
