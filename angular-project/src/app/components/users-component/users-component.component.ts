@@ -44,8 +44,18 @@ export class UsersComponentComponent {
     this.newUser = new UserDTO();
   }
 
+  // loadUsers(): void {
+  //   this.userClient.userAll().subscribe({
+  //     next: (data) => {
+  //       this.users = data;
+  //     },
+  //     error: (err) => {
+  //       console.error('Error loading users', err);
+  //     }
+  //   });
+  // }
   loadUsers(): void {
-    this.userClient.userAll().subscribe({
+    this.userClient.userAll(this.name, this.email, this.role).subscribe({
       next: (data) => {
         this.users = data;
       },

@@ -3588,8 +3588,29 @@ protected processLecturerAll(response: HttpResponseBase): Observable<Lecturer[]>
     //     return _observableOf<User[]>(null as any);
     // }
 
-    userAll(): Observable<User[]> {
-        const url = this.baseUrl + "/api/User";
+    // userAll(): Observable<User[]> {
+    //     const url = this.baseUrl + "/api/User";
+    
+    //     return this.http.get<User[]>(url).pipe(
+    //         catchError((error: any) => {
+    //             console.error("Error fetching users", error);
+    //             return throwError(() => new Error("Failed to load users"));
+    //         })
+    //     );
+    // }
+    userAll(name?: string, email?: string, role?: string): Observable<User[]> {
+        let url = this.baseUrl + "/api/User?";
+    
+        if (name)
+            url += "name=" + encodeURIComponent(name) + "&";
+    
+        if (email)
+            url += "email=" + encodeURIComponent(email) + "&";
+    
+        if (role)
+            url += "role=" + encodeURIComponent(role) + "&";
+    
+        url = url.replace(/[?&]$/, "");
     
         return this.http.get<User[]>(url).pipe(
             catchError((error: any) => {
@@ -3597,8 +3618,8 @@ protected processLecturerAll(response: HttpResponseBase): Observable<Lecturer[]>
                 return throwError(() => new Error("Failed to load users"));
             })
         );
-    }
-    
+    }  
+  
      protected processUserAll(response: HttpResponseBase): Observable<User[]> {
         const status = response.status;
         const responseBlob =
