@@ -39,6 +39,8 @@ namespace AudioLectures.Data.Repositories
                 query = query.Where(u => u.UserRole.Contains(role));
             }
             Console.WriteLine($"name={name}, email={email}, role={role}");
+            Console.WriteLine(">>> QUERY BEFORE EXECUTION");
+            Console.WriteLine(query.ToQueryString());
             return await query.ToListAsync();
         }
 
