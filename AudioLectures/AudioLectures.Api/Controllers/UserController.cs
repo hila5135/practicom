@@ -19,16 +19,17 @@ namespace AudioLectures.Api.Controllers
             _userService = userService;
         }
         //[Authorize(policy:"AdminOnly")]
-        [HttpGet]
         //public async Task<IEnumerable<User>> GetAll()
         //{
         //    return await _userService.GetAllUsersAsync();
         //}
+        [HttpGet]
         public async Task<IEnumerable<User>> GetAll([FromQuery] string? name,
             [FromQuery] string? email,
             [FromQuery] string? role)
         {
-            return await _userService.GetAllUsersAsync(name, email, role);
+            //return await _userService.GetAllUsersAsync(name, email, role);
+            throw new Exception("HIT CONTROLLER");
         }
 
         [HttpGet("{id}")]
