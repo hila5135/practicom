@@ -28,8 +28,7 @@ namespace AudioLectures.Api.Controllers
             [FromQuery] string? email,
             [FromQuery] string? role)
         {
-            //return await _userService.GetAllUsersAsync(name, email, role);
-            throw new Exception("HIT CONTROLLER");
+            return await _userService.GetAllUsersAsync(name, email, role); 
         }
 
         [HttpGet("{id}")]
