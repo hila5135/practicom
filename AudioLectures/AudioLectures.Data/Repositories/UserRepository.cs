@@ -20,8 +20,8 @@ namespace AudioLectures.Data.Repositories
 
         public async Task<IEnumerable<User>> GetAllAsync(string? name, string? email, string? role)
         {
-            Console.WriteLine($"name={name}, email={email}, role={role}");
-
+            Console.WriteLine(">>> REPOSITORY HIT");
+            Console.WriteLine($"name={name}");
             var query = _context.Users.Include(u => u.UserLessons).AsQueryable();
 
             if (!string.IsNullOrEmpty(name))
