@@ -20,6 +20,8 @@ namespace AudioLectures.Data.Repositories
 
         public async Task<IEnumerable<User>> GetAllAsync(string? name, string? email, string? role)
         {
+            Console.WriteLine($"name={name}, email={email}, role={role}");
+
             var query = _context.Users.Include(u => u.UserLessons).AsQueryable();
 
             if (!string.IsNullOrEmpty(name))
@@ -36,7 +38,7 @@ namespace AudioLectures.Data.Repositories
             {
                 query = query.Where(u => u.UserRole.Contains(role));
             }
-
+            Console.WriteLine($"name={name}, email={email}, role={role}");
             return await query.ToListAsync();
         }
 

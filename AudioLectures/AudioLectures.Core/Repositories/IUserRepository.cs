@@ -9,7 +9,7 @@ namespace AudioLectures.Core.Repositories
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> GetAllAsync();
+        Task<IEnumerable<User>> GetAllAsync(string? name, string? email, string? role);
         Task<User> GetByIdAsync(int id);
         Task<User> AddAsync(User user);
         Task<User> UpdateAsync(int id,User user);
