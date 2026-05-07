@@ -20,9 +20,15 @@ namespace AudioLectures.Api.Controllers
         }
         //[Authorize(policy:"AdminOnly")]
         [HttpGet]
-        public async Task<IEnumerable<User>> GetAll()
+        //public async Task<IEnumerable<User>> GetAll()
+        //{
+        //    return await _userService.GetAllUsersAsync();
+        //}
+        public async Task<IEnumerable<User>> GetAll([FromQuery] string? name,
+            [FromQuery] string? email,
+            [FromQuery] string? role)
         {
-            return await _userService.GetAllUsersAsync();
+            return await _userService.GetAllUsersAsync(name, email, role);
         }
 
         [HttpGet("{id}")]
