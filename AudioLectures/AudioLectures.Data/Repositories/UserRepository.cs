@@ -18,9 +18,26 @@ namespace AudioLectures.Data.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public async Task<IEnumerable<User>> GetAllAsync(string? name, string? email, string? role)
         {
-            return await _context.Users.Include(u=>u.UserLessons).ToListAsync();
+            var query = _context.Users.Include(u => u.UserLessons).AsQueryable();
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(u => u.UserName.Contains(name));
+            }
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                query = query.Where(u => u.UserEmail.Contains(email));
+            }
+
+            if (!string.IsNullOrEmpty(role))
+            {
+                query = query.Where(u => u.UserRole.Contains(role));
+            }
+
+            return await query.ToListAsync();
         }
 
         public async Task<User?> GetByIdAsync(int id)
