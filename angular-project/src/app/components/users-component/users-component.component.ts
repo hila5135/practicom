@@ -78,7 +78,7 @@ loadUsers(): void {
   addUser(): void {
     this.userClient.userPOST(this.newUser).subscribe({
       next: (user) => {
-        this.users.push(user);
+        this.users.push(user);    
         this.newUser = new UserDTO();
         this.isAddingNewUser = false; // אפשר גם להסתיר את הטופס אחרי הוספה
       },
