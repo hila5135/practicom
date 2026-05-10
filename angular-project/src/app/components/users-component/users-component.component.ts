@@ -71,11 +71,24 @@ export class UsersComponentComponent {
 //   });
 // }
 
+// searchUsers(): void {
+//   console.log('Searching users with:', this.name, this.email, this.role);
+//   this.userClient.userAll(this.name, this.email, this.role)
+//     .subscribe({
+//       next: (data) => this.users = data,
+//       error: (err) => console.error(err)
+//     });
+
+// }
 searchUsers(): void {
   console.log('Searching users with:', this.name, this.email, this.role);
+
   this.userClient.userAll(this.name, this.email, this.role)
     .subscribe({
-      next: (data) => this.users = data,
+      next: (data) => {
+        console.log("RESULT FROM SERVER:", data);
+        this.users = data;
+      },
       error: (err) => console.error(err)
     });
 }
