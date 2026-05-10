@@ -28,7 +28,7 @@ namespace AudioLectures.Api.Controllers
             [FromQuery] string? email,
             [FromQuery] string? role)
         {
-            return await _userService.GetAllUsersAsync(name, email, role); 
+            return await _userService.GetAllAsync(name, email, role); 
         }
 
         [HttpGet("{id}")]

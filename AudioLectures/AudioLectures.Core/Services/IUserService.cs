@@ -10,7 +10,7 @@ namespace AudioLectures.Core.Services
 {
     public interface IUserService
     {
-       public Task<IEnumerable<User>> GetAllUsersAsync(string? name, string? email, string? role);
+       public Task<IEnumerable<User>> GetAllAsync(string? name, string? email, string? role);
        public  Task<User> GetUserByIdAsync(int id);
        public  Task<User> AddUserAsync(UserDTO user);
        public  Task<User> UpdateUserAsync(int id,UserDTO user);

@@ -22,7 +22,7 @@ namespace AudioLectures.Service
       _userRepository = userRepository;
       _mapper = mapper;
     }
-    public async Task<IEnumerable<User>> GetAllUsersAsync(string? name, string? email, string? role) => await _userRepository.GetAllAsync(name, email,role);
+    public async Task<IEnumerable<User>> GetAllAsync(string? name, string? email, string? role) => await _userRepository.GetAllAsync(name, email,role);
     public async Task<User> GetUserByIdAsync(int id) => await _userRepository.GetByIdAsync(id);
     public async Task<User> AddUserAsync(UserDTO user)
     {
