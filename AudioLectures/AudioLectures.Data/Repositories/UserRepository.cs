@@ -27,7 +27,7 @@ namespace AudioLectures.Data.Repositories
             if (!string.IsNullOrWhiteSpace(name))
             {
                 name = name.Trim();
-                query = query.Where(u => u.UserName==name);
+                query = query.Where(u => u.UserName.Contains(name));
             }
 
             if (!string.IsNullOrWhiteSpace(email))

@@ -21,7 +21,7 @@ import { MatTableModule } from '@angular/material/table';
     MatSidenavModule,
   ],
   templateUrl: './users-component.component.html',
-  styleUrls: ['./users-component.component.css']  // תוקן כאן
+  styleUrls: ['./users-component.component.css']  
 })
 export class UsersComponentComponent {
   isAddingNewUser = false; 
