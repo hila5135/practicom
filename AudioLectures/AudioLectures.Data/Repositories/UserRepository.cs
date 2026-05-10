@@ -20,6 +20,7 @@ namespace AudioLectures.Data.Repositories
 
         public async Task<IEnumerable<User>> GetAllAsync(string? name, string? email, string? role)
         {
+            Console.WriteLine(">>> FILTERED REPOSITORY HIT");
             Console.WriteLine($"RAW name = '{name}'");
             Console.WriteLine($"length = {name?.Length}");
             var query = _context.Users.Include(u => u.UserLessons).AsQueryable();
