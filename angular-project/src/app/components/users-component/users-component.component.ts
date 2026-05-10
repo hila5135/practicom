@@ -44,16 +44,16 @@ export class UsersComponentComponent {
     this.newUser = new UserDTO();
   }
 
-  // loadUsers(): void {
-  //   this.userClient.userAll().subscribe({
-  //     next: (data) => {
-  //       this.users = data;
-  //     },
-  //     error: (err) => {
-  //       console.error('Error loading users', err);
-  //     }
-  //   });
-  // }
+  loadUsers(): void {
+    this.userClient.userAll().subscribe({
+      next: (data) => {
+        this.users = data;
+      },
+      error: (err) => {
+        console.error('Error loading users', err);
+      }
+    });
+  }
 //   loadUsers(): void {
 //   this.userClient.userAll(this.name, this.email, this.role).subscribe({
 //     next: (data) => {
@@ -64,17 +64,14 @@ export class UsersComponentComponent {
 //     }
 //   });
 // }
-loadUsers(): void {
-  alert("BUTTON WORKS");
 
-  console.log("clicked");
-
-  this.userClient.userAll(this.name, this.email, this.role).subscribe({
-    next: (data) => this.users = data,
-    error: (err) => console.error(err)
-  });
+searchUsers(): void {
+  this.userClient.userAll(this.name, this.email, this.role)
+    .subscribe({
+      next: (data) => this.users = data,
+      error: (err) => console.error(err)
+    });
 }
-
   addUser(): void {
     this.userClient.userPOST(this.newUser).subscribe({
       next: (user) => {
@@ -114,7 +111,7 @@ loadUsers(): void {
   }
 
   deleteUser(id: number): void {
-    if (confirm('את בטוחה שברצונך למחוק משתמש זה?')) {
+    if (confirm('האם אתה בטוח שברצונך למחוק משתמש זה?')) {
       this.userClient.userDELETE(id).subscribe(() => {
         this.loadUsers();
       });
