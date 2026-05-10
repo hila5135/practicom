@@ -36,6 +36,7 @@ export class UsersComponentComponent {
   constructor(private userClient: Client) {}
 
   ngOnInit(): void {
+    console.log("Users component INIT");
     this.loadUsers();
   }
  
@@ -45,24 +46,20 @@ export class UsersComponentComponent {
     this.newUser = new UserDTO();
   }
 
+ 
   loadUsers(): void {
-  console.log("CLICK");
-  console.log("name =", this.name);
-  console.log("email =", this.email);
-  console.log("role =", this.role);
-}
-//   loadUsers(): void {
-// console.log("NAME:", this.name);
-// console.log("EMAIL:", this.email);
-// console.log("ROLE:", this.role);    this.userClient.userAll().subscribe({
-//       next: (data) => {
-//         this.users = data;
-//       },
-//       error: (err) => {
-//         console.error('Error loading users', err);
-//       }
-//     });
-//   }
+      console.log("NAME:", this.name);
+      console.log("EMAIL:", this.email);
+      console.log("ROLE:", this.role);  
+      this.userClient.userAll().subscribe({
+      next: (data) => {
+        this.users = data;
+      },
+      error: (err) => {
+        console.error('Error loading users', err);
+      }
+    });
+  }
 //   loadUsers(): void {
 //   this.userClient.userAll(this.name, this.email, this.role).subscribe({
 //     next: (data) => {

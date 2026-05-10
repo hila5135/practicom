@@ -11,9 +11,7 @@ export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
      provideRouter(routes),
      provideHttpClient(),
-      provideAnimationsAsync(),
-       provideAnimationsAsync(),
-        provideAnimationsAsync(),
+      provideAnimationsAsync(),  
         { provide: API_BASE_URL, useValue: environment.apiUrl }
       ]
 };
