@@ -12,11 +12,13 @@ namespace AudioLectures.Data.Repositories
     public class UserRepository :IUserRepository    
     {
         private readonly DataContext _context;
-
+       
         public UserRepository(DataContext context)
         {
             _context = context;
+            Console.WriteLine(">>> USER REPOSITORY CREATED");
         }
+
 
         public async Task<IEnumerable<User>> GetAllAsync(string? name, string? email, string? role)
         {
