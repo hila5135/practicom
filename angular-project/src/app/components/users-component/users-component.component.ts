@@ -66,6 +66,7 @@ export class UsersComponentComponent {
 // }
 
 searchUsers(): void {
+  console.log('Searching users with:', this.name, this.email, this.role);
   this.userClient.userAll(this.name, this.email, this.role)
     .subscribe({
       next: (data) => this.users = data,
