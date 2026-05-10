@@ -21,9 +21,18 @@ namespace AudioLectures.Service
     {
       _userRepository = userRepository;
       _mapper = mapper;
-    }
-    public async Task<IEnumerable<User>> GetAllAsync(string? name, string? email, string? role) => await _userRepository.GetAllAsync(name, email,role);
-    public async Task<User> GetUserByIdAsync(int id) => await _userRepository.GetByIdAsync(id);
+            Console.WriteLine(">>> USER SERVICE CREATED");
+        }
+        //public async Task<IEnumerable<User>> GetAllAsync(string? name, string? email, string? role) =>
+        //        await _userRepository.GetAllAsync(name, email,role);
+        public async Task<IEnumerable<User>> GetAllAsync(string? name, string? email, string? role)
+        {
+            Console.WriteLine(">>> USER SERVICE HIT");
+            Console.WriteLine($"SERVICE name={name}, email={email}, role={role}");
+
+            return await _userRepository.GetAllAsync(name, email, role);
+        }
+        public async Task<User> GetUserByIdAsync(int id) => await _userRepository.GetByIdAsync(id);
     public async Task<User> AddUserAsync(UserDTO user)
     {
       var userMap = _mapper.Map<User>(user);

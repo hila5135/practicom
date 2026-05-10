@@ -17,6 +17,7 @@ namespace AudioLectures.Data.Repositories
         {
             _context = context;
             Console.WriteLine(">>> USER REPOSITORY CREATED");
+            Console.WriteLine($"DbContext Hash: {context.GetHashCode()}");
         }
 
 
