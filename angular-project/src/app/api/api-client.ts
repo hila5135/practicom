@@ -3598,27 +3598,47 @@ protected processLecturerAll(response: HttpResponseBase): Observable<Lecturer[]>
     //         })
     //     );
     // }
+    // userAll(name?: string, email?: string, role?: string): Observable<User[]> {
+    //     let url = this.baseUrl + "/api/User?";
+    
+    //     if (name)
+    //         url += "name=" + encodeURIComponent(name) + "&";
+    
+    //     if (email)
+    //         url += "email=" + encodeURIComponent(email) + "&";
+    
+    //     if (role)
+    //         url += "role=" + encodeURIComponent(role) + "&";
+    
+    //     url = url.replace(/[?&]$/, "");
+    
+    //     return this.http.get<User[]>(url).pipe(
+    //         catchError((error: any) => {
+    //             console.error("Error fetching users", error);
+    //             return throwError(() => new Error("Failed to load users"));
+    //         })
+    //     );
+    // } 
     userAll(name?: string, email?: string, role?: string): Observable<User[]> {
-        let url = this.baseUrl + "/api/User?";
-    
-        if (name)
-            url += "name=" + encodeURIComponent(name) + "&";
-    
-        if (email)
-            url += "email=" + encodeURIComponent(email) + "&";
-    
-        if (role)
-            url += "role=" + encodeURIComponent(role) + "&";
-    
-        url = url.replace(/[?&]$/, "");
-    
-        return this.http.get<User[]>(url).pipe(
-            catchError((error: any) => {
-                console.error("Error fetching users", error);
-                return throwError(() => new Error("Failed to load users"));
-            })
-        );
-    }  
+    let url = this.baseUrl + "/api/User?";
+
+    const n = name?.trim();
+    const e = email?.trim();
+    const r = role?.trim();
+
+    if (n)
+        url += "name=" + encodeURIComponent(n) + "&";
+
+    if (e)
+        url += "email=" + encodeURIComponent(e) + "&";
+
+    if (r)
+        url += "role=" + encodeURIComponent(r) + "&";
+
+    url = url.replace(/[?&]$/, "");
+
+    return this.http.get<User[]>(url);
+} 
   
      protected processUserAll(response: HttpResponseBase): Observable<User[]> {
         const status = response.status;
