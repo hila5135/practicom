@@ -28,7 +28,9 @@ namespace AudioLectures.Api.Controllers
             [FromQuery] string? email,
             [FromQuery] string? role)
         {
-            return await _userService.GetAllAsync(name, email, role); 
+            Console.WriteLine($"CONTROLLER name={name}, email={email}, role={role}");
+            return await _userService.GetAllAsync(name, email, role);
+            
         }
 
         [HttpGet("{id}")]
