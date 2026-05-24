@@ -24,7 +24,7 @@ namespace AudioLectures.Api.Controllers
             [FromQuery] string? role)
         {
             Console.WriteLine(">>> CONTROLLER DIRECT HIT DB TEST");
-            var test = await _userService.GetAllAsync(null, null, null);
+            var test = await _userService.GetAllAsync(name, email, role);
             Console.WriteLine($"RESULT COUNT: {test.Count()}");
 
             return test;
