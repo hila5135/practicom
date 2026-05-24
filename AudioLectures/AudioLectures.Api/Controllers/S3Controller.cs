@@ -30,40 +30,23 @@ namespace AudioLectures.Api.Controllers
             return Ok(new { Url = url });
         }
 
-        //[HttpGet("download/{fileName}")]
-        //public async Task<IActionResult> DownloadFile(string fileName)
-        //{
-        //    // דקוד את שם הקובץ (במקרה וכולל תווים מיוחדים)
-        //    string decodedFileName = HttpUtility.UrlDecode(fileName);
-
-        //    // הורד את הקובץ מה-S3 באמצעות השם המפוענח
-        //    var stream = await _s3Service.DownloadFileAsync(decodedFileName);
-
-        //    // החזר את הקובץ ללקוח
-        //    return File(stream, "application/octet-stream", decodedFileName);
-        //}
         [HttpGet("download/{fileName}")]
         public async Task<IActionResult> DownloadFile(string fileName)
         {
-            // דקוד את שם הקובץ (במקרה וכולל תווים מיוחדים)
+           
             string decodedFileName = HttpUtility.UrlDecode(fileName);
 
-            // הורד את הקובץ מה-S3
             var stream = await _s3Service.DownloadFileAsync(decodedFileName);
 
-            // הגדרת Content-Disposition בצורה נכונה
             var contentDisposition = new System.Net.Mime.ContentDisposition
             {
-                FileName = decodedFileName, // שם הקובץ עם הסיומת
-                Inline = false // זה אומר שזה קובץ להורדה ולא להציג בדפדפן
+                FileName = decodedFileName, 
+                Inline = false 
             };
 
-            // החזר את הקובץ עם הסיומת הנכונה
             Response.Headers.Add("Content-Disposition", contentDisposition.ToString());
             return File(stream, "application/octet-stream");
         }
-
-
 
         [HttpGet("files")]
         public async Task<IActionResult> ListFiles()

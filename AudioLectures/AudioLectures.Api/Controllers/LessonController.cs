@@ -50,14 +50,12 @@ namespace AudioLectures.Api.Controllers
             return lesson;
         }
 
-        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Lesson>> Add([FromBody] LessonDTO lesson)
         {
             Lesson l = await _lessonService.AddLessonAsync(lesson);
             return Ok(l);
         }
-        //[Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] LessonDTO lesson)
         {
@@ -69,7 +67,6 @@ namespace AudioLectures.Api.Controllers
             return Ok(l);
         }
 
-        //[Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

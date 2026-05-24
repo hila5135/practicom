@@ -18,22 +18,13 @@ namespace AudioLectures.Api.Controllers
         {
             _userService = userService;
         }
-        //[Authorize(policy:"AdminOnly")]
-        //public async Task<IEnumerable<User>> GetAll()
-        //{
-        //    return await _userService.GetAllUsersAsync();
-        //}
         [HttpGet]
         public async Task<IEnumerable<User>> GetAll([FromQuery] string? name,
             [FromQuery] string? email,
             [FromQuery] string? role)
         {
-            //Console.WriteLine($"CONTROLLER name={name}, email={email}, role={role}");
-            //return await _userService.GetAllAsync(name, email, role);
             Console.WriteLine(">>> CONTROLLER DIRECT HIT DB TEST");
-
             var test = await _userService.GetAllAsync(null, null, null);
-
             Console.WriteLine($"RESULT COUNT: {test.Count()}");
 
             return test;
@@ -64,7 +55,6 @@ namespace AudioLectures.Api.Controllers
             }
             return Ok(u);
         }
-        //[Authorize(policy:"EditorOrAdmin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

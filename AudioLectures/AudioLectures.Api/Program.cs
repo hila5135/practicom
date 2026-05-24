@@ -174,7 +174,8 @@ app.Use(async (context, next) =>
     await next.Invoke();
 });
 
-app.MapGet("/", () => "Welcome to Audio Lectures API!");
+//app.MapGet("/", () => "Welcome to Audio Lectures API!");
+app.MapGet("/version", () => "NEW VERSION 123");
 app.Run();
 
 

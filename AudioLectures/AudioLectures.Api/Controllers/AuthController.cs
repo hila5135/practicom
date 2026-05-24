@@ -43,13 +43,12 @@ public class AuthController : ControllerBase
             return BadRequest("User already exists");
         }
 
-        // קביעת תפקיד – נניח שכל משתמש חדש יהיה "User" כברירת מחדל
         var newUser = new User
         {
             UserName = model.UserName,
             UserPassword = model.UserPassword,
-            UserEmail = model.UserEmail,// כדאי להצפין סיסמאות
-            UserRole = "User" // ברירת מחדל
+            UserEmail = model.UserEmail,
+            UserRole = "User" 
         };
 
         await _userRepository.AddAsync(newUser);
