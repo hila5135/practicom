@@ -1,9 +1,99 @@
 mat-header-cell {
     font-weight: bold;
     font-size: large;
-    /* color: #3f51b5; */
+   
   }
   .action-icon {
-    margin-left: 8px; /* או margin-right בהתאם לכיוון */
+    margin-left: 8px; 
   }
-  
+  .loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  padding: 40px;
+  background: #f9fafb;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+/* הטקסט עצמו */
+.loading-text {
+  text-align: center;
+  max-width: 400px;
+  padding: 25px 30px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* כותרת */
+.loading-text h3 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  letter-spacing: 0.3px;
+}
+
+.loading-text p {
+  margin: 0;
+  font-size: 14.5px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+.loading-screen {
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* עיגול מתקדם בסגנון Google/Figma */
+.loader {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid #6366f1;
+  border-right: 3px solid #06b6d4;
+  animation: spin 0.9s linear infinite;
+  position: relative;
+}
+
+/* אפקט עדין פנימי */
+.loader::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: #a5b4fc;
+  animation: spin 1.4s linear infinite reverse;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* טקסט */
+.loading-text {
+  text-align: center;
+}
+
+.loading-text h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: 0.2px;
+}
+
+.loading-text p {
+  margin: 4px 0 0;
+  font-size: 13.5px;
+  color: #6b7280;
+}

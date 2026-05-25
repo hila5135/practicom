@@ -9,8 +9,8 @@ type LessonsListProps = {
     lessons: Lesson[];
     isLoading: boolean;
 };
-
 const apiClient = new ApiClient("https://audiolecturesserver.onrender.com");
+// const apiClient = new ApiClient("https://audiolecturesserver.onrender.com");
 const LessonsList = ({ lessons, isLoading }: LessonsListProps) => {
     const [currentAudio, setCurrentAudio] = useState<string | null>(null) // הוספת state לאודיו
    console.log(setCurrentAudio)
@@ -421,7 +421,7 @@ const [showTitles, setShowTitles] = useState(false);
     <div style={styles.header}>
       <h1 style={styles.title}>כל השיעורים</h1>
       <p style={styles.subtitle}>גלה ולמד מאלפי שיעורים איכותיים</p>
-
+{/* 
       <button
         style={styles.aiButton}
         onClick={() => navigate("/chat")}
@@ -436,7 +436,7 @@ const [showTitles, setShowTitles] = useState(false);
       >
         <MessageCircle size={20} />
         <span>יש לך שאלה? שאל את הבוט החכם</span>
-      </button>
+      </button> */}
     </div>
 
     <div style={styles.divider}></div>

@@ -40,7 +40,7 @@
   }
    */
    
-
+/* 
    .sidenav-container {
     height: 100vh;
     direction: rtl;
@@ -52,7 +52,7 @@
   
   .main-content {
     padding: 20px;
-    text-align: right; /* אם את רוצה שתוכן הטפסים וכו' יהיה מיושר לימין */
+    text-align: right; 
   }
   
   mat-toolbar {
@@ -81,4 +81,68 @@ text-align: right;;
       display: inline-flex;
     }
   }
-  
+   */
+
+.sidenav-container {
+  height: 100vh;
+  direction: rtl;
+  background-color: #f4f7fb;
+}
+
+.sidenav {
+  width: 260px;
+  color: white;
+  border-left: none;
+  box-shadow: 0 0 15px rgba(0,0,0,0.08);
+}
+
+.main-content {
+  padding: 30px;
+  background-color: #f8fbff;
+  min-height: 100vh;
+}
+
+mat-toolbar {
+  background: rgb(47, 64, 147) !important;
+  color: #dee9fb;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.active {
+  background-color: rgba(255,255,255,0.15) !important;
+  border-radius: 12px;
+}
+
+mat-nav-list a {
+  color: white !important;
+  margin: 6px 12px;
+  border-radius: 12px;
+  transition: 0.2s;
+}
+
+mat-nav-list a:hover {
+  background-color: rgba(255,255,255,0.12);
+}
+
+mat-icon {
+  margin-left: 10px;
+}
+
+.hide-desktop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidenav {
+    width: 220px;
+  }
+
+  .hide-desktop {
+    display: inline-flex;
+  }
+
+  .main-content {
+    padding: 16px;
+  }
+}   

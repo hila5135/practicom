@@ -56,7 +56,16 @@
           </form>
         </mat-card-content>
       </mat-card>
-      
+      <div *ngIf="isLoading" class="loading-screen">
+
+  <div class="loader"></div>
+
+  <div class="loading-text">
+    <h3>טוען נתונים</h3>
+    <p>אנא המתן, המערכת מכינה את המידע...</p>
+  </div>
+</div>
+
       <mat-card class="section-card">
         <mat-card-title>📂 קבצים קיימים</mat-card-title>
         <mat-card-content>

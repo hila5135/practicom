@@ -27,6 +27,7 @@ export class LecturerComponent implements OnInit {
   newLecturer: LecturerDTO = new LecturerDTO();
   editMode: number | null = null; // מחזיק את ה-id של המרצה שנמצא בעריכה
   editLecturer: LecturerDTO = new LecturerDTO();
+  isLoading = true;
 
   constructor(private client: Client) {}
 
@@ -35,9 +36,12 @@ export class LecturerComponent implements OnInit {
   }
 
   getLecturers(): void {
+      this.isLoading = true;
     this.client.lecturerAll().subscribe({
       next: (res: Lecturer[]) => {
+      
         this.lecturers = res;
+        this.isLoading = false;
       },
       error: (err: HttpErrorResponse) => {
         alert('שגיאה בטעינת מרצים: ' + err.message);

@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 })
 export class LessonsListComponentComponent implements OnInit {
   lessonPOST: Lesson = new Lesson();
+    isLoading = true;
   selectedFile: File | null = null;
   filesList: string[] = [];
   // isDownloading = false;
@@ -117,11 +118,16 @@ export class LessonsListComponentComponent implements OnInit {
   }
   
   getFiles() {
+    this.isLoading = true;
     this.client.files().subscribe({
       next: (files: string[]) => {
         this.filesList = files;
+        this.isLoading = false;
       },
-      error: (err: HttpErrorResponse) => alert('שגיאה בטעינת קבצים: ' + err.message)
+      error: (err: HttpErrorResponse) => {
+        this.isLoading = false;
+        alert('שגיאה בטעינת קבצים: ' + err.message);
+      }
     });
   }
   showLessonForm = false;

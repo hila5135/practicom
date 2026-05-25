@@ -50,8 +50,19 @@
 </mat-card>
 
 <mat-card>
+  <div *ngIf="isLoading" class="loading-screen">
+
+  <div class="loader"></div>
+
+  <div class="loading-text">
+    <h3>טוען נתונים</h3>
+    <p>אנא המתן, המערכת מכינה את המידע...</p>
+  </div>
+
+</div>
+  <div *ngIf="!isLoading">
   <mat-card-title>📚 רשימת מרצים</mat-card-title>
-  <mat-list *ngIf="lecturers.length; else noLecturers">
+  <mat-list>
     <mat-list-item *ngFor="let lecturer of lecturers" class="lecturer-item">
       <div *ngIf="editMode !== lecturer.lecturerId; else editForm" class="lecturer-display">
         <strong>{{ lecturer.lecturerName }}</strong> | מזהה: {{ lecturer.lecturerId }}
@@ -61,18 +72,6 @@
         <button mat-icon-button color="warn" (click)="deleteLecturer(lecturer.lecturerId!)">
           <mat-icon>delete</mat-icon>
         </button>
-
-        <!-- <div class="lessons">   <div class="lessons-scroll">
-          📝 שיעורים:
-       
-          <ul *ngIf="lecturer.lecturerLessons?.length; else noLessons">
-            <li *ngFor="let lesson of lecturer.lecturerLessons">
-              {{ lesson.lessonName }}
-            </li>
-          </ul>
-        </div> -->
-        <!-- </div> -->
-        <ng-template #noLessons>אין שיעורים</ng-template>
       </div>
       
 
@@ -92,5 +91,5 @@
       </ng-template>
     </mat-list-item>
   </mat-list>
-  <ng-template #noLecturers>אין מרצים להצגה</ng-template>
+</div>
 </mat-card>

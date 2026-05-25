@@ -21,7 +21,8 @@ export default function HomePage() {
     const [type, setType] = useState('Login');
            const handleLoginSuccess = () => {
             setIsLogin((prev) => {
-                if (!prev) setIsLoginOpen(false);
+                if (!prev) setIsLoginOpen(true);
+                // if (!prev) setIsLoginOpen(false);
                 return !prev;
             });
             navigate('/navBar'); // Redirect to home page after login
@@ -298,7 +299,7 @@ export default function HomePage() {
               <h1 style={styles.heroTitle} className="hero-title">
                 מערכת שיעורים
                 <br />
-                <span style={styles.heroTitleAccent}>חכמה ומבוססת AI</span>
+                <span style={styles.heroTitleAccent}>Cloud Lectures</span>
               </h1>
               <p style={styles.heroDescription}>
                 מצא את השיעור המושלם עבורך עם מערכת החיפוש המתקדמת שלנו. אלפי שיעורים ממרצים מובילים במקום אחד.
@@ -431,8 +432,8 @@ export default function HomePage() {
                   <circle cx="12" cy="7" r="4" stroke="currentColor" strokeWidth="2" />
                 </svg>
               </div>
-              <h3 style={styles.featureTitle}>ניהול תלמידים</h3>
-              <p style={styles.featureDescription}>עקוב אחר התקדמות התלמידים שלך ונהל את כל המידע במקום אחד.</p>
+              <h3 style={styles.featureTitle}>פורטל מרצים</h3>
+              <p style={styles.featureDescription}>עקוב אחר המרצים והשיעורים השיכים להם</p>
             </div>
 
             <div
@@ -447,7 +448,7 @@ export default function HomePage() {
               }}
             >
               <div style={styles.featureIcon}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"
                     stroke="currentColor"
@@ -455,11 +456,16 @@ export default function HomePage() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
-                </svg>
+                </svg> */}
+   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="2"/>
+  <path d="M10 9l5 3-5 3V9z" fill="currentColor"/>
+  <path d="M12 19v2m-3 0h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+</svg>
               </div>
-              <h3 style={styles.featureTitle}>בוט AI חכם</h3>
+              <h3 style={styles.featureTitle}>צפיה והורדת שעורים</h3>
               <p style={styles.featureDescription}>
-                קבל תשובות מיידיות לשאלות שלך עם העוזר החכם המבוסס על בינה מלאכותית.
+               מהיום תוכלו לצפות בתכנים שלכם בכל מקום ובכל זמן, עם אפשרות להוריד את השיעורים למכשיר שלכם לצפייה אופליין
               </p>
             </div>
           </div>
@@ -467,7 +473,7 @@ export default function HomePage() {
       </section>
 
       <footer style={styles.footer}>
-        <p style={{ color: "#6b7280", fontSize: "0.875rem" }}>© 2025 מערכת שיעורים. כל הזכויות שמורות.</p>
+        <p style={{ color: "#6b7280", fontSize: "0.875rem" }}>© 2026 מערכת שיעורים. כל הזכויות שמורות.</p>
       </footer>
     </div>
   )

@@ -278,7 +278,6 @@ const NavBar = () => {
 
       <nav style={styles.nav}>
         <div style={styles.container}>
-          {/* Logo */}
           <Link to="/" style={styles.logo}>
             <div style={styles.logoIcon} className="logo-hover">
               <Sparkles size={24} color="white" />

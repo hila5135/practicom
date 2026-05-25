@@ -25,6 +25,7 @@ import { MatTableModule } from '@angular/material/table';
 })
 export class UsersComponentComponent {
   isAddingNewUser = false; 
+  isLoading = true;
   users: UserDTO[] = [];
   newUser: UserDTO = new UserDTO();
   editMode: number | null = null;
@@ -42,21 +43,25 @@ export class UsersComponentComponent {
  
 
   cancelAdd(): void {
+    
     this.isAddingNewUser = false;
     this.newUser = new UserDTO();
   }
 
  
   loadUsers(): void {
+    this.isLoading = true;
       console.log("NAME:", this.name);
       console.log("EMAIL:", this.email);
       console.log("ROLE:", this.role);  
       this.userClient.userAll().subscribe({
       next: (data) => {
         this.users = data;
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Error loading users', err);
+      this.isLoading = false;
       }
     });
   }
