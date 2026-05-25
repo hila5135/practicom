@@ -20,23 +20,58 @@ namespace AudioLectures.Service
             _emailSettings = emailSettings.Value;
         }
 
+        //public async Task SendEmailAsync(string to, string subject, string body)
+        //{
+        //    var mail = new MailMessage();
+        //    mail.From = new MailAddress(_emailSettings.SenderEmail, _emailSettings.SenderName); ;
+        //    mail.To.Add(to);
+        //    mail.Subject = subject;
+        //    mail.Body = body;
+        //    mail.IsBodyHtml = true;
+
+        //    using var smtp = new SmtpClient(_emailSettings.SmtpServer, _emailSettings.Port)
+        //    {
+        //        Credentials = new NetworkCredential(_emailSettings.SenderEmail, _emailSettings.Password),
+        //        EnableSsl = true
+        //    };
+
+        //    await smtp.SendMailAsync(mail);
+        //}
         public async Task SendEmailAsync(string to, string subject, string body)
         {
-            var mail = new MailMessage();
-            mail.From = new MailAddress(_emailSettings.SenderEmail, _emailSettings.SenderName); ;
-            mail.To.Add(to);
-            mail.Subject = subject;
-            mail.Body = body;
-            mail.IsBodyHtml = true;
-
-            using var smtp = new SmtpClient(_emailSettings.SmtpServer, _emailSettings.Port)
+            try
             {
-                Credentials = new NetworkCredential(_emailSettings.SenderEmail, _emailSettings.Password),
-                EnableSsl = true
-            };
+                var mail = new MailMessage();
 
-            await smtp.SendMailAsync(mail);
+                mail.From = new MailAddress(
+                    _emailSettings.SenderEmail,
+                    _emailSettings.SenderName
+                );
+
+                mail.To.Add(to);
+                mail.Subject = subject;
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+
+                using var smtp = new SmtpClient(
+                    _emailSettings.SmtpServer,
+                    _emailSettings.Port
+                )
+                {
+                    Credentials = new NetworkCredential(
+                        _emailSettings.SenderEmail,
+                        _emailSettings.Password
+                    ),
+                    EnableSsl = true
+                };
+
+                await smtp.SendMailAsync(mail);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("EMAIL ERROR:");
+                Console.WriteLine(ex.Message);
+            }
         }
-
     }
 }

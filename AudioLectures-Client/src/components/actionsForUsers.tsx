@@ -306,7 +306,7 @@ function ActionsForUsers() {
           background: "white",
           borderLeft: "1px solid #e8eef7",
           p: 2,
-        }}
+        }}  
       >
  
         <Typography
