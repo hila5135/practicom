@@ -3212,56 +3212,138 @@ protected processLecturerAll(response: HttpResponseBase): Observable<Lecturer[]>
      * @param file (optional) 
      * @return OK
      */
-    upload(file?: FileParameter | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/S3/upload";
-        url_ = url_.replace(/[?&]$/, "");
+    upload(file?: FileParameter | undefined): Observable<any> {
+    let url_ = this.baseUrl + "/api/S3/upload";
+    url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = new FormData();
-        if (file === null || file === undefined)
-            throw new Error("The parameter 'file' cannot be null.");
-        else
-            content_.append("file", file.data, file.fileName ? file.fileName : "file");
+    const content_ = new FormData();
 
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-            })
-        };
+    if (file === null || file === undefined)
+        throw new Error("The parameter 'file' cannot be null.");
 
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+    content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+    let options_: any = {
+        body: content_,
+        observe: "response",
+        responseType: "blob",
+        headers: new HttpHeaders({})
+    };
+
+    return this.http.request("post", url_, options_).pipe(
+        _observableMergeMap((response_: any) => {
             return this.processUpload(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        }),
+        _observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processUpload(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<any>;
                 }
-            } else
-                return _observableThrow(response_) as any as Observable<void>;
-        }));
-    }
+            } else {
+                return _observableThrow(response_) as any as Observable<any>;
+            }
+        })
+    );
+}
+protected processUpload(response: HttpResponseBase): Observable<any> {
 
-    protected processUpload(response: HttpResponseBase): Observable<void> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
+    const status = response.status;
 
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return _observableOf<void>(null as any);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
+    const responseBlob =
+        response instanceof HttpResponse
+            ? response.body
+            : (response as any).error instanceof Blob
+                ? (response as any).error
+                : undefined;
+
+    let _headers: any = {};
+    if (response.headers) {
+        for (let key of response.headers.keys()) {
+            _headers[key] = response.headers.get(key);
         }
-        return _observableOf<void>(null as any);
     }
+
+    if (status === 200) {
+
+        return blobToText(responseBlob).pipe(
+            _observableMergeMap(_responseText => {
+
+                const resultData = JSON.parse(_responseText);
+
+                return _observableOf(resultData);
+            })
+        );
+    }
+
+    if (status !== 200 && status !== 204) {
+
+        return blobToText(responseBlob).pipe(
+            _observableMergeMap(_responseText => {
+                return throwException(
+                    "An unexpected server error occurred.",
+                    status,
+                    _responseText,
+                    _headers
+                );
+            })
+        );
+    }
+
+    return _observableOf(null);
+}
+    
+    // upload(file?: FileParameter | undefined): Observable<void> {
+    //     let url_ = this.baseUrl + "/api/S3/upload";
+    //     url_ = url_.replace(/[?&]$/, "");
+
+    //     const content_ = new FormData();
+    //     if (file === null || file === undefined)
+    //         throw new Error("The parameter 'file' cannot be null.");
+    //     else
+    //         content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+    //     let options_ : any = {
+    //         body: content_,
+    //         observe: "response",
+    //         responseType: "blob",
+    //         headers: new HttpHeaders({
+    //         })
+    //     };
+
+    //     return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+    //         return this.processUpload(response_);
+    //     })).pipe(_observableCatch((response_: any) => {
+    //         if (response_ instanceof HttpResponseBase) {
+    //             try {
+    //                 return this.processUpload(response_ as any);
+    //             } catch (e) {
+    //                 return _observableThrow(e) as any as Observable<void>;
+    //             }
+    //         } else
+    //             return _observableThrow(response_) as any as Observable<void>;
+    //     }));
+    // }
+
+    // protected processUpload(response: HttpResponseBase): Observable<void> {
+    //     const status = response.status;
+    //     const responseBlob =
+    //         response instanceof HttpResponse ? response.body :
+    //         (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+    //     let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+    //     if (status === 200) {
+    //         return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+    //         return _observableOf<void>(null as any);
+    //         }));
+    //     } else if (status !== 200 && status !== 204) {
+    //         return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+    //         return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+    //         }));
+    //     }
+    //     return _observableOf<void>(null as any);
+    // }
 
     /**
      * @return OK

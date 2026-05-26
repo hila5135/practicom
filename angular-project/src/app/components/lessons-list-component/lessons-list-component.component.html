@@ -8,14 +8,31 @@
           <div *ngIf="showUploadControls" class="upload-controls">
             <input type="file" (change)="onFileSelected($event)" />
             <button mat-flat-button color="accent" (click)="uploadFile()">אישור העלאה</button>
-          </div>
+      </div>
+            <div *ngIf="fileUrl">
+    <p>📎 כתובת הקובץ שהועלה:</p>
+
+    <a [href]="fileUrl" target="_blank">
+      {{ fileUrl }}
+    </a>
+  </div>
+          
       
           <div *ngIf="isUploading" class="uploading-msg">
             {{ uploadingMessage }}
           </div>
         </mat-card-content>
       </mat-card>
-      
+      <div *ngIf="fileUrl" class="uploaded-url-box">
+
+  <!-- <p>✅ הקובץ הועלה בהצלחה:</p> -->
+
+  <a [href]="lessonPOST.lessonUrl" target="_blank">
+    {{ lessonPOST.lessonUrl }}
+  </a>
+
+</div>
+
       <mat-card class="section-card">
         <mat-card-title>📝 הוספת שיעור</mat-card-title>
         <mat-card-content>
@@ -47,10 +64,11 @@
               <input matInput type="number" [(ngModel)]="lessonPOST.lessonLecturerId" name="lecturerId" />
             </mat-form-field>
       
-            <mat-form-field appearance="outline">
-              <mat-label>כתובת קובץ</mat-label>
+          <mat-form-field appearance="outline">
+              <mat-label>כתובת קובץ</mat-label>              
               <input matInput [(ngModel)]="lessonPOST.lessonUrl" name="url" />
             </mat-form-field>
+           
       
             <button mat-raised-button color="accent" type="submit">📤 הוסף שיעור</button>
           </form>

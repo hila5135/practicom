@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 export class LessonsListComponentComponent implements OnInit {
   lessonPOST: Lesson = new Lesson();
     isLoading = true;
+    fileUrl : string ='';
   selectedFile: File | null = null;
   filesList: string[] = [];
   // isDownloading = false;
@@ -43,26 +44,71 @@ export class LessonsListComponentComponent implements OnInit {
       contentType: file.type
     };
   }
-  uploadFile() {
-    if (this.selectedFile) {
-      const fileParam = this.createFileParameter(this.selectedFile);
-      this.isUploading = true;
-      this.uploadingMessage = '⏳ מעלה קובץ...';
-      this.client.upload(fileParam).subscribe({
-        next: () => {
-          this.isUploading = false;
-          this.uploadingMessage = '';
-          alert('✅ הקובץ הועלה בהצלחה!');
-        },
-        error: (err: HttpErrorResponse) => {
-          this.isUploading = false;
-          this.uploadingMessage = '';
-          alert('שגיאה בהעלאה: ' + err.message);
-        }
-      });
-    }
-    this.showUploadControls = false;
+//   uploadFile() {
+//     if (this.selectedFile) {
+//       const fileParam = this.createFileParameter(this.selectedFile);
+//       this.isUploading = true;
+//       this.uploadingMessage = '⏳ מעלה קובץ...';
+//       this.client.upload(fileParam).subscribe({
+//         // next: () => {
+//         //   this.isUploading = false;
+//         //   this.uploadingMessage = '';
+//         //   alert('✅ הקובץ הועלה בהצלחה!');
+//         // },
+//         next: (res: any) => {
+          
+//           this.fileUrl = res.url || '';
+//         this.isUploading = false;
+//         this.uploadingMessage = '';
+//         console.log('תגובה מהשרת:', res);
+//         // console.log('URL של הקובץ שהועלה:', this.fileUrl);
+//         alert('✅ הקובץ הועלה בהצלחה!');
+// },
+//         error: (err: HttpErrorResponse) => {
+//           this.isUploading = false;
+//           this.uploadingMessage = '';
+//           alert('שגיאה בהעלאה: ' + err.message);
+//         }
+//       });
+//     }
+//     this.showUploadControls = false;
+//   }
+
+
+uploadFile() {
+  if (this.selectedFile) {
+
+    const fileParam = this.createFileParameter(this.selectedFile);
+
+    this.isUploading = true;
+    this.uploadingMessage = '⏳ מעלה קובץ...';
+
+    this.client.upload(fileParam).subscribe({
+
+      next: (res: any) => {
+
+        console.log('תגובה מהשרת:', res);
+        console.log('URL של הקובץ שהועלה:', res?.url);
+        this.fileUrl = res.url || '';
+
+        this.isUploading = false;
+        this.uploadingMessage = '';
+
+        this.showUploadControls = false;
+
+        alert('✅ הקובץ הועלה בהצלחה!');
+      },
+
+      error: (err: HttpErrorResponse) => {
+
+        this.isUploading = false;
+        this.uploadingMessage = '';
+
+        alert('שגיאה בהעלאה: ' + err.message);
+      }
+    });
   }
+}
   // downloadFile(fileName: string) {
   //   this.isDownloading = true;
   //   this.downloadingMassage = '⏳ מוריד קובץ...';
@@ -148,8 +194,8 @@ toggleLessonForm() {
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
-  showUploadControls = false;
-
+  // showUploadControls = false;
+showUploadControls = true;
 toggleUploadControls() {
   this.showUploadControls = !this.showUploadControls;
 }
