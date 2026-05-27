@@ -1,10 +1,10 @@
 import { ApiClient, Lesson } from "../api/client";
 import { useState } from "react";
 import {   IconButton,  Tooltip} from "@mui/material";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import DownloadIcon from '@mui/icons-material/Download';
-import { Clock,  Headphones, MessageCircle,User } from "lucide-react";
+import { Clock,  Headphones,User } from "lucide-react";
 type LessonsListProps = {
     lessons: Lesson[];
     isLoading: boolean;
@@ -55,7 +55,7 @@ const [showTitles, setShowTitles] = useState(false);
         }
     };
     
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
  const allTitles = async () => {
 
         setIsLoadingTitles(true);
