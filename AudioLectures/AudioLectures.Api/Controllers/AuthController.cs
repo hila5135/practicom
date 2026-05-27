@@ -53,16 +53,16 @@ public class AuthController : ControllerBase
 
         await _userRepository.AddAsync(newUser);
 
-        await _emailService.SendEmailAsync(
-            model.UserEmail,
-             "נרשמת בהצלחה",
-                @"
-                <div style='direction: rtl; text-align: right; font-family: Arial, sans-serif;'>
-                    <h2>ברוך הבא למערכת!</h2>
-                    <p>נרשמת בהצלחה, אנחנו שמחים שהצטרפת 😊</p>
-                </div>
-                "
-        );
+        //await _emailService.SendEmailAsync(
+        //    model.UserEmail,
+        //     "נרשמת בהצלחה",
+        //        @"
+        //        <div style='direction: rtl; text-align: right; font-family: Arial, sans-serif;'>
+        //            <h2>ברוך הבא למערכת!</h2>
+        //            <p>נרשמת בהצלחה, אנחנו שמחים שהצטרפת 😊</p>
+        //        </div>
+        //        "
+        //);4
         var token = await _authService.GenerateJwtTokenAsync(model.UserName, model.UserPassword);
         return Ok(new { Token = token });
     }
