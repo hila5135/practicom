@@ -75,7 +75,7 @@ const Auth = ({ successLogin, typeAction, close }: { successLogin: Function; typ
 
           setOpen(false);
           successLogin();
-          alert("נרשמת בהצלחה. כעת נשלחה לך הודעת מייל לאישור הרשמה")
+          alert("  🎉 נרשמת בהצלחה למערכת")
         } else {
           throw new Error("Failed to register user. No token received.");
         }
