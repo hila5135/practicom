@@ -327,7 +327,11 @@ const NavBar = () => {
           </div>
           <span style={styles.logoText}>מערכת שיעורים</span>
 
-   </div>  </nav>  </>
-  )}
+   </div>  </nav>  
+   
+   </>
+ 
+)}
+
 
 export default NavBar;

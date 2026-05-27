@@ -27,7 +27,9 @@ namespace AudioLectures.Api.Controllers
             using var stream = file.OpenReadStream();
             var url = await _s3Service.UploadFileAsync(stream, file.FileName);
             Console.WriteLine("I Am in upload!!!!");
-            return Ok(new { Url = url });
+            //return Ok(new { Url = url });
+            return Ok(new { fileUrl = url });
+
         }
 
         [HttpGet("download/{fileName}")]

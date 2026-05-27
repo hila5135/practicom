@@ -70,7 +70,11 @@ namespace AudioLectures.Service
             catch (Exception ex)
             {
                 Console.WriteLine("EMAIL ERROR:");
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.ToString());
+                Console.WriteLine(_emailSettings.SenderEmail);
+                Console.WriteLine(_emailSettings.SmtpServer);
+                Console.WriteLine(_emailSettings.Port);
             }
         }
     }
