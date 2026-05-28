@@ -6,7 +6,6 @@ import { User, userReducer } from "./user"
 import NavBar from "./NavBar";
 
 
-
 /*************  ✨ Windsurf Command 🌟  *************/
 const AppLayout = () => {
     
@@ -22,10 +21,9 @@ const AppLayout = () => {
     return (
         <>
             <UserContext value={{ user, userDispatch }}>
-              
+             
                   {/* <HomePage/> */}
                 <NavBar />
-                <div></div>
                 <Outlet />
             </UserContext>
         </>

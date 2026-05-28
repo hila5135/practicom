@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { ApiClient, Lecturer } from '../api/client';
-import { Grid, Card, CardContent, Typography, Box, Button } from '@mui/material';
+import { Grid, Card, CardContent, Typography, Box, Button, CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const LecturersListPage: React.FC = () => {
   const [lecturers, setLecturers] = useState<Lecturer[]>([]);
   const apiClient = new ApiClient("https://audiolecturesserver.onrender.com");
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     // שליפת המרצים מה-API
     apiClient.lecturerAll()
@@ -15,13 +15,21 @@ const LecturersListPage: React.FC = () => {
       })
       .catch((error) => {
         console.error("Error fetching lecturers:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
   return (
     <Box sx={{ p: 4, direction: 'rtl' , margin: 7}} >
      
-      {lecturers.length === 0 ? (
+      {isLoading ? (
+          <Box sx={{ textAlign: "center", mt: 5 }}>
+            <CircularProgress />
+            <Typography sx={{ mt: 2 }}>טוען מרצים...</Typography>
+          </Box>
+      ) : lecturers.length === 0 ? (
         <Typography variant="h6" color="text.secondary" align="center">לא נמצאו מרצים</Typography>
       ) : (
         <Grid container spacing={3} justifyContent="center">

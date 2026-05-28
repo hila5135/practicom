@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { User } from "./user";
 import Auth from "./auth";
-
+import MainPage from "./mainPage";
 export default function HomePage() {
     const navigate = useNavigate();
     // const initialUser: User = {
@@ -25,7 +25,8 @@ export default function HomePage() {
                 // if (!prev) setIsLoginOpen(false);
                 return !prev;
             });
-            navigate('/navBar'); // Redirect to home page after login
+           navigate('/navBar'); // Redirect to home page after login
+            navigate('/mainPage')
         }
   const styles = {
     container: {
@@ -305,20 +306,6 @@ export default function HomePage() {
                 מצא את השיעור המושלם עבורך עם מערכת החיפוש המתקדמת שלנו. אלפי שיעורים ממרצים מובילים במקום אחד.
               </p>
               <div style={styles.heroButtons}>
-                {/* <button style={{ ...styles.btnBase, ...styles.btnPrimary, ...styles.btnLarge }}>
-                  התחל עכשיו
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M5 12h14M12 5l7 7-7 7"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button> */}
-                {/* <button style={{ ...styles.btnBase, ...styles.btnOutline, ...styles.btnLarge }}>צפה בדמו</button> */}
-             
                 <div style={styles.headerContent}>
           <div></div>
           <div style={styles.headerActions}>

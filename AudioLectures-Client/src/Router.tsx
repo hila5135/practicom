@@ -6,6 +6,7 @@ import UserAvatar from "./components/UserAvatar";
 import LecturerDetailsPage from "./components/lecturerDetails";
 import LecturersListPage from "./components/lecturersList";
 import NavBar from "./components/NavBar";
+import MainPage from "./components/mainPage";
 
 
 
@@ -21,7 +22,8 @@ export const myRouter = createBrowserRouter([
             { path: "/actionsForUsers", element: <ActionsForUsers /> },
             { path: "/lecturers", element: <LecturersListPage /> },
             { path: "/lecturers/:lecturerId", element: <LecturerDetailsPage /> },
-            {path:"/navBar", element:<NavBar/>}
+            // {path:"/navBar", element:<NavBar/>},
+         {path:"/mainPage", element:<MainPage/>}
         ]
     }
 

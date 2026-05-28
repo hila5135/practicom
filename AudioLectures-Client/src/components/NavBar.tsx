@@ -15,7 +15,7 @@ const NavBar = () => {
       title: "דף הבית",
       description: "חזרה לעמוד הראשי של המערכת",
       icon: Home,
-      path: "/",
+      path: "/mainPage",
       gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
       color: "#667eea",
       emoji: "🏠",
