@@ -5,7 +5,6 @@ import HomePage from "./components/HomePage";
 import UserAvatar from "./components/UserAvatar";
 import LecturerDetailsPage from "./components/lecturerDetails";
 import LecturersListPage from "./components/lecturersList";
-import NavBar from "./components/NavBar";
 import MainPage from "./components/mainPage";
 
 

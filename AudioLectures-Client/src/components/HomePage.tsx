@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { User } from "./user";
 import Auth from "./auth";
-import MainPage from "./mainPage";
 export default function HomePage() {
     const navigate = useNavigate();
     // const initialUser: User = {
