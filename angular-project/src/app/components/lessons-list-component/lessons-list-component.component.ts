@@ -88,8 +88,8 @@ uploadFile() {
       next: (res: any) => {
 
         console.log('תגובה מהשרת:', res);
-        console.log('URL של הקובץ שהועלה:', res?.url);
-        this.fileUrl = res.url || '';
+        console.log('URL של הקובץ שהועלה:', res?.fileUrl);
+        this.fileUrl = res.fileUrl || '';
 
         this.isUploading = false;
         this.uploadingMessage = '';
