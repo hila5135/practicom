@@ -24,7 +24,7 @@ export default function HomePage() {
                 // if (!prev) setIsLoginOpen(false);
                 return !prev;
             });
-           navigate('/navBar'); // Redirect to home page after login
+          // navigate('/navBar'); // Redirect to home page after login
             navigate('/mainPage')
         }
   const styles = {
@@ -302,7 +302,7 @@ export default function HomePage() {
                 <span style={styles.heroTitleAccent}>Cloud Lectures</span>
               </h1>
               <p style={styles.heroDescription}>
-                מצא את השיעור המושלם עבורך עם מערכת החיפוש המתקדמת שלנו. אלפי שיעורים ממרצים מובילים במקום אחד.
+                מצא את השיעור המושלם עבורך עם מערכת החיפוש המתקדמת שלנו. האזן והורד שיעורים ממרצים מובילים 
               </p>
               <div style={styles.heroButtons}>
                 <div style={styles.headerContent}>

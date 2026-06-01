@@ -65,7 +65,7 @@ namespace AudioLectures.Service
                     EnableSsl = true
                 };
 
-                await smtp.SendMailAsync(mail);
+                //await smtp.SendMailAsync(mail);
             }
             catch (Exception ex)
             {
