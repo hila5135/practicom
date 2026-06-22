@@ -62,7 +62,7 @@ public class AuthController : ControllerBase
         //            <p>נרשמת בהצלחה, אנחנו שמחים שהצטרפת 😊</p>
         //        </div>
         //        "
-        //);4
+        //);
         var token = await _authService.GenerateJwtTokenAsync(model.UserName, model.UserPassword);
         return Ok(new { Token = token });
     }

@@ -110,7 +110,7 @@ const LecturerDetailsPage: React.FC = () => {
                   </Typography>
                   <Typography variant="body2"><strong>כותרת:</strong> {lesson.lessonTitle}</Typography>
                   <Typography variant="body2"><strong>משך:</strong> {lesson.lessonDuration} דקות</Typography>
-                  <Typography variant="body2"><strong>מס' הורדות:</strong> {lesson.lessonDownloadCount}</Typography>
+                  {/* <Typography variant="body2"><strong>מס' הורדות:</strong> {lesson.lessonDownloadCount}</Typography> */}
                 </CardContent>
                 
                 <CardActions sx={{ display: 'flex', gap: 1 }}>
@@ -121,7 +121,7 @@ const LecturerDetailsPage: React.FC = () => {
                   >
                     ▶️ הפעל
                   </Button>
-                  <Button
+                  {/* <Button
             variant="outlined"
             color="error"
             onClick={() => {
@@ -131,7 +131,7 @@ const LecturerDetailsPage: React.FC = () => {
             // sx={{ mt: 2 }}
           >
             ⏹ עצור נגן
-          </Button>
+          </Button> */}
                   {/* <Button
                     variant="outlined"
                     color="error"

@@ -233,9 +233,8 @@ import LessonsTitle from "./lessonsTitles";
 const apiClient = new ApiClient("https://audiolecturesserver.onrender.com");
 
 function ActionsForUsers() {
-  const [allLessons, setAllLessons] = useState<Lesson[]>([]);
+  const [allLessons, setAllLessons] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
   const [searchQuery, setSearchQuery] = useState("");
   const [searchType, setSearchType] = useState("lecturer");
 
@@ -261,12 +260,21 @@ function ActionsForUsers() {
       setAllLessons(await apiClient.lessonAll());
     } else if (searchType === "lecturer") {
       const lecturers = await apiClient.name(searchQuery);
+console.log("lecturers", lecturers);
 
+      // setAllLessons(
+      //   lecturers
+      //     .flatMap(l => l.lecturerLessons ?? [])
+      //     .filter(Boolean)
+      // );
       setAllLessons(
-        lecturers
-          .flatMap(l => l.lecturerLessons ?? [])
-          .filter(Boolean)
-      );
+  lecturers.flatMap(l =>
+    (l.lecturerLessons ?? []).map(lesson => ({
+      ...lesson,
+      lessonLecturer: l
+    }))
+  )
+);
     } else {
       setAllLessons(await apiClient.title2(searchQuery));
     }
@@ -302,10 +310,18 @@ function ActionsForUsers() {
       {/* SIDEBAR */}
       <Box
         sx={{
-          width: 260,
-          background: "white",
-          borderLeft: "1px solid #e8eef7",
-          p: 2,
+          // width: 260,
+          // background: "white",
+          // borderLeft: "1px solid #e8eef7",
+          // p: 2,
+             width: 260,
+    background: "white",
+    borderLeft: "1px solid #e8eef7",
+    p: 2,
+    position: "sticky",
+    top: 0,
+    height: "100vh",
+    overflowY: "auto",
         }}  
       >
  

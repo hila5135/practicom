@@ -75,7 +75,8 @@ const [showTitles, setShowTitles] = useState(false);
     console.log(allTitles)
     const styles = {
       container: {
-        maxWidth: "1200px",
+        width: "100%",
+        maxWidth: "1000px",
         margin: "0 auto",
         padding: "40px 20px",
         backgroundColor: "#fafbfc",

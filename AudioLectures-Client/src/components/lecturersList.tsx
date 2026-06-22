@@ -43,9 +43,9 @@ const LecturersListPage: React.FC = () => {
                   <Typography variant="body2" color="text.secondary" gutterBottom>
                     מספר השיעורים: {lecturer.lecturerLessons?.length || 0}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  {/* <Typography variant="body2" color="text.secondary">
                     {`המרצה עם ניסיון רב בתחום ההוראה וההדרכה. מציע שיעורים מגוונים ומעמיקים.`}
-                  </Typography>
+                  </Typography> */}
                 </CardContent>
                 <Box sx={{ p: 2, textAlign: 'center' }}>
                   <Button
