@@ -48,6 +48,7 @@ namespace AudioLectures.Service
                     _emailSettings.SenderName
                 );
 
+
                 mail.To.Add(to);
                 mail.Subject = subject;
                 mail.Body = body;
