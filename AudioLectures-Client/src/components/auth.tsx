@@ -46,40 +46,40 @@ const Auth = ({ successLogin, typeAction, close }: { successLogin: Function; typ
     e.preventDefault();
     const apiClient = new ApiClient("https://audiolecturesserver.onrender.com");
 
-    try {
-      let res: any;
-      if (typeAction === "Sign") {
-        // רישום משתמש חדש
-        const registerModel = new UserDTO();
-        registerModel.userName = firstNameRef.current?.value || "";
-        registerModel.userPassword = passwordRef.current?.value || "";
-        registerModel.userEmail = emailRef.current?.value || ""; // הוספת מייל
+      try {
+        let res: any;
+        if (typeAction === "Sign") {
+          // רישום משתמש חדש
+          const registerModel = new UserDTO();
+          registerModel.userName = firstNameRef.current?.value || "";
+          registerModel.userPassword = passwordRef.current?.value || "";
+          registerModel.userEmail = emailRef.current?.value || ""; // הוספת מייל
 
-        res = await apiClient.register(registerModel);
-        console.log("Response from server:", res);
+          res = await apiClient.register(registerModel);
+          console.log("Response from server:", res);
 
-        // בדיקה אם התקבלה תשובה עם טוקן
-        if (res && res.token) {
-          console.log("User registered successfully, token received:", res.token);
-          // שמירת הטוקן ב-localStorage
-          localStorage.setItem("authToken", res.token);
+          // בדיקה אם התקבלה תשובה עם טוקן
+          if (res && res.token) {
+            console.log("User registered successfully, token received:", res.token);
+            // שמירת הטוקן ב-localStorage
+            localStorage.setItem("authToken", res.token);
 
-          context?.userDispatch({
-            type: "CREATE",
-            data: {
-              id: firstNameRef.current?.value || "",
-              firstName: firstNameRef.current?.value || "",
-              password: passwordRef.current?.value || "",
-            },
-          });
+            context?.userDispatch({
+              type: "CREATE",
+              data: {
+                id: firstNameRef.current?.value || "",
+                firstName: firstNameRef.current?.value || "",
+                password: passwordRef.current?.value || "",
+              },
+            });
 
-          setOpen(false);
-          successLogin();
-          alert("  🎉 נרשמת בהצלחה למערכת")
+            setOpen(false);
+            successLogin();
+            alert("  🎉 נרשמת בהצלחה למערכת")
+          } else {
+            throw new Error("Failed to register user. No token received.");
+          }
         } else {
-          throw new Error("Failed to register user. No token received.");
-        }
-      } else {
         // התחברות למערכת
         const loginModel = new LoginModel();
         loginModel.userName = firstNameRef.current?.value || "";

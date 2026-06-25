@@ -36,8 +36,11 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterModel model)
     {
-        var existingUser = await _userRepository.GetUserByCredentialsAsync(model.UserName, model.UserPassword);
+        var start = DateTime.Now;
 
+
+        var existingUser = await _userRepository.GetUserByCredentialsAsync(model.UserName, model.UserPassword);
+        Console.WriteLine($"Check user: {(DateTime.Now - start).TotalMilliseconds} ms");
         if (existingUser != null)
         {
             return BadRequest("User already exists");
@@ -52,18 +55,12 @@ public class AuthController : ControllerBase
         };
 
         await _userRepository.AddAsync(newUser);
+        Console.WriteLine($"Add user: {(DateTime.Now - start).TotalMilliseconds} ms");
+        start = DateTime.Now;
 
-        //await _emailService.SendEmailAsync(
-        //    model.UserEmail,
-        //     "נרשמת בהצלחה",
-        //        @"
-        //        <div style='direction: rtl; text-align: right; font-family: Arial, sans-serif;'>
-        //            <h2>ברוך הבא למערכת!</h2>
-        //            <p>נרשמת בהצלחה, אנחנו שמחים שהצטרפת 😊</p>
-        //        </div>
-        //        "
-        //);
+
         var token = await _authService.GenerateJwtTokenAsync(model.UserName, model.UserPassword);
+        Console.WriteLine($"JWT: {(DateTime.Now - start).TotalMilliseconds} ms");
         return Ok(new { Token = token });
     }
 
