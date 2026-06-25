@@ -219,7 +219,7 @@
 
 // export default ActionsForUsers;
 import { useEffect, useState } from "react";
-import { ApiClient, Lesson } from "../api/client";
+import { ApiClient} from "../api/client";
 import {
   Box,
   Typography,
